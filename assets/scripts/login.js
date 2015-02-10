@@ -1,4 +1,4 @@
-var login = angular.module('login',['angular-capitalize-filter','ngSanitize','mgcrea.ngStrap']);
+var login = angular.module('login',['angular-capitalize-filter','ngSanitize','mgcrea.ngStrap', 'angularUtils.directives.dirPagination']);
 
 angular.module('angular-capitalize-filter', [])
   .filter('capitalize', function() {

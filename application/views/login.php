@@ -140,10 +140,15 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">Events Section</h2>
-                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+                    <ul>
+                        <li dir-paginate="list in listEvent | itemsPerPage: 3"><a href="" ng-click="showEventDetails(list)">{{list.event_title}}</a></li>
+                    </ul>
+                    <dir-pagination-controls></dir-pagination-controls>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="<?php echo base_url('assets/img/ipad.png') ?>" alt="">
+                    <label>{{eventDetails.event_title}}</label>
+                    <label>{{eventDetails.event_date}}</label>
+                    <label>{{eventDetails.event_description}}</label>
                 </div>
             </div>
 
@@ -265,6 +270,7 @@
     <script src="<?php echo base_url('assets/js/angularstrap/angular-sanitize.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.tpl.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/dirPagination.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/login.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/loginFactory.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/loginDirective.js') ?>"></script>
