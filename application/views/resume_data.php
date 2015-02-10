@@ -13,7 +13,7 @@
 html {
 	/*Image only BG fallback*/
 	/*background = gradient + image pattern combo*/
-	background: url(/tracer/assets/img/bg-must.jpg) no-repeat center fixed;
+	background: url(/alumni/assets/img/bg-must.jpg) no-repeat center fixed;
 	background-size: 100%; 
 }
 

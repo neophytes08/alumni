@@ -99,7 +99,7 @@ login
 				}
 				else if(response.stat == 0)
 				{
-					window.location = '/tracer/index.php/homectrl/graduate';
+					window.location = '/alumni/index.php/homectrl/graduate';
 				}
 			});
 		}
