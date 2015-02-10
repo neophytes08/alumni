@@ -1,0 +1,131 @@
+<div class="row" navigator>
+    <div class="col-lg-9 main-chart">
+
+        <div class="row mt">
+        <!-- SERVER STATUS PANELS -->
+          <div class="col-md-4 col-sm-4 mb">
+            <div class="white-panel pn donut-chart">
+              <div class="white-header">
+      <h5>Admin</h5>
+              </div>
+  <div class="row">
+    <div class="col-sm-6 col-xs-6 goleft">
+      <p><i class="fa fa-database"></i> 70%</p>
+    </div>
+              </div>
+  <canvas id="serverstatus01" height="120" width="120"></canvas>
+  <script>
+    var doughnutData = [
+        {
+          value: 70,
+          color:"#68dff0"
+        },
+        {
+          value : 30,
+          color : "#fdfdfd"
+        }
+      ];
+      var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
+  </script>
+</div><!--/grey-panel -->
+  </div><!-- /col-md-4-->
+<div class="col-md-4 col-sm-4 mb">
+  <div class="white-panel pn" ng-click="Settings()">
+    <div class="white-header">
+      <h5>Settings</h5>
+              </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6 goleft">
+            <p><i class="fa fa-heart"></i> 122</p>
+          </div>
+          <div class="col-sm-6 col-xs-6"></div>
+        </div>
+              <div class="centered">
+      <img src="../../assets/img/product.png" width="120">
+              </div>
+            </div>
+          </div><!-- /col-md-4 -->
+                    
+        <div class="col-md-4 mb">
+          <!-- WHITE PANEL - TOP USER -->
+          <div class="white-panel pn" ng-click="getGradList()">
+            <div class="white-header">
+              <h5>List of Graduates</h5>
+                      </div>
+                <div class="row">
+                  <div class="col-sm-6 col-xs-6 goleft">
+                    <p><i class="fa fa-heart"></i> 122</p>
+                  </div>
+                  <div class="col-sm-6 col-xs-6"></div>
+                </div>
+                      <div class="centered">
+              <img src="../../assets/img/product.png" width="120">
+            </div>
+            </div>
+        </div><!-- /col-md-4 -->
+</div><!-- /row -->
+          <div class="row">
+            <!-- TWITTER PANEL -->
+            <div class="col-md-12 mb">
+              <!-- WHITE PANEL - TOP USER -->
+              <div class="white-panel pn">
+                <div class="white-header">
+                  <h5>Pending List</h5>
+                </div>
+              <!-- <div class="row"> -->
+                <table class="table table-striped table-advance table-hover custom-table">
+                    <thead>
+                    <tr>
+                        <th><i class="fa fa-bullhorn"></i> Full Name</th>
+                        <th class="hidden-phone"><i class="fa fa-question-circle"></i> Course</th>
+                        <th><i class="fa fa-bookmark"></i> Year Graduated</th>
+                        <th><input type="text" ng-model="search" class="form-control" placeholder="Search Graduate"/></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-cloak dir-paginate="list in pendingList | filter: search | itemsPerPage: 5">
+                       <td>{{list.fname | capitalize}} {{list.mname | capitalize}} {{list.lname | capitalize}} {{list.extention_name | capitalize}}</td>
+                        <td class="hidden-phone">{{list.course_name | capitalize}}</td>
+                        <td>{{list.year_graduated_tertiary | date}}</td>
+                        <td>
+                          <button class="btn btn-primary btn-xs" ng-click="grantPending(list)"><i class="fa fa-check"></i></button>
+                          <button class="btn btn-danger btn-xs"><i class="fa fa-inbox"></i></button>
+                          <img src="/tracer/assets/img/loading.gif" class="load-accepted_{{list.user_id}}" id="accepted">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+              <!-- </div> -->
+              <div class="col-md-12 mb">
+                <div class="row">
+                  <dir-pagination-controls></dir-pagination-controls>
+                </div>
+              </div>
+
+              </div>
+            </div>
+          </div><!-- /row -->
+          
+      
+      </div><!-- /col-lg-9 END SECTION MIDDLE -->
+                  
+                  
+      <!-- **********************************************************************************************************************************************************
+      RIGHT SIDEBAR CONTENT
+      *********************************************************************************************************************************************************** -->                  
+                  
+<div class="col-lg-3 ds custom-noti">
+      <!--COMPLETED ACTIONS DONUTS CHART-->
+<h3>NOTIFICATIONS</h3>                
+        <!-- First Action -->
+        <div class="desc" ng-repeat="listLog in logList">
+          <div class="thumb">
+            <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+          </div>
+          <div class="details">
+               <a href>{{listLog.position | capitalize}} : {{listLog.fname | capitalize}} {{listLog.mname | capitalize}} {{listLog.lname | capitalize}}, {{listLog.log_name}}</a> {{listLog.log_date | date}}<br/>
+            </p>
+          </div>
+        </div>
+    </div><!-- /col-lg-3 -->
+</div><!--/row -->

@@ -1,0 +1,353 @@
+
+/*admin*/
+
+body
+{
+	font-family: Arial, sans-serif!important;
+	font-size: 20px;
+}
+.school-logo
+{
+	border-radius: 50%;
+	box-shadow: 0px 2px 2px black;
+}
+.admin-nav
+{
+	background: #1A1851!important;
+}
+.admin-nav a
+{
+	color: white!important;
+}
+.side-long-nav
+{
+	color: white!important;
+	background: #222222!important;
+}
+.card-title
+{
+	color: black!important;
+	text-shadow: 0px 2px 2px white!important;
+}
+.admin-box
+{
+	float: left!important;
+}
+.active
+{
+	color: red!important;
+}
+.hidden
+{
+	display: none;
+}
+.background
+{
+	position: fixed;
+  	width: 100%!important;
+  	height: 100%!important;
+  	background: #000000;
+  	z-index: 1;
+  	opacity: 0.6;
+  	display: none;
+}
+.show-graudate-info
+{
+	/*position: absolute;
+	margin-top: -100%!important;
+	margin-left: 300px!important;
+	z-index: 2!important;*/
+}
+.personal,.employment, .education
+{
+	height: 300px!important;
+	/*display: none;*/
+	padding: 10px!important;
+}
+.btn
+{
+	background: #1A1851!important;
+}
+label
+{
+	color: #212121!important;
+	font-family: Arial, sans-serif!important;
+}
+.card-action button
+{
+	font-size: 12px!important;
+}
+.educational-box
+{
+	float: left!important;
+	margin-left: 30px;
+}
+input, textarea, select, h6, h1 , h2, h3, h4, h5, p
+{
+	color: black!important;
+}
+.custom-input-size
+{
+	width: 184px!important;
+	float: left;
+	margin: 2px!important;
+}
+.custom-input-address
+{
+	float: left;
+	width: 279px!important;
+	margin: 2px!important;
+}
+.edit-graduate-info
+{
+	position: fixed!important;
+	margin-top: 0px!important;
+	margin-left: -100%!important;
+	z-index: 10!important;
+	background: white!important;
+}
+.info-update-grad
+{
+	height: 500px!important;
+	overflow: auto!important;
+}
+.custom-input-year
+{
+	width: 150px!important;
+	float: left!important;
+	margin-left: 5px!important;
+}
+.admin-dropdown li a
+{
+	float: left!important;
+}
+/*button*/
+#updateButtonDept
+{
+	display: none;
+}
+a
+{
+	color: black!important;
+}
+.deleteSurvey-prompt
+{
+	position: fixed!important;
+	z-index: 5!important;
+	margin-top: 70px!important;
+	margin-left: 25%!important;
+	display: none;
+}
+/*graduate*/
+ .deleteDeptPrompt, .deleteCoursePrompt
+ {
+ 	position: fixed!important;
+ 	z-index: 2!important;
+ 	margin-top: 100px!important;
+ 	margin-left: 25%!important;
+ 	display: none;
+ }
+
+.graduate-big-box
+{
+	width: 100%;
+	height: 100%;
+	background: black;
+	position: fixed!important;
+	z-index: 1;
+	opacity: 0.7;
+	display: none;
+}
+.user-pic
+{
+	width: 150px!important;
+	height: 130px!important;
+}
+.user-pic-box
+{
+	width: 150px;
+	height: 130px;
+	box-shadow: 0px 2px 2px black!important;
+	position: absolute;
+	margin-top: 150px;
+	margin-left: 30px;
+}
+.graduate-prompt-info
+{
+	position: fixed!important;
+	z-index: 2!important;
+	margin-left: 200px!important;
+	margin-top: -370px!important;
+	display: none;
+}
+.take-survey-form
+{
+	display: none;
+}
+.updateProfile
+{
+	position: fixed!important;
+	margin-left: 25%!important;
+	margin-right: 20px!important;
+	z-index: 2!important;
+	height: 100%;
+    width: 100%;
+    overflow: hidden!important;
+    display: none;
+}
+.graduate-about
+{
+	color: #778ED4!important;
+}
+td.graduate-info-color
+{
+	color: #9E9E9E;
+}
+.graduate-tabs
+{
+	margin: 0 auto!important;
+}
+.option-btn
+{
+	
+}
+/*charts*/
+.charts
+{
+	float: left!important;
+}
+.bar-text
+{
+	text-align: center;
+}
+.pie-details
+{
+	float: left;
+	margin-left: 10px;
+}
+/*delete user prompt*/
+.deleteUserPrompt
+{
+	position: fixed!important;
+	margin-left: -100%!important;
+	z-index: 20!important;
+	margin-top: 130px!important;
+	display: none;
+}
+
+/*survey*/
+li.survey-area, .survey-box
+{
+	display: none;
+}
+
+/*nav*/
+.side-nav
+{
+	background: #1A1851!important;
+}
+
+.updateUserInfo
+{
+	position: fixed;
+	z-index: 2;
+	margin-left: 30%!important;
+	display: none;
+	margin-left: -100%!important;
+}
+
+/*search*/
+.searchUser
+{
+	display: none;
+}
+
+.displayLogs
+{
+	position: fixed!important;
+	z-index: 1!important;
+	margin-left: 300px!important;
+	display: none;
+}
+.indicator
+{
+	background: #1A1851!important;
+}
+
+#lean_overlay
+{
+	opacity: 0.5!important;
+}
+
+.delete-prompt
+{
+	z-index: 100!important;
+	margin-top: 85%!important;
+}
+
+/*loader*/
+.loader-admin
+{
+	margin-left: 25%!important;
+	z-index: 2!important;
+	display: none;
+	position: fixed!important;
+}
+.parallax-container 
+{
+    height: 280px!important;
+}
+.card-survey
+{
+	display: none;
+}
+.yes-survey, .no-survey
+{
+	display: none;
+}
+img.circle {
+    background-clip: padding-box;
+    border-radius: 50%;
+}
+img.responsive-img {
+    height: auto;
+    max-width: 100%;
+}
+img {
+    border: 0 none;
+}
+#progressbar, #progressbarSent
+{
+	width: 80%;
+  	height: 25px;
+  	border-radius: 0px;
+  	box-shadow: 0px 1px 2px black;
+  	color: #405892;
+  	padding: 0px;
+  	display: none;
+}
+#sendingEmails
+{
+	margin-top: 120px;
+}
+.emailErrorPrompt
+{
+	margin-top: 345px!important;
+}
+.educationalInfo
+{
+	display: none;
+	color: white!important;
+}
+a.next, a.prev
+{
+	color: white!important;
+}
+.updateProfile
+{
+	overflow: auto!important;
+}
+button.updateOBE
+{
+	display: none;
+}

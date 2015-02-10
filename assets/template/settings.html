@@ -1,0 +1,681 @@
+<div class="row">
+<div class="col-lg-12">
+    <div class="row mt">
+    <!-- SERVER STATUS PANELS -->
+      <div class="col-md-12 col-sm-4 mb">
+        <div class="white-panel pn" data-toggle="modal" data-target="#department">
+          <div class="white-header">
+            <h5>Department</h5>
+          </div>
+        <div class="row">
+        </div>
+        <div class="centered">
+            <img src="../../assets/img/logo.jpg" width="120">
+          </div>
+        </div><!--/grey-panel -->
+      </div><!-- /col-md-4-->
+                    
+  <div class="row ">
+    <!-- TWITTER PANEL -->
+    <div class="col-md-4 mb">
+      <!-- WHITE PANEL - TOP USER -->
+      <div class="white-panel pn" data-toggle="modal" data-target="#users">
+        <div class="white-header">
+          <h5>Users</h5>
+        </div>
+        <p><img src="../../assets/img/users.png" width="120"></p>
+      </div>
+    </div>
+    
+    
+    <div class="col-md-4 mb">
+      <!-- WHITE PANEL - TOP USER -->
+      <div class="white-panel pn" data-toggle="modal" data-target="#survey">
+        <div class="white-header">
+          <h5>Survey</h5>
+        </div>
+        <p><img src="../../assets/img/survey.jpg" width="120"></p>
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb">
+      <!-- WHITE PANEL - TOP USER -->
+      <div class="white-panel pn" data-toggle="modal" data-target="#mail">
+        <div class="white-header">
+          <h5>Mail</h5>
+        </div>
+        <p><img src="../../assets/img/mail.png" width="120"></p>
+      </div>
+    </div>
+    
+  </div><!-- /row -->
+  
+
+</div><!-- /col-lg-9 END SECTION MIDDLE -->
+</div><!--/row -->
+
+<div class="modal fade" id="department" tabindex="-1" role="dialog" aria-labelledby="department" aria-hidden="true">
+  <div class="modal-dialog large-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="department">Depatment</h4>
+        <h6>Note: click the Department name to see the course list.</h6>
+      </div>
+      <div class="modal-body">
+          <h4><i class="fa fa-angle-right"></i> College Table</h4>
+          <button style="margin-left: 10px!important;" class="btn btn-success btn-xs" ng-click="addDeptartment()"><span class="glyphicon glyphicon-plus"></span>Add College</button>
+          <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <thead>
+                        <tr>
+                          <th><i class="fa fa-bullhorn"></i> College Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="list in departmentList">
+                          <td ng-click="getCourse(list)">{{list.department_name | capitalize}}</td>
+                          <td>
+                            <button class="btn btn-primary btn-xs" ng-click="editDept(list)"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="deleteDeptPrompt(list)"><i class="fa fa-trash-o"></i></button>
+                          </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /content-panel -->
+            </div><!-- /col-md-12 -->
+        </div><!-- /row -->
+        <div class="row options-department">
+            <div class="content-panel">
+              <form ng-submit="AddDepartment()">
+                <table class="table table-striped table-advance table-hover">
+                  <h4><i class="fa fa-angle-right"></i> Options</h4>
+                  <hr>
+                    <thead>
+                    <tr>
+                      <th><i class="fa fa-bullhorn"></i> College Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <input type="hidden" ng-model="addDept.department_id">
+                      <td><input type="text" class="form-control" ng-model="addDept.department_name" required></td>
+                      <td>
+                        <button class="btn btn-success btn-xs" ><i class="fa fa-check"></i></button>
+                        <button class="btn btn-danger btn-xs" ng-click="cancelDeleteDept()"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                      </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </form>
+                </div><!-- /content-panel -->
+            </div><!-- /col-md-12 -->
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="course" tabindex="-1" role="dialog" aria-labelledby="course" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="course">Course under {{departmentTitle | capitalize}}</h4>
+        <h6>Note: click the Course name to see the OBE list.</h6>
+      </div>
+      <div class="modal-body">
+      <h4><i class="fa fa-angle-right"></i> Course Table</h4>
+            <button style="margin-left: 10px!important;" class="btn btn-success btn-xs" ng-click="addCourseOption()"><span class="glyphicon glyphicon-plus"></span>Add Course</button>
+        <div class="row">
+      <div class="col-md-12">
+        <div class="content-panel custom-addUserContainer">
+          <table class="table table-striped table-advance table-hover">
+            <hr>
+              <thead>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> Course Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="list in courseList">
+                <td ng-click="getObe(list)">{{list.course_name | capitalize}}</td>
+                <td>
+                  <button class="btn btn-primary btn-xs" ng-click="editCourse(list)"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-danger btn-xs" ng-click="deleteCoursePrompt(list)"><i class="fa fa-trash-o"></i></button>
+                </td>
+              </tr>
+              </tbody>
+          </table>
+        </div><!-- /content-panel -->
+      </div><!-- /col-md-12 -->
+      </div><!-- /row -->
+      <div class="row options-course">
+        <div class="content-panel">
+          <form ng-submit="AddCourse()">
+            <table class="table table-striped table-advance table-hover">
+              <h4><i class="fa fa-angle-right"></i> Options</h4>
+              <hr>
+                <thead>
+                <tr>
+                  <th><i class="fa fa-bullhorn"></i> Course Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <input type="hidden" ng-model="addcourse.course_id">
+                  <input type="hidden" ng-model="addcourse.department_id">
+                  <td>
+                    <input type="text" class="form-control" ng-model="addcourse.course_name" required placeholder="Course Name">
+                  </td>
+                  <td>
+                    <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-check"></i></button>
+                    <button class="btn btn-danger btn-xs" ng-click="cancelDeleteCourse()"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                  </td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+            </div><!-- /content-panel -->
+        </div><!-- /col-md-12 -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="users" tabindex="-1" role="dialog" aria-labelledby="users" aria-hidden="true">
+  <div class="modal-dialog large-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="users">Users</h4>
+      </div>
+      <div class="modal-body">
+         <div class="row mt">
+            <div class="col-md-12">
+                 <h4><i class="fa fa-angle-right"></i>User List</h4>
+                  <button style="margin-left: 10px!important;" class="btn btn-success btn-xs" ng-click="addUserCont()"><span class="glyphicon glyphicon-plus"></span>Add User</button>
+                  <hr>
+                <div class="content-panel">
+                  <table class="table table-striped table-advance table-hover">
+                        <thead>
+                        <tr>
+                          <th><i class="fa fa-question-circle"></i> Username</th>
+                          <th><i class="fa fa-bookmark"></i> Password</th>
+                          <th><i class="fa fa-bookmark"></i> Email Address</th>
+                          <th><i class="fa fa-bookmark"></i> Course </th>
+                          <th><input type="text" ng-model="search" class="form-control" placeholder="Search User"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr dir-paginate="list in userList | filter: search | itemsPerPage: 5" pagination-id="userList">
+                          <td>{{list.fname | capitalize}} {{list.mname | capitalize}} {{list.lname | capitalize}} {{list.extention_name | capitalize}}</td>
+                          <td>{{list.username | capitalize}}</td>
+                          <td>{{list.email | capitalize}}</td>
+                          <td>{{list.course_name | capitalize}}</td>
+                          <td>
+                            <button class="btn btn-primary btn-xs" ng-click="editUser(list)"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="deleteUserPrompt(list)"><i class="fa fa-trash-o "></i></button>
+                          </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-md-12 mb">
+                      <div class="row">
+                        <dir-pagination-controls pagination-id="userList"></dir-pagination-controls>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row options-adduser">
+        <div class="content-panel">
+          <form class="form-inline" role="form" ng-submit="addUser()">
+            <table class="table table-striped table-advance table-hover">
+              <h4><i class="fa fa-angle-right"></i> Options</h4>
+              <hr>
+                <thead>
+                <tr>
+                  <th><i class="fa fa-bullhorn"></i> User Details </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <input type="hidden" ng-model="add.user_id" ng-init="add.user_id = 0">
+                  <td>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail2">First Name</label>
+                      <input type="text" class="form-control" id="exampleInputEmail2" placeholder="First Name" ng-model="add.fname" required>
+                  </div>
+                  <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail2">Middle Name</label>
+                      <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Middle Name" ng-model="add.mname" required>
+                  </div>
+                  <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail2">Last Name</label>
+                      <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Last Name" ng-model="add.lname" required>
+                  </div>
+                  <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail2">Extention Name</label>
+                      <select class="form-control" ng-model="add.extention_name">
+                        <option ng-select="add.extention_name == ' '" selected> </option>
+                        <option ng-select="add.extention_name == 'Sr'">Sr</option>
+                        <option ng-select="add.extention_name == 'Jr'">Jr</option>
+                      </select>
+                  </div>
+                  <br>
+                   <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail2">Username</label>
+                      <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Username" ng-model="add.username" required>
+                  </div>
+                  <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail2">Password</label>
+                      <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Password" ng-model="add.password" required>
+                  </div>
+                   <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail2">Password</label>
+                     <input type="email" placeholder="Email Address" ng-model="add.email" class="form-control edit-group" required>
+                  </div>
+                  <br>
+                  <select ng-model="add.degree_tertiary" class="form-control edit-group">
+                    <option ng-repeat="list in courseList" ng-value="{{list.course_id}}" ng-selected="add.degree_tertiary == list.course_id">{{list.course_name | capitalize}}</option>  
+                  </select>
+                  </td>
+                  <td>
+                    <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-check"></i></button>
+                    <button class="btn btn-danger btn-xs" ng-click="cancelUser()"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                  </td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+            </div><!-- /content-panel -->
+        </div><!-- /col-md-12 -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="survey" tabindex="-1" role="dialog" aria-labelledby="survey" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="survey">Survey</h4>
+      </div>
+      <div class="modal-body">
+      <div class="row">
+      <div class="col-md-12">
+        <div class="content-panel custom-addUserContainer">
+        <table class="table table-striped table-advance table-hover">
+          <h4><i class="fa fa-angle-right"></i> Survey Table</h4>
+          <button style="margin-left: 10px!important;" class="btn btn-success btn-xs" ng-click="addSurveyOption()"><span class="glyphicon glyphicon-plus"></span>Add Survey</button>
+          <hr>
+            <thead>
+            <tr>
+              <th><i class="fa fa-bullhorn"></i> Survey Course </th>
+              <th><i class="fa fa-bullhorn"></i> Survey Year </th>
+              <th><i class="fa fa-bullhorn"></i> Status </th>
+               <th><i class="fa fa-bullhorn"></i> Operation </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="list in surveyList">
+              <td>{{list.course_name | capitalize}}</td>
+              <td>{{list.year_name | capitalize}}</td>
+              <td><button class="btn btn-primary btn-xs" ng-click="changeSurveyStat(list)"><span class="glyphicon glyphicon-thumbs-up"></span> {{list.survey_status | capitalize}}</button></td>
+              <td>
+                <button class="btn btn-primary btn-xs" ng-click="updatePromptSurvey(list)"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-danger btn-xs" ng-click="deleteSurveyPrompt(list)"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </div><!-- /content-panel -->
+        </div><!-- /col-md-12 -->
+        </div><!-- /row -->
+        <div class="row options-survey">
+        <div class="content-panel">
+          <form ng-submit="submitSurvey()">
+            <table class="table table-striped table-advance table-hover">
+              <h4><i class="fa fa-angle-right"></i> Options</h4>
+              <hr>
+                <thead>
+                <tr>
+                  <th><i class="fa fa-bullhorn"></i> Survey Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <input type="hidden" ng-model="survey.survey_id" ng-init="survey.survey_id = 0">
+                  <input type="hidden" ng-model="survey.survey_status">
+                  <td>
+                      <select ng-model="survey.survey_year" class="form-control">
+                        <option ng-repeat="list in yearList" ng-value="{{list.year_id}}" ng-selected="survey.survey_year == list.year_id">{{list.year_name}}</option> 
+                      </select>
+                      <br>
+                      <select ng-model="survey.course_id" class="form-control">
+                        <option ng-repeat="list in courseList" ng-value="{{list.course_id}}" ng-selected="survey.course_id == list.course_id">{{list.course_name | capitalize}}</option>  
+                    </select>
+                  </td>
+                  <td>
+                    <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-check"></i></button>
+                    <button class="btn btn-danger btn-xs" ng-click="cancelDeleteSurveyPrompt()"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                  </td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+            </div><!-- /content-panel -->
+        </div><!-- /col-md-12 -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="obe" tabindex="-1" role="dialog" aria-labelledby="obe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="department">OBE Specialization</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="content-panel custom-addUserContainer">
+              <table class="table table-striped table-advance table-hover">
+                <h4><i class="fa fa-angle-right"></i> OBE Table</h4>
+                <button style="margin-left: 10px!important;" class="btn btn-success btn-xs" ng-click="addPromptObe()"><span class="glyphicon glyphicon-plus"></span>Add OBE</button>
+                <hr>
+                  <thead>
+                  <tr>
+                    <th><i class="fa fa-bullhorn"></i> OBE Specialization </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="list in obeList">
+                    <td>{{list.obe_name | capitalize}}</td>
+                    <td>
+                      <button class="btn btn-primary btn-xs" ng-click="editObe(list)"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btn-xs" ng-click="deletePromptObe(list)"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row options-obe">
+        <div class="content-panel">
+          <form ng-submit="submitObe()">
+            <table class="table table-striped table-advance table-hover">
+              <h4><i class="fa fa-angle-right"></i> Options</h4>
+              <hr>
+                <thead>
+                <tr>
+                  <th><i class="fa fa-bullhorn"></i>OBE Specialization</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>
+                    <input type="hidden" ng-model="obe.obe_id">
+                    <input type="hidden" ng-model="obe.course_id">
+                    <input type="text" class="form-control" ng-model="obe.obe_name" required placeholder="OBE Specialization">
+                  </td>
+                  <td>
+                    <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-check"></i></button>
+                    <button class="btn btn-danger btn-xs" ng-click="cancelObe()"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                  </td>
+                </tr>
+                </tbody>
+            </table>
+            </form>
+            </div><!-- /content-panel -->
+        </div><!-- /col-md-12 -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mail" tabindex="-1" role="dialog" aria-labelledby="mail" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="mail">Mail</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12 mb">
+              <div class="weather-2 pn">
+                <div class="weather-2-header">
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-6">
+                      <p>Send Account Notification</p>
+                    </div>
+                  </div>
+                </div><!-- /weather-2 header -->
+                <div class="row centered">
+                  <img src="./DASHGUM - Bootstrap Admin Template_files/ny.jpg" class="img-circle" width="120">      
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5>16 Unsent Account Confirmation</h5>
+                    <h6><button class="btn btn-theme">Send</button></h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-12 mb">
+              <div class="row">
+              <div class="white-panel pn">
+                  <div class="white-header">
+                    <label>Send Account Notification</label>
+                  </div>
+                  <p><img src="../../assets/img/users.png" width="120"></p>
+              </div>
+              </div>
+            </div>
+          </div>
+            <!-- <div class="white-panel pn">
+              <div class="white-header">
+                <h5>User Mails</h5>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-6 goleft">
+                  <p><i class="fa fa-database"></i> Total of {{sentEmails}} Sent Emails to the Users.</p>
+                </div>
+              </div>
+              <div class="row">
+              <div class="col-lg-12 col-md-6 col-sm-12">
+                <div class="showback">
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{sentEmails}}" aria-valuemin="0" aria-valuemax="{{countedMails.emailCounted}}" style="width: 10%">
+                    </div>
+                    <span>Emails Sent to the users {{sentEmails}}% Complete </span>
+                  </div>
+                  <div class="showback">
+                    <h3>Unsent Emails </h3><span class="badge custom-badge"><p class="unsentCount">{{unsentEmails}}</p></span>
+                  </div>
+                  <button class="btn btn-primary btn-lg" ng-click="sendEmails()">Send</button>
+                </div>
+          </div>/grey-panel 
+        </div>
+        <div class="row mt">
+            <div class="col-md-12">
+              <div class="content-panel">
+                  <table class="table table-striped table-advance table-hover">
+                    <h4><i class="fa fa-angle-right"></i> Send Survey Notification</h4>
+                    <hr>
+                      <thead>
+                      <tr>
+                        <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
+                        <th><i class=" fa fa-edit"></i> Status</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="list in activeSurvey">
+                        <td>{{list.course_name | capitalize}}</td>
+                        <td>
+                            <button class="btn btn-success btn-xs" ng-click="sendSurveyNotification(list)"><i class="fa fa-check"></i></button>
+                        </td>
+                      </tr>
+                      
+                      </tbody>
+                  </table>
+                </div><
+            </div><!-- /col-md-12 -->
+        </div><!-- /row -->
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<!-- delete -->
+
+<div class="modal fade" id="deleteDepartment" tabindex="-1" role="dialog" aria-labelledby="deleteDepartment" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="deleteDepartment">Delete?</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="deleteDept(prompDeleteDeptList)">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteCourse" tabindex="-1" role="dialog" aria-labelledby="deleteCourse" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="deleteCourse">Delete?</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="deleteCourse(deleteCourseList)">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteObe" tabindex="-1" role="dialog" aria-labelledby="deleteObe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="deleteObe">Delete?</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="deleteObe(deleteObeList)">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteSurvey" tabindex="-1" role="dialog" aria-labelledby="deleteSurvey" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="deleteSurvey">Delete?</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="deleteSurvey(deleteSurveyList)">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="surveyPrompt" tabindex="-1" role="dialog" aria-labelledby="surveyPrompt" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="surveyPrompt">Survey</h4>
+      </div>
+      <div class="modal-body">
+        There is no email to be sent!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CLose</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteUserPrompt" tabindex="-1" role="dialog" aria-labelledby="deleteUserPrompt" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="deleteUserPrompt">User</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="deleteUser(prompDeleteUserList)">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+         $('#example1').datepicker({
+            format: "dd/mm/yyyy"
+        });  
+    });
+</script>

@@ -1,0 +1,185 @@
+
+<div ng-controller="DatepickerDemoCtrl">
+<div class="col-lg-12">
+<form class="form-inline" role="form" ng-submit="saveData()">
+<div class="row mt">
+	<div class="col-lg-4">
+		<div class="form-panel">
+      	  <h4 class="mb"><i class="fa fa-angle-right"></i> Personal Information </h4>
+              <div class="form-group">
+                  <label class="sr-only" for="exampleInputEmail2">First Name</label>
+                  <input type="text" class="form-control edit-group" id="exampleInputEmail2" placeholder="First Name" ng-model="new.fname" required>
+              </div>
+              <div class="form-group">
+                  <label class="sr-only" for="exampleInputPassword2">Middle Name</label>
+                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="Middle Name" ng-model="new.mname" required>
+              </div>
+              <div class="form-group">
+                  <label class="sr-only" for="exampleInputPassword2">Last Name</label>
+                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="Last Name" ng-model="new.lname">
+              </div>
+              <br>
+              <div class="form-group">
+                  <label class="sr-only" for="exampleInputPassword2" ng-model="new.extention_name">Extention Name</label>
+                  <select class="form-control edit-group">
+                  	<option ng-init="new.extention_name = ' '" selected disabled>Choose Extention Name</option>
+                  	<option ng-init="new.extention_name = ' '"></option>
+                  	<option ng-init="new.extention_name = 'Sr'">Sr.</option>
+                  	<option ng-init="new.extention_name = 'Jr'">Jr.</option>
+                  </select>
+			      <div class="form-group" ng-class="{'has-error': datepickerForm.date.$invalid}">
+			        <input type="text" class="form-control edit-group" ng-model="new.date" bs-datepicker style="width: 158px!important;" placeholder="Birthday" required>
+			      </div>
+	              </div>
+	             <br>
+	              <div class="radio">
+	              <label>Gender</label>
+	              <br>
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male" ng-model="new.gender" required>
+					    Male
+					  </label>
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios2" value="Female" ng-model="new.gender" required>
+					    Female
+					  </label>
+				  </div>
+					<br>
+				<div class="form-group">
+				<label for="exampleInputPassword2">Address</label>
+				<br>
+                  <label class="sr-only" for="exampleInputPassword2">Street</label>
+                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="Street" ng-model="new.street" required>
+	             </div>
+	             <div class="form-group">
+	                  <label class="sr-only" for="exampleInputPassword2">Barangay</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="Barangay" ng-model="new.barangay" required>
+	              </div>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputPassword2">City</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="City" ng-model="new.city" required>
+	              </div>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputPassword2">Province</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="Province" ng-model="new.province" required>
+	              </div>
+	              <br>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputPassword2">Email Address</label>
+	                  <input type="email" class="form-control edit-group" id="exampleInputPassword2" placeholder="Email Address" ng-model="new.email" required>
+	              </div>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputPassword2">Mobile No.</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="Mobile No." ng-model="new.mobile_no" required>
+	              </div>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputPassword2">Telephone No.</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="Telephone No." ng-model="new.tele_no" required>
+	              </div>
+
+	              <br>
+			</div><!-- /form-panel -->
+			</div><!-- /col-lg-12 -->
+
+			<div class="col-lg-4">
+			<div class="form-panel">
+	      	  <h4 class="mb"><i class="fa fa-angle-right"></i> Elementary Education</h4>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputEmail2">School Name</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputEmail2" placeholder="School Name" ng-model="new.school_name_elementary" required>
+	              </div>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputPassword2">School Address</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="School Address" ng-model="new.school_address_elementary" required>
+	              </div>
+	              <div class="form-group">
+                 	<!-- <div class="form-group" ng-class="{'has-error': datepickerForm.date.$invalid}">
+		        		<select ng-model="new.year_graduated_elementary" class="form-control edit-group" required>
+		        			<option ng-repeat="list in yearList" value="{{list.year_name}}">{{list.year_name}}</option>
+		        		</select>
+		        	</div> -->
+		        	<input type="text" ng-model="new.year_graduated_elementary" placeholder="Year Graduated" bs-datepicker class="form-control edit-group">
+			      </div>
+	              <br>
+				<div class="form-group">
+                  <textarea class="form-control edit-group" id="exampleInputPassword2" ng-model="new.awards_received_elementary" cols="20" placeholder="Awards Received"></textarea>
+	             </div>
+			</div>
+
+			<div class="form-panel">
+	      	  <h4 class="mb"><i class="fa fa-angle-right"></i> Secondary Education</h4>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputEmail2">School Name</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputEmail2" placeholder="School Name" ng-model="new.school_name_secondary" required>
+	              </div>
+	              <div class="form-group">
+	                  <label class="sr-only" for="exampleInputPassword2">School Address</label>
+	                  <input type="text" class="form-control edit-group" id="exampleInputPassword2" placeholder="School Address" ng-model="new.school_address_secondary" required> 
+	              </div>
+	              <div class="form-group">
+        			<input type="text" ng-model="new.year_graduated_secondary" placeholder="Year Graduated" bs-datepicker class="form-control edit-group">
+			      </div>
+	              <br>
+				<div class="form-group">
+                  <textarea class="form-control edit-group" id="exampleInputPassword2" ng-model="new.awards_received_secondary" cols="20" placeholder="Awards Received"></textarea>
+	             </div>
+			</div>
+
+			</div>
+			<div class="col-lg-4">
+				<div class="form-panel">
+	      	  <h4 class="mb"><i class="fa fa-angle-right"></i> Tertiary Education</h4>
+	              <div class="form-group">
+	                  <label for="exampleInputEmail2">Academic Level</label>
+	                  <br>
+	                  <select ng-model="new.academic_level_tertiary" class="form-control edit-group" required ng-click="graduateCateg()">
+	                  	<option ng-init="new.academic_level_tertiary = 'Vocational'">Vocational</option>
+	                  	<option ng-init="new.academic_level_tertiary = 'College'">College</option>
+	                  	<option ng-init="new.academic_level_tertiary = 'Graduate'">Graduate</option>
+	                  	<option ng-init="new.academic_level_tertiary = 'Post Graduate'">Post Graduate</option>
+	                  </select>
+	                  <br>
+	                  	<select class="form-control edit-group" id="academic-specific" ng-model="new.academic_specific">
+	                  		<option value="Graduate">Graduate</option>
+	                  		<option value="Masteral">Masteral</option>
+	                  		<option value="Doctorate">Doctorate</option>
+	                  	</select>
+	              </div>
+	              <div class="form-group">
+	                  <label for="exampleInputPassword2">Degree</label>
+	                  <br>
+	                  <select ng-model="new.degree_tertiary" class="form-control edit-group" required>
+	                  	<option ng-repeat="list in courseList" value="{{list.course_id}}">{{list.course_name | capitalize}}</option>
+	                  </select>
+	              </div>
+	              <div class="form-group">
+	                  <label for="exampleInputPassword2">School Duration</label>
+	                  <br>           
+        				<input type="text" ng-model="new.year_from_tertiary" placeholder="Year Started" bs-datepicker class="form-control edit-group">
+        				<input type="text" ng-model="new.year_to_tertiary" placeholder="Year Ended" bs-datepicker class="form-control edit-group">
+	              </div>
+	              <br>
+	              <div class="form-group">
+	                  <br>
+        				<input type="text" ng-model="new.year_graduated_tertiary" placeholder="Year Graduated" bs-datepicker class="form-control edit-group">
+	              </div>
+	              <br>
+				<div class="form-group">
+                  <textarea ng-model="new.awards_received_tertiary" placeholder="Awards Received" class="form-control edit-group"></textarea>
+	             </div>
+	              <div class="form-group">
+	                  <input type="text" class="form-control edit-group" placeholder="Thesis Project" ng-model="new.thesis_project_tertiary">
+	              </div>
+			</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="form-panel" style="text-align: center!important;">
+					<a href class="btn btn-danger" ng-click="ClearFields()" style="color: white!important;">Clear</a>
+					<button class="btn btn-theme" type="submit"><i class="fa fa-check"></i>Done</button>
+				</div>
+			</div>
+	  </div><!-- /row -->
+
+	  </form>
+</div>
+</div>
