@@ -261,7 +261,7 @@
 		}
 		public function listPending()
 		{	
-			$query = "select a.user_id,a.fname,a.mname,a.lname,a.extention_name,d.degree_tertiary,d.year_graduated_tertiary,f.course_name from tblgrad_profile a inner join tbltertiary d inner join tblcourse f where d.user_id = a.user_id && d.degree_tertiary = f.course_id && a.status = 'pending'";
+			$query = "select l.user_id,a.user_id,a.fname,a.mname,a.lname,a.extention_name,d.degree_tertiary,d.year_graduated_tertiary,f.course_name,l.status from tblgrad_profile a inner join tbltertiary d inner join tblcourse f inner join tbluser_acc l where d.user_id = a.user_id && d.degree_tertiary = f.course_id && l.user_id = a.user_id";
 			return $this->db->query($query)->result_object();
 
 		}
@@ -302,6 +302,64 @@
 			$this->db->like('course_id', $getDegreeId->degree_tertiary);
 			$this->db->where('others', 'true');
 			return $this->db->get('tblspecialization_obe')->result_object();
+		}
+		public function statusOptBlock($id)
+		{
+			$block = array(
+				'status' => 'block'
+			);
+
+			$this->db->where('user_id', $id);
+			$data = $this->db->update('tbluser_acc', $block);
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		public function statusOptActivate($id)
+		{
+			$active = array(
+				'status' => 'active'
+			);
+
+			$this->db->where('user_id', $id);
+			$data = $this->db->update('tbluser_acc', $active);
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		public function statusOptDeactivate($id)
+		{
+			$deactivate = array(
+				'status' => 'deactivate'
+			);
+
+			$this->db->where('user_id', $id);
+			$data = $this->db->update('tbluser_acc', $deactivate);
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		public function eventList()
+		{
+			return $this->db->get('tblevent')->result_object();
 		}
 	}
  ?>

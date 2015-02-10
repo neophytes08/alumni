@@ -9,13 +9,13 @@
 		}
 		public function show_login($show_error = false)
 		{
-			$this->load->view('login_page');
+			$this->load->view('login');
 		}
 		public function index()
 		{
 			if($this->session->userdata('isLoggedIn'))
 			{
-				$this->load->view('login_page');
+				$this->load->view('login');
 			}
 			else
 			{

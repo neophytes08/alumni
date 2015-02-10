@@ -396,7 +396,7 @@
     
     module.provider('paginationTemplate', function() {
 
-        var templatePath = '/tracer/assets/js/dirPagination.tpl.html';
+        var templatePath = '/alumni/assets/js/dirPagination.tpl.html';
         
         this.setPath = function(path) {
             templatePath = path;

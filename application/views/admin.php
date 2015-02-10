@@ -164,10 +164,10 @@
                           <span>Add Graduate</span>
                       </a>
                   </li>
-                  <li class="sub-menu" ng-click="getStatistics()">
+                  <li class="sub-menu" ng-click="Events()">
                       <a class="stat" href>
                           <i class=" fa fa-inbox"></i>
-                          <span>Mail</span>
+                          <span>Add Events</span>
                       </a>
                   </li>
                   <li class="sub-menu" ng-click="getStatistics()">
@@ -195,6 +195,7 @@
             <section statistics></section>
             <section admin></section>
             <section settings></section>
+            <section events></section>
           </section>
       </section>
 

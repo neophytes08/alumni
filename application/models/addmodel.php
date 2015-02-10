@@ -709,6 +709,27 @@
 			
 
 		}
+		public function addEvent($post)
+		{
+			$date = strtok($post->date, "T");
+
+			$event = array(
+				'event_title' => $post->title,
+				'event_description' => $post->description,
+				'event_date' => $date
+			);
+
+			$data = $this->db->insert('tblevent', $event);
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				false;
+			}
+		}
 	}
 	
  ?>

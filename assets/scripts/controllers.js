@@ -353,7 +353,44 @@ myadmin
 						$scope.getPending();
 					});
 				}
-				$scope.getPending();
+				// status option
+				$scope.stat = {};
+				$scope.statusOpt = function statusOpt(list){
+					console.log(list);
+					$('.load-accepted_' + list.user_id).show();
+
+					if($scope.stat.option == 'active')
+					{
+						console.log('active');
+						$http.get(getUrl.url + '/listCtrl/statusOptActivate/' + list.user_id)
+						.success(function onSuccess(response){
+							$('.load-accepted_' + list.user_id).hide();
+							$scope.getPending();
+						});
+					}
+					else if($scope.stat.option == 'block')
+					{
+						console.log('block');
+						$http.get(getUrl.url + '/listCtrl/statusOptBlock/' + list.user_id)
+						.success(function onSuccess(response){
+							$('.load-accepted_' + list.user_id).hide();
+							$scope.getPending();
+						});
+						
+					}
+					else if($scope.stat.option == 'deactivate')
+					{
+						console.log('deactivate');
+
+						$http.get(getUrl.url + '/listCtrl/statusOptDeactivate/' + list.user_id)
+						.success(function onSuccess(response){
+							$('.load-accepted_' + list.user_id).hide();
+							$scope.getPending();
+						});
+					}
+					
+				}
+				// $scope.getPending();
 			}
 
 		])
@@ -1294,7 +1331,33 @@ myadmin
 						$scope.admin = response;
 					});
 				}
-				$scope.showLogs();
-				$scope.adminInfo();
+				// $scope.showLogs();
+				// $scope.adminInfo();
 			}
+		])
+		.controller('eventsController',[
+			"$scope",
+			"$http",
+			"getUrl",
+			function controller($scope, $http, getUrl){
+
+			$scope.events = {};
+			$scope.eventList = function eventList(){
+				console.log('events');
+				$http.get(getUrl.url + '/listCtrl/eventList')
+				.success(function onSuccess(response){
+					$scope.listEvent = response;
+				});
+			}
+			// add event
+			$scope.addEvent = function addEvent(){
+				console.log($scope.events);
+				$http.post(getUrl.url + '/addCtrl/addEvent/', $scope.events)
+				.success(function onSuccess(response){
+					console.log(response);
+					$scope.eventList();
+				});
+			}
+			$scope.eventList();
+		}
 		]);

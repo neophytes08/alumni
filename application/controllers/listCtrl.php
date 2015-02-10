@@ -501,5 +501,53 @@
 				$this->show_login(false);
 			}
 		}
+		public function statusOptBlock($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->listmodel->statusOptBlock($id);
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
+		public function statusOptActivate($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->listmodel->statusOptActivate($id);
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
+		public function statusOptDeactivate($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->listmodel->statusOptDeactivate($id);
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
+		public function eventList()
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->listmodel->eventList();
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
 	}
  ?>

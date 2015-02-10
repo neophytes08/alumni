@@ -73,6 +73,10 @@ myadmin
 							$rootScope.$broadcast('hide');
 							$rootScope.$broadcast('show-settings');
 						}
+						scope.Events = function Events(){
+							$rootScope.$broadcast('hide');
+							$rootScope.$broadcast('show-events');
+						}
 					}
 				}
 			}
@@ -85,7 +89,7 @@ myadmin
 					"controller": "activitiesController",
 					"templateUrl": "/alumni/assets/template/dashboard.html",
 					"link": function onLink(scope, element, attributeSet){
-						// element.addClass("hidden");
+						element.addClass("hidden");
 						scope.$on('show-dashboard' , 
 							function on(){
 								element.removeClass("hidden");
@@ -169,6 +173,30 @@ myadmin
 					"controller": "activitiesController",
 					"link": function onlink(scope, element, attributeSet){
 						
+					}
+				}
+			}
+		])
+		.directive('events', [
+			function directives(){
+				return {
+					"restrict": "A",
+					"scope": true,
+					"controller": "eventsController",
+					"templateUrl": "/alumni/assets/template/events.html",
+					"link": function onlink(scope, element, attributeSet){
+						// element.addClass("hidden");
+						scope.$on('show-settings' , 
+							function on(){
+								element.removeClass("hidden");
+								$('.events').addClass('active');
+							});
+
+						scope.$on('hide', 
+							function on(){
+								element.addClass("hidden");
+								$('.events').removeClass('active');
+							});	
 					}
 				}
 			}

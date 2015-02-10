@@ -1,318 +1,274 @@
 <!DOCTYPE html>
-<html ng-app="login">
+<html lang="en" ng-app="login">
+
 <head>
-	<title> Graduate Tracer Study </title>
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-	<link href="<?php echo base_url('assets/css/materialize.css') ?>" rel="stylesheet">
-  <link href="<?php echo base_url('assets/css/materialize.min.css') ?>" rel="stylesheet">
-  <script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Alumni Assocation</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="<?php echo base_url('assets/css/bootstrap2.min.css') ?>" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="<?php echo base_url('assets/css/landing-page.css') ?>" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
-  	<style type="text/css">
-    html, body, .container
+  <style type="text/css">
+    .logo
     {
-      height: 100%;
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      position: absolute;
+      margin-right: 20px;
     }
-    body
+    .title-site
     {
-      background: url(/alumni/assets/img/bg.jpg) no-repeat center fixed;
-      background-size: 100% 90%;
-      color: white;
+      margin-left: 20px!important;
+      font-size: 20px!important;
     }
-    h4, p
-    {
-      color: black!important;
-    }
-  	.tracer-logo
-  	{
-  		border-radius: 100px!important;
-  		box-shadow: 0px 1px 2px black!important;
-  	}
-  	.login-head
-  	{
-  		height: 100px!important;
-  	}
-    .site-title
-    {
-      margin-right: 450px!important;
-      color: #FEB613!important;
-    }
-    .site-title li:hover
-    {
-      background: transparent!important;
-    }
-    nav
-    {
-        background: #1A1851!important; 
-        height: 100px!important;
-        border-bottom: 3px solid #FEB614!important;
-        z-index: 1!important;
-    }
-    .background_box
-    {
-      position: fixed;
-      margin-left: 200px;
-      width: 800px;
-      height: 100%;
-      background: black;
-      z-index: -1;
-      opacity: 0.5;
-      padding: 20px;
-    }
-    .container
-    {
-       width: 800px;
-       padding: 20px;
-       margin-left: 200px;
-       position: fixed!important;
-       display: table!important;
-       vertical-align: middle!important;
-      
-    }
-    .vertical-center-row
-    {
-      display: table-cell!important;
-      vertical-align: middle!important;
-    }
-    .site-description
-    {
-      margin: 150px auto;
-      color: white!important;
-      font-size: 18px!important;
-      font-family: Arial, sans-serif;
-      text-indent: 20px;
-      text-align: justify;
-    }
-    .button-customize
-    {
-      background: #FEB613!important;
-      font-weight: bold!important;
-    }
-    footer
-    {
-      margin-top: 40%!important;
-      background: #1A1851!important;
-      width: 100%!important; 
-      height: 100%!important; 
-      position: fixed!important;
-      border-top: 3px solid #FEB614!important;
-    }
-    .background-layout
-    {
-      width: 100%;
-      height: 100%;
-      background: black;
-      z-index: 1;
-      position: fixed;
-      opacity: 0.6;
-      display: none;
-    }
-    #forgot, #register
-    {
-      z-index: 2;
-    }
-    .successSent
-    {
-      color: white!important;
-    }
-    .emailSent
-    {
-      position: absolute!important;
-      margin-left: 600px;
-      margin-top: -50px;
-      display: none;
-    }
-    input.reg-input
-    {
-      color: black!important;
-      width: 224px!important;
-    }
-    .select-custom
-    {
-      float: left!important;
-      margin-left: 5px;
-    }
-    .doneRegistration
-    {
-      color: black!important;
-      display: none;
-    }
-  	</style>
+  </style>
 <body login>
-<div class="background-layout"></div>
-        <div class="background_box"></div>  
-    <header>
-      <nav>
-        <div class="nav-wrapper login-head" >
-          <img src="<?php echo base_url('assets/img/logo.jpg')?>" alt="logo" class="tracer-logo">
-          <ul class="side-nav site-title">
-            <li><h3>Graduate Tracer</h3></li>
-          </ul>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+      <img src="<?php echo base_url('assets/img/saint-log.jpg') ?>" class="logo">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand topnav title-site" href="#">Alumni Association</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#login" data-toggle="modal">Login</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('index.php/loginctrl/resume') ?>">Sign Up</a>
+                    </li>
+                    <li>
+                        <a href="#events">Events</a>
+                    </li>
+                    <li>
+                        <a href="#news">News</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-      </nav>
-    </header>
-    <main>
-            
+        <!-- /.container -->
+    </nav>
+
+
+    <!-- Header -->
+    <a name="about"></a>
+    <div class="intro-header">
         <div class="container">
-          <div class="row vertical-center-row" style="opacity: 1!important;">
-          <div class="col s6" style="border-right: 1px solid #9A9999!important;">
-              <p class="site-description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  
-              </p>
-          </div>
-          <div class="col s6">
-            <div class="card" style="margin-top: 100px!important; box-shadow: 0px 0px 0px transparent!important;">
-              <div class="card-image">
-                <span class="card-title">Please Login</span>
-              </div>
-              <form >
-                <div class="card-content white-text">
-                  <span class="card-title">Please Login</span>
-                  <br>
-                  <label>Username</label>
-                  <br>
-                  <input type="text" ng-model="login.username" required>
-                  <br>
-                  <label>Password</label>
-                  <br>
-                  <input type="password" ng-model="login.password" required>
-                  <br>
-                  <a href="#forgot" ng-click="recoveryAlert()">Fogot Password?</a>
-                  <br>
-                  <a href="#register" ng-click="register()">Register</a>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="intro-message">
+                        <h1>Saint Michael College of Caraga</h1>
+                        <h3>An Alumni Website</h3>
+                    </div>
                 </div>
-              <div class="card-action">
-                  <button type="submit" class="waves-effect waves-light btn-large button-customize">Cancel</button>
-                  <button class="waves-effect waves-light btn-large button-customize">Login</button>
-             </div>
-              </form>
             </div>
-          </div>
-          </div>
+
         </div>
-     </main>
-     
-    <!-- <footer>
-        <div class="row">
-            <div class="container">
-              <div class="row">
-                <div class="col l6 s12">
-                  <h5 class="white-text">Footer Content</h5>
-                  <p class="grey-text lighten-4">You can use rows and columns here to organize your footer content.</p>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+  <a  name="news"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">News Section</h2>
+                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
                 </div>
-                <div class="col l4 offset-l2 s12">
-                  <h5 class="white-text">Links</h5>
-                  <li><a class="grey-text lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text lighten-3" href="#!">Link 4</a></li>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="<?php echo base_url('assets/img/ipad.png') ?>" alt="">
                 </div>
-              </div>
             </div>
-            <div class="footer-copyright">
-              <div class="container">
-              © 2014 Copyright Text
-              <a class="grey-text lighten-4 right" href="#!">More Links</a>
-              </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+   <a  name="events"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Events Section</h2>
+                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="<?php echo base_url('assets/img/ipad.png') ?>" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Google Web Fonts and<br>Font Awesome Icons</h2>
+                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="<?php echo base_url('assets/img/phones.png') ?>" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+  <a  name="contact"></a>
+    <div class="banner">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Connect to Start Bootstrap:</h2>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-inline banner-social-buttons">
+                        <li>
+                            <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.banner -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#services">Services</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Your Company 2014. All Rights Reserved</p>
+                </div>
             </div>
         </div>
-    </footer>  -->
-    <div id="forgot" class="modal">
-      <h4>Please type your valid email address</h4>
-      <p>We will check if the email address you give exist in our records, we will send your username and password using the email address if valid.</p>
-      <br>
-      <form ng-submit="recover()">
-        <input type="email" ng-model="rec.email" placehoder="Email Address here..." style="color: black;">
-        <br>
-        <a class="btn" ng-click="cancelRecovery()">Cancel</a>
-        <button class="btn" type="submit">Send</button>
-        <div class="preloader-wrapper small active emailSent">
-            <div class="spinner-layer spinner-blue">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
+    </footer>
 
-            <div class="spinner-layer spinner-red">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="login" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <form class="form-login custom-login" ng-submit="loginUser()">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Login Here!</h4>
+                </div>
+                <div class="modal-body">
+                <div class="row"> 
+                  <input type="text" ng-model="login.username" placeholder="Username" class="form-control">
+                  <br>
+                  <input type="password" ng-model="login.password" placeholder="Password" class="form-control">
+                </div>
               </div>
+                <div class="modal-footer">
+                    <button class="btn btn-theme" type="submit">Login</button>
+                </div>
+                </form>
             </div>
-
-            <div class="spinner-layer spinner-yellow">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
-
-            <div class="spinner-layer spinner-green">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
-          </div>
-      </form>
+        </div>
     </div>
+    <!-- jQuery -->
+    <script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
 
-    <div id="register" class="modal">
-      <h4>Register</h4>
-      <div class="row registration">
-        <form ng-submit="submitReg()">
-          <input type="text" placeholder="First Name" ng-model="reg.fname" class="reg-input">
-          <input type="text" placeholder="Middle Name" ng-model="reg.mname" class="reg-input">
-          <input type="text" placeholder="Last Name" ng-model="reg.lname" class="reg-input">
-          <br>
-          <select ng-model="reg.extention_name" class="disabled select-custom" style="color: black!important; width: 140px!important;">
-            <option value="''" selected> </option>
-            <option value="Jr">Jr</option>
-            <option value="Sr">Sr</option>
-          </select>
-          <select ng-model="reg.course" class="disabled select-custom" style="color: black!important; width: 400px!important; margin-right: 5px;">
-            <option selected disabled>Choose Degree Graduated</option>
-            <option ng-cloak ng-repeat="list in courseList" value="{{list.course_name}}">{{list.course_name | capitalize}}</option>
-          </select>
-          <br>
-          <input type="email" ng-model="reg.email" placeholder="Email Address" class="reg-input">
-          <br>
-            <a href class="waves-effect waves-light btn-large button-customize" ng-click="cancelReg()" style="margin-top: 5px!important;"> Cancel </a>
-            <button type="submit" class="waves-effect waves-light btn-large button-customize" style="margin-top: 5px!important;"> Done </button>
-        </form>
-      </div>
-      <div class="row doneRegistration">
-        <h5>Thank you for registering to Graduate Tracer, your information will be reviewed by the admin to determine your existence in the school records. <br>
-        You will be notifiy via email that you provided if you exist in school records. Thank you and God Bless!
-        </h5>
-        <a href="#" class="waves-effect btn-flat modal-close" ng-click="cancelReg()">Done</a>
-      </div>
-    </div>
-    <script src="<?php echo base_url('assets/js/materialize.js') ?>"></script>
-    <script src="<?php echo base_url('assets/js/platform.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/angular.min.js') ?>"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?php echo base_url('assets/js/bootstrap2.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/angular.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/angularstrap/angular-sanitize.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.tpl.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/login.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/loginFactory.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/loginDirective.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/loginController.js') ?>"></script>
 </body>
-</html>           
-    
-    
+
+</html>

@@ -50,7 +50,7 @@
           <!-- WHITE PANEL - TOP USER -->
           <div class="white-panel pn" ng-click="getGradList()">
             <div class="white-header">
-              <h5>List of Graduates</h5>
+              <h5>List of Alumni</h5>
                       </div>
                 <div class="row">
                   <div class="col-sm-6 col-xs-6 goleft">
@@ -79,6 +79,7 @@
                         <th><i class="fa fa-bullhorn"></i> Full Name</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i> Course</th>
                         <th><i class="fa fa-bookmark"></i> Year Graduated</th>
+                        <th><i class="fa fa-bookmark"></i> Status</th>
                         <th><input type="text" ng-model="search" class="form-control" placeholder="Search Graduate"/></th>
                     </tr>
                     </thead>
@@ -88,9 +89,16 @@
                         <td class="hidden-phone">{{list.course_name | capitalize}}</td>
                         <td>{{list.year_graduated_tertiary | date}}</td>
                         <td>
-                          <button class="btn btn-primary btn-xs" ng-click="grantPending(list)"><i class="fa fa-check"></i></button>
+                          <select ng-model="stat.option" class="form-control">
+                            <option value="active" ng-selected="list.status == 'active'">Active</option>
+                            <option value="deactivate" ng-selected="list.status == 'deactivate'">Deactivate</option>
+                            <option value="block" ng-selected="list.status == 'block'">Block</option>
+                          </select>
+                      </td>
+                        <td>
+                          <button class="btn btn-primary btn-xs" ng-click="statusOpt(list)"><i class="fa fa-check"></i></button>
                           <button class="btn btn-danger btn-xs"><i class="fa fa-inbox"></i></button>
-                          <img src="/tracer/assets/img/loading.gif" class="load-accepted_{{list.user_id}}" id="accepted">
+                          <img src="/alumni/assets/img/loading.gif" class="load-accepted_{{list.user_id}}" id="accepted">
                         </td>
                     </tr>
                     </tbody>
