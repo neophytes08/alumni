@@ -105,5 +105,17 @@
 				$this->show_login(false);
 			}	
 		}
+		public function deleteNews($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->deletemodel->deleteNews($id);
+				echo json_encode(array('stat' => $data));
+			}
+			else
+			{
+				$this->show_login(false);
+			}	
+		}
 	}
  ?>

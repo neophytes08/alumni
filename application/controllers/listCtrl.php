@@ -542,5 +542,10 @@
 			$data = $this->listmodel->eventList();
 			echo json_encode($data);
 		}
+		public function newsList()
+		{
+			$data = $this->listmodel->newsList();
+			echo json_encode($data);
+		}
 	}
  ?>

@@ -361,5 +361,9 @@
 		{
 			return $this->db->get('tblevent')->result_object();
 		}
+		public function newsList()
+		{
+			return $this->db->get('tblnews')->result_object();
+		}
 	}
  ?>

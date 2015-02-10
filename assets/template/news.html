@@ -1,0 +1,86 @@
+<div class="col-lg-12">
+	<div class="row">
+		 <div class="col-md-12 mb">
+		 	<div class="white-panel pn">
+                <div class="white-header">
+                  <h5>News List</h5>
+                  <div class="col-md-12 mb">
+	                <div class="row">
+	                  <dir-pagination-controls></dir-pagination-controls>
+	                </div>
+	              </div>
+                </div>
+                <div class="col-md-6 mb" dir-paginate="list in listNews | itemsPerPage: 2">
+            		<div class="white-panel pn">
+            			<div class="white-header">
+              				<h5>{{list.news_title | capitalize}}</h5>
+            			</div>
+            			<div class="white-body">
+		                	<p>{{list.news_description}}
+		                </div>
+		                <div class="col-md-12 mb">
+	            			<button class="btn btn-theme" data-toggle="modal" data-target="#editNews" ng-click="editNews(list)">Edit</button>
+	            			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteNews" ng-click="deletePrompt(list)">Delete</button>
+            			</div>
+        			</div>
+            	</div>
+            </div>
+		 </div>
+	<div class="col-md-6 mb">
+		<div class="white-panel pn">
+			<form ng-submit="addNews()">
+	    		<div class="white-header">
+	      			<h5>Create News</h5>
+	    		</div>
+	    		<input type="text" ng-model="news.news_title" placeholder="Title" class="form-control" required>
+	    		<br>
+	    		<textarea class="form-control" ng-model="news.news_description" placeholder="Description" required></textarea>
+	    		<br>
+	    		<button class="btn btn-theme pull-right" type="Type">Add News</button>
+    		</form>
+		</div>
+    </div>
+	</div>
+<div>
+
+<div class="modal fade" id="editNews" tabindex="-1" role="dialog" aria-labelledby="editEvent" aria-hidden="true">
+  <div class="modal-dialog">
+  	<form ng-submit="updateEvent()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="deleteDepartment">Edit News</h4>
+      </div>
+      <div class="modal-body">
+    	<input type="text" ng-model="edit.news_title" placeholder="Event Title" class="form-control">
+    	<input type="hidden" ng-model="edit.news_id">
+    	<br>
+    	<textarea ng-model="edit.news_description" class="form-control"></textarea>
+    	<br>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteNews" tabindex="-1" role="dialog" aria-labelledby="editEvent" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="deleteDepartment">Delete News</h4>
+      </div>
+      <div class="modal-body">
+     	<p>Are you sure you want to delete this?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-click="deleteNews(deleteNewsData)">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>

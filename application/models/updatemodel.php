@@ -284,5 +284,27 @@
 				return false;
 			}
 		}
+		public function updateNews($post)
+		{
+			$date = date("Y-m-d");
+
+			$update = array(
+				'news_title' => $post->news_title,
+				'news_description' => $post->news_description,
+				'news_date' => $date
+			);
+
+			$this->db->where('news_id', $post->news_id);
+			$data = $this->db->update('tblnews', $update);
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
  ?>

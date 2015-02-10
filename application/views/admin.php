@@ -170,6 +170,12 @@
                           <span>Add Events</span>
                       </a>
                   </li>
+                  <li class="sub-menu" ng-click="News()">
+                      <a class="stat" href>
+                          <i class=" fa fa-inbox"></i>
+                          <span>Add Events</span>
+                      </a>
+                  </li>
                   <li class="sub-menu" ng-click="getStatistics()">
                       <a class="stat" href>
                           <i class=" fa fa-bar-chart-o"></i>
@@ -196,6 +202,7 @@
             <section admin></section>
             <section settings></section>
             <section events></section>
+            <section news></section>
           </section>
       </section>
 

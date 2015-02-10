@@ -170,5 +170,18 @@
 			$data = $this->addmodel->addEvent($post);
 			echo json_encode(array('stat' => $data));
 		}
+		public function addNews()
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$post = json_decode(file_get_contents('php://input'));
+				$data = $this->addmodel->addNews($post);
+				echo json_encode(array('stat' => $data));
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
 	}
  ?>

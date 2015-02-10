@@ -1389,4 +1389,63 @@ myadmin
 			}
 			$scope.eventList();
 		}
+		])
+		.controller('newsController', [
+			"$scope",
+			"$http",
+			"getUrl",
+			function controller($scope, $http, getUrl){
+
+				console.log('news');
+
+				// get news
+				$scope.newsList = function newsList(){
+
+					$http.get(getUrl.url + '/listCtrl/newsList')
+					.success(function onSuccess(response){
+						$scope.listNews = response;
+					});
+				}
+
+				// add news
+				$scope.addNews = function addNews(){
+					console.log($scope.news);
+
+					$http.post(getUrl.url + '/addCtrl/addNews', $scope.news)
+					.success(function onSuccess(response){
+						console.log(response);
+						$scope.newsList();
+						$scope.news = "";
+					});
+				}
+				// edit news
+				$scope.editNews = function editNews(list){
+					console.log(list);
+					$scope.edit = list;
+				}
+				// update news
+				$scope.updateEvent = function updateEvent(){
+					console.log($scope.edit);
+					$http.post(getUrl.url + '/updateCtrl/updateNews/', $scope.edit)
+					.success(function onSuccess(response){
+						console.log(response);
+						$('#editNews').modal('hide');
+					});
+				}
+				// delete event prompt
+				$scope.deletePrompt = function deletePrompt(list){
+					console.log(list);
+					$scope.deleteNewsData = list;
+				}
+				// delete event 
+				$scope.deleteNews = function deleteNews(list){
+
+					$http.get(getUrl.url + '/deleteCtrl/deleteNews/' + list.news_id)
+					.success(function onSuccess(response){
+						$scope.listNews.splice($scope.listNews.indexOf(list),1);
+						$('#deleteNews').modal('hide');
+					});
+				}
+				$scope.newsList();
+			}
 		]);

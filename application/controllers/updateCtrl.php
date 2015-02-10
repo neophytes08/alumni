@@ -140,5 +140,18 @@
 				$this->show_login(false);
 			}
 		}
+		public function updateNews()
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$post = json_decode(file_get_contents('php://input'));
+				$data = $this->updatemodel->updateNews($post);
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
 	}
  ?>
