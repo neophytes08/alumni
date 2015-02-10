@@ -93,5 +93,17 @@
 				$this->show_login(false);
 			}	
 		}
+		public function deleteEvent($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->deletemodel->deleteEvent($id);
+				echo json_encode(array('stat' => $data));
+			}
+			else
+			{
+				$this->show_login(false);
+			}	
+		}
 	}
  ?>

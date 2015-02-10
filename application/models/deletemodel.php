@@ -108,5 +108,19 @@
 			$this->db->where('pending_id' , $id);
 			return $this->db->delete('tblpending');
 		}
+		public function deleteEvent($id)
+		{
+			$this->db->where('event_id' , $id);
+			$data = $this->db->delete('tblevent');
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
  ?>

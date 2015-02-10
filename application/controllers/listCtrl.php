@@ -539,15 +539,8 @@
 		}
 		public function eventList()
 		{
-			if($this->session->userdata('isLoggedIn'))
-			{
-				$data = $this->listmodel->eventList();
-				echo json_encode($data);
-			}
-			else
-			{
-				$this->show_login(false);
-			}
+			$data = $this->listmodel->eventList();
+			echo json_encode($data);
 		}
 	}
  ?>

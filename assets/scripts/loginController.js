@@ -187,6 +187,15 @@ login
 				console.log(response);
 			});
 		}
+		// get list events
+		$scope.eventList = function eventList(){
+			console.log('events');
+			$http.get(getUrl.url + '/listCtrl/eventList')
+			.success(function onSuccess(response){
+				$scope.listEvent = response;
+			});
+		}
 	$scope.getCourse();
+	$scope.eventList();
 	}
 ]);

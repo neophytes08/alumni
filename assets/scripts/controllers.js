@@ -1355,6 +1355,7 @@ myadmin
 				$http.post(getUrl.url + '/addCtrl/addEvent/', $scope.events)
 				.success(function onSuccess(response){
 					console.log(response);
+					$scope.events = {};
 					$scope.eventList();
 				});
 			}
@@ -1370,6 +1371,20 @@ myadmin
 				.success(function onSuccess(response){
 					console.log(response);
 					$('#editEvent').modal('hide');
+				});
+			}
+			// delete event prompt
+			$scope.deletePrompt = function deletePrompt(list){
+				console.log(list);
+				$scope.deleteEventData = list;
+			}
+			// delete event 
+			$scope.deleteEvent = function deleteEvent(list){
+
+				$http.get(getUrl.url + '/deleteCtrl/deleteEvent/' + list.event_id)
+				.success(function onSuccess(response){
+					$scope.listEvent.splice($scope.listEvent.indexOf(list),1);
+					$('#deleteEvent').modal('hide');
 				});
 			}
 			$scope.eventList();
