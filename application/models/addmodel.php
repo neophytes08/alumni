@@ -730,6 +730,27 @@
 				false;
 			}
 		}
+		public function addNews($post)
+		{
+			$date = date("Y-m-d");
+
+			$news = array(
+				'news_title' => $post->news_title,
+				'news_description' => $post->news_description,
+				'news_date' => $date
+			);
+
+			$data = $this->db->insert('tblnews', $news);
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 	
  ?>

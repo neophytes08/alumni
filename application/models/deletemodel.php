@@ -122,5 +122,19 @@
 				return false;
 			}
 		}
+		public function deleteNews($id)
+		{
+			$this->db->where('news_id' , $id);
+			$data = $this->db->delete('tblnews');
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
  ?>

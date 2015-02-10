@@ -77,6 +77,10 @@ myadmin
 							$rootScope.$broadcast('hide');
 							$rootScope.$broadcast('show-events');
 						}
+						scope.News = function News(){
+							$rootScope.$broadcast('hide');
+							$rootScope.$broadcast('show-news');
+						}
 					}
 				}
 			}
@@ -185,7 +189,7 @@ myadmin
 					"controller": "eventsController",
 					"templateUrl": "/alumni/assets/template/events.html",
 					"link": function onlink(scope, element, attributeSet){
-						// element.addClass("hidden");
+						element.addClass("hidden");
 						scope.$on('show-settings' , 
 							function on(){
 								element.removeClass("hidden");
@@ -196,6 +200,30 @@ myadmin
 							function on(){
 								element.addClass("hidden");
 								$('.events').removeClass('active');
+							});	
+					}
+				}
+			}
+		])
+		.directive('news', [
+			function directives(){
+				return {
+					"restrict": "A",
+					"scope": true,
+					"controller": "newsController",
+					"templateUrl": "/alumni/assets/template/news.html",
+					"link": function onlink(scope, element, attributeSet){
+						// element.addClass("hidden");
+						scope.$on('show-news' , 
+							function on(){
+								element.removeClass("hidden");
+								$('.news').addClass('active');
+							});
+
+						scope.$on('hide', 
+							function on(){
+								element.addClass("hidden");
+								$('.news').removeClass('active');
 							});	
 					}
 				}
