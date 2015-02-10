@@ -262,5 +262,27 @@
 
 				return true;
 		}
+		public function updateEvent($post)
+		{
+			$date = strtok($post->event_date, "T");
+
+			$update = array(
+				'event_title' => $post->event_title,
+				'event_description' => $post->event_title,
+				'event_date' => $date
+			);
+
+			$this->db->where('event_id', $post->event_id);
+			$data = $this->db->update('tblevent', $update);
+
+			if($data)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
  ?>

@@ -1358,6 +1358,20 @@ myadmin
 					$scope.eventList();
 				});
 			}
+			// edit event
+			$scope.editEvent = function editEvent(list){
+				console.log(list);
+				$scope.edit = list;
+			}
+			// update
+			$scope.updateEvent = function updateEvent(){
+				console.log($scope.edit);
+				$http.post(getUrl.url + '/updateCtrl/updateEvent/', $scope.edit)
+				.success(function onSuccess(response){
+					console.log(response);
+					$('#editEvent').modal('hide');
+				});
+			}
 			$scope.eventList();
 		}
 		]);

@@ -21,7 +21,7 @@
 		                	<h5>{{list.event_date | date}}</h5>
 		                </div>
 		                <div class="col-md-4 mb">
-            			<button class="btn btn-theme" data-toggle="modal" data-target="#editEvent">Edit</button>
+            			<button class="btn btn-theme" data-toggle="modal" data-target="#editEvent" ng-click="editEvent(list)">Edit</button>
             		</div>
             		</div>
             	</div>
@@ -93,3 +93,28 @@
             <div>
 </div>
 <div>
+
+<div class="modal fade" id="editEvent" tabindex="-1" role="dialog" aria-labelledby="editEvent" aria-hidden="true">
+  <div class="modal-dialog">
+  	<form ng-submit="updateEvent()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="deleteDepartment">Edit Event</h4>
+      </div>
+      <div class="modal-body">
+        	<input type="text" ng-model="edit.event_title" placeholder="Event Title" class="form-control">
+        	<input type="hidden" ng-model="edit.event_id">
+        	<br>
+        	<textarea ng-model="edit.event_description" class="form-control"></textarea>
+        	<br>
+        	<input type="text" ng-model="edit.event_date" placeholder="Event Date" class="form-control" bs-datepicker>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
