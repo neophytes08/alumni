@@ -31,18 +31,18 @@
 		{
 			if($this->session->userdata('isLoggedIn'))
 			{
-				// $address = $this->listmodel->getAddress();
-				// $config['center'] = $address;
-				// $config['zoom'] = 16;
-				// $this->googlemaps->initialize($config);
+				$address = $this->listmodel->getAddress();
+				$config['center'] = $address;
+				$config['zoom'] = 16;
+				$this->googlemaps->initialize($config);
 
-				// $marker = array();
-				// $marker['position'] = $address;
-				// $this->googlemaps->add_marker($marker);
-				// $data['map'] = $this->googlemaps->create_map();
+				$marker = array();
+				$marker['position'] = $address;
+				$this->googlemaps->add_marker($marker);
+				$data['map'] = $this->googlemaps->create_map();
 
-				// $this->load->view('graduate', $data);
-				$this->load->view('graduate');
+				$this->load->view('graduate', $data);
+				// $this->load->view('graduate');
 				
 			}
 			else

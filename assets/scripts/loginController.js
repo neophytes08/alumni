@@ -199,7 +199,16 @@ login
 		$scope.showEventDetails = function showEventDetails(event){
 			$scope.eventDetails = event; 
 		}
-	$scope.getCourse();
-	$scope.eventList();
+		// get year
+		$scope.year = function year(){
+			$http.get(getUrl.url + '/listCtrl/getYear')
+			.success(function onSuccess(response){
+				$scope.yearList = response;
+			});
+		}
+
+		$scope.getCourse();
+		$scope.eventList();
+		$scope.year();
 	}
 ]);

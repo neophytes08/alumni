@@ -1,6 +1,6 @@
 .header-admin
 {
-	background: #1A1851!important;
+	background: #3F369F!important;
 }
 .edit-group
 {
@@ -296,7 +296,13 @@ table.custom-table > tbody tr td
 }
 
 
-#editEvent, #deleteEvent
+#editEvent, #deleteEvent, #custom-message-show
 {
     display: none;
+}
+
+.custom-message
+{
+    height: 350px!important;
+    overflow: auto!important;
 }

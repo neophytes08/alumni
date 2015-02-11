@@ -141,5 +141,15 @@
 			$this->db->where('comment_event_id' , $id);
 			$data = $this->db->delete('tblcomments_event');
 		}
+		public function deleteMessage($id)
+		{
+			$this->db->where('cr_id' , $id);
+			$this->db->delete('tblconversation_reply');
+		}
+		public function deleteConvo($id)
+		{
+			$this->db->where('conversation_id' , $id);
+			$this->db->delete('tblconversation');
+		}
 	}
  ?>

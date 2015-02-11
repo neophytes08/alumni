@@ -1,4 +1,4 @@
-var graduate = angular.module('graduate', ['angular-capitalize-filter','ngSanitize','mgcrea.ngStrap', 'angular-loading-bar']);
+var graduate = angular.module('graduate', ['angular-capitalize-filter','ngSanitize','mgcrea.ngStrap', 'angular-loading-bar','angularUtils.directives.dirPagination']);
 
 angular.module('angular-capitalize-filter', [])
   .filter('capitalize', function() {

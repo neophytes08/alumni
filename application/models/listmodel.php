@@ -88,7 +88,6 @@
 		}
 		public function getYear()
 		{
-			// return $this->db->get('tblyear')->result_object();
 			$query = "select * from tblyear order by year_id desc";
 			return $this->db->query($query)->result_object();
 		}
@@ -100,7 +99,7 @@
 		public function getUsers()
 		{
 			
-			$query = "select a.user_id,a.username,a.password,a.email,d.fname,d.mname,d.lname,d.extention_name,b.degree_tertiary, c.course_name from tbluser_acc a inner join tbltertiary b inner join tblcourse c inner join tblgrad_profile d where b.user_id = a.user_id && c.course_id = b.degree_tertiary && d.user_id = a.user_id && a.position = 'user'";
+			$query = "select a.user_id,a.username,a.password,a.email,d.picture,d.fname,d.mname,d.lname,d.extention_name,b.degree_tertiary, c.course_name from tbluser_acc a inner join tbltertiary b inner join tblcourse c inner join tblgrad_profile d where b.user_id = a.user_id && c.course_id = b.degree_tertiary && d.user_id = a.user_id && a.position = 'user'";
 			return $this->db->query($query)->result_object();
 		}
 		public function getPokeSurvey()
@@ -168,11 +167,7 @@
 		}
 		public function searchUser($post)
 		{
-			// $query = "select a.user_id,a.username,a.password, b.degree_tertiary, c.course_name from tbluser_acc a inner join tbltertiary b inner join tblcourse c where b.user_id = a.user_id && c.course_id = b.degree_tertiary && a.position = 'user' && a.username LIKE '".$post."' || c.course_name LIKE '".$post."'";
-			// return $this->db->query($query)->result_object();
-			// $post_data = array('username' => $this->input->post('keyword'));
-			// echo var_dump($this->input->post('keyword'));
-			 // return $this->db->like($post_data)->get('tbluser_acc')->result_object();
+	
 		}
 		public function getUserEmails()
 		{
@@ -368,6 +363,17 @@
 		public function listEventComment($id)
 		{
 			$query = " select a.picture,a.fname,a.mname,a.lname,a.extention_name,b.comment_event_id,b.event_id,a.user_id,b.comment_event_details,comment_event_date,c.event_id from tblgrad_profile a inner join tblcomments_event b inner join tblevent c where b.user_id = a.user_id && c.event_id = b.event_id && b.event_id = ".$id." order by b.comment_event_id asc";
+			return $this->db->query($query)->result_object();
+		}
+		public function messageList()
+		{
+			$query = "SELECT U.user_id,C.conversation_id,U.fname,U.mname,U.extention_name,U.picture FROM tblgrad_profile U, tblconversation C, tblconversation_reply R WHERE CASE WHEN C.user_one = ".$this->session->userdata('user_id')." THEN C.user_two = U.user_id WHEN C.user_two = ".$this->session->userdata('user_id')." THEN C.user_one = U.user_id END AND C.conversation_id = R.conversation_id AND (C.user_one = ".$this->session->userdata('user_id')." OR C.user_two = ".$this->session->userdata('user_id').") group by U
+			.user_id DESC ";
+			return $this->db->query($query)->result_object();
+		}
+		public function messageSpecificList($id)
+		{
+			$query = "SELECT R.conversation_id,R.time,R.reply,U.user_id,U.fname,U.mname,U.lname,U.picture,R.cr_id FROM tblgrad_profile U, tblconversation_reply R WHERE R.user_id = U.user_id AND R.conversation_id = ".$id." ORDER BY R.conversation_id DESC";
 			return $this->db->query($query)->result_object();
 		}
 	}

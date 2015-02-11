@@ -128,5 +128,27 @@
 				$this->show_login(false);
 			}	
 		}
+		public function deleteMessage($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->deletemodel->deleteMessage($id);
+			}
+			else
+			{
+				$this->show_login(false);
+			}	
+		}
+		public function deleteConvo($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->deletemodel->deleteConvo($id);
+			}
+			else
+			{
+				$this->show_login(false);
+			}	
+		}
 	}
  ?>

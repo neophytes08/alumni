@@ -767,6 +767,48 @@
 			$query = " select a.picture,a.fname,a.mname,a.lname,a.extention_name,b.comment_event_id,b.event_id,a.user_id,b.comment_event_details,comment_event_date,c.event_id from tblgrad_profile a inner join tblcomments_event b inner join tblevent c where b.user_id = a.user_id && c.event_id = b.event_id && b.event_id = ".$post->event_id." order by b.comment_event_id asc";
 			return $this->db->query($query)->result_object();
 		}
+		public function addMessage($post)
+		{
+			$date = date('Y-m-d H:i:s');
+
+			$conversation = array(
+				'user_one' => $this->session->userdata('user_id'),
+				'user_two' => $post->user_two,
+				'status' => 'sent',
+				'time' => $date
+			);
+
+			$this->db->insert('tblconversation', $conversation);
+			$id = $this->db->insert_id();
+
+			$message = array(
+				'reply' => $post->reply,
+				'user_id' => $post->user_two,
+				'time' => $date,
+				'status' => 'sent',
+				'conversation_id' => $id
+			);
+
+			$this->db->insert('tblconversation_reply', $message);
+			return true;
+		}
+		public function replyData($post)
+		{
+			$date = date('Y-m-d H:i:s');
+
+			$message = array(
+				'reply' => $post->message,
+				'user_id' => $post->user_id,
+				'time' => $date,
+				'status' => 'sent',
+				'conversation_id' => $post->conversation_id
+			);
+
+			$this->db->insert('tblconversation_reply', $message);
+
+			$query = "SELECT R.conversation_id,R.time,R.reply,U.user_id,U.fname,U.mname,U.lname,U.picture FROM tblgrad_profile U, tblconversation_reply R WHERE R.user_id = U.user_id AND R.conversation_id = ".$post->conversation_id." ORDER BY R.conversation_id DESC";
+			return $this->db->query($query)->result_object();
+		}
 	}
 	
  ?>

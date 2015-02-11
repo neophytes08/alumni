@@ -376,6 +376,80 @@ graduate
 			$scope.showNews = function showNews(list){
 				$scope.showNewsList = list
 			}
+			$scope.message = {};
+			// search user
+			$scope.searchUser = function searchUser(){
+				$http.get(getUrl.url + '/listCtrl/getUsers')
+				.success(function onSuccess(response){
+					$scope.userList = response;
+					console.log(response);
+				});
+			}
+			// get users
+			$scope.getUsers = function getUsers(){
+				$http.get(getUrl.url + '/listCtrl/getUsers')
+				.success(function onSuccess(response){
+					$scope.userList = response;
+				});
+			}
+			// user data for messaage
+			$scope.userData = function userData(list){
+				$scope.message.nameUser = list.fname + ' ' + list.mname + ' ' + list.lname + ' ' + list.extention_name;
+				$scope.message.user_two = list.user_id;
+			}
+			// get message list
+			$scope.messageDataList = function messageList(){
+
+				$http.get(getUrl.url + '/listCtrl/messageList/')
+				.success(function onSuccess(response){
+					$scope.messageList = response;
+				});
+			}
+			// send message
+			$scope.sendMessage = function sendMessage(){
+				console.log($scope.message);
+
+				$http.post(getUrl.url + '/addCtrl/addMessage/', $scope.message)
+				.success(function onSuccess(response){
+					console.log(response);
+					$('#messageSucees').modal('show');
+					$('#message').modal('hide');
+					$scope.message = "";
+					$scope.messageDataList();
+				});
+			}
+			// view message
+			$scope.viewMessages = function viewMessages(list){
+
+				$http.get(getUrl.url + '/listCtrl/messageSpecificList/' + list.conversation_id)
+				.success(function onSuccess(response){
+					$scope.messageView = response;
+					$scope.newMessage = response[0];
+					$('#custom-message-show').show(500);
+				});
+			}
+			// reply
+			$scope.replyMessage = function replyMessage(){
+				console.log($scope.newMessage);
+
+				$http.post(getUrl.url + '/addCtrl/replyData', $scope.newMessage)
+				.success(function onSuccess(response){
+					console.log(response);
+					$scope.messageView = response;
+					$scope.newMessage = response[0];
+				});
+			}
+			// delete message
+			$scope.deleteMessage = function deleteMessage(list){
+				$http.get(getUrl.url + '/deleteCtrl/deleteMessage/' + list.cr_id);
+				$scope.messageView.splice($scope.messageView.indexOf(list),1);
+			}
+			// delete convo
+			$scope.deleteConvo = function deleteConvo(list){
+				$http.get(getUrl.url + '/deleteCtrl/deleteConvo/' + list.conversation_id);
+				$scope.messageList.splice($scope.messageList.indexOf(list),1);
+			}
+			$scope.messageDataList();
 			$scope.newsList();
 			$scope.eventList();
 			$scope.countSurvey();

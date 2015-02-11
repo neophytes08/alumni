@@ -175,15 +175,8 @@
 		}
 		public function getYear()
 		{
-			if($this->session->userdata('isLoggedIn'))
-			{
-				$data = $this->listmodel->getYear();
-				echo json_encode($data);
-			}
-			else
-			{
-				$this->show_login(false);
-			}
+			$data = $this->listmodel->getYear();
+			echo json_encode($data);
 		}
 		public function getSurvey()
 		{
@@ -550,6 +543,16 @@
 		public function listEventComment($id)
 		{
 			$data = $this->listmodel->listEventComment($id);
+			echo json_encode($data);
+		}
+		public function messageList()
+		{
+			$data = $this->listmodel->messageList();
+			echo json_encode($data);
+		}
+		public function messageSpecificList($id)
+		{
+			$data = $this->listmodel->messageSpecificList($id);
 			echo json_encode($data);
 		}
 	}

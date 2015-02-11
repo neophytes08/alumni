@@ -181,7 +181,12 @@ body {
 		<h3 class="fs-subtitle">This information is highly NEEDED</h3>
 		<input type="text" placeholder="School Name" ng-model="elementary.school_name_elementary"/>
 		<input type="text" placeholder="School Address" ng-model="elementary.school_address_elementary"/>
-		<input type="text" placeholder="Year Graduated" ng-model="elementary.year_graduated_elementary" bs-datepicker/>
+		<br>
+		<label>Year Graduated</label>
+		<br>
+		<select ng-model="tertiary.year_graduated_elementary" class="form-control">
+			<option ng-repeat="list in yearList" value="{{list.year_name}}">{{list.year_name | capitalize}}</option>
+		</select>
 		<input type="text" placeholder="Awards Received" ng-model="elementary.awards_received_elementary"/>
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
 		<input type="button" name="next" class="next action-button" value="Next" />
@@ -191,7 +196,12 @@ body {
 		<h3 class="fs-subtitle">This information is highly NEEDED</h3>
 		<input type="text" placeholder="School Name" ng-model="secondary.school_name_secondary"/>
 		<input type="text" placeholder="School Address" ng-model="secondary.school_address_secondary"/>
-		<input type="text" placeholder="Year Graduated" ng-model="secondary.year_graduated_secondary" bs-datepicker/>
+		<br>
+		<label>Year Graduated</label>
+			<select ng-model="tertiary.year_graduated_secondary" class="form-control">
+				<option ng-repeat="list in yearList" value="{{list.year_name}}">{{list.year_name | capitalize}}</option>
+			</select>
+		</br>
 		<input type="text" placeholder="Awards Received" ng-model="secondary.awards_received_secondary"/>
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
 		<input type="button" name="next" class="next action-button" value="Next" />
@@ -213,17 +223,29 @@ body {
 			<option ng-repeat="list in courseList" value="{{list.course_id}}">{{list.course_name | capitalize}}</option>
 		</select>
 		<div class="input-year">
-			<input type="text" placeholder="Year Started" style="width: 110px;" ng-model="tertiary.year_from_tertiary" class="degree_data" bs-datepicker>
-			<input type="text" placeholder="Year Ended" style="width: 110px;" ng-model="tertiary.year_to_tertiary" class="degree_data" bs-datepicker>
-			<input type="text" placeholder="Graduated" style="width: 110px;" ng-model="tertiary.year_graduated_tertiary" class="degree_data" bs-datepicker>
+			<label>Year Started</label>
+			<br>
+			<select ng-model="tertiary.year_from_tertiary" class="form-control">
+				<option ng-repeat="list in yearList" value="{{list.year_name}}">{{list.year_name | capitalize}}</option>
+			</select>
+			<br>
+			<label>Year Ended</label>
+			<select ng-model="tertiary.year_to_tertiary" class="form-control">
+				<option ng-repeat="list in yearList" value="{{list.year_name}}">{{list.year_name | capitalize}}</option>
+			</select>
+			<br>
+			<label>Year Graduated</label>
+			<select ng-model="tertiary.year_graduated_tertiary" class="form-control">
+				<option ng-repeat="list in yearList" value="{{list.year_name}}">{{list.year_name | capitalize}}</option>
+			</select>
 		</div>
 		<input type="text" placeholder="Awards Received" ng-model="tertiary.awards_received_tertiary" class="degree_data">
 		<input type="text" placeholder="Thesis Project" ng-model="tertiary.thesis_project_tertiary" class="degree_data">
 		</div>
-		<input type="button" name="previous" class="previous action-button" value="Previous"/>
 		<input type="button" name="add-row" class="add-row action-button" ng-click="addRow(forms)" value="Add Row"/>
 		<input type="button" name="submit" class="submit action-button" ng-click="submitData(forms)" value="Submit"/>
 	</form>
+		<input type="button" name="previous" class="previous action-button" value="Previous"/>
 	</fieldset>
 </div>
 
@@ -234,6 +256,7 @@ body {
 <!-- angular -->
 
 <script type="text/javascript" src="<?php echo base_url('assets/js/angular.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/dirPagination.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/angularstrap/angular-sanitize.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.tpl.js') ?>"></script>

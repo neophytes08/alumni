@@ -51,7 +51,7 @@
 							<p class="survey-exist" ng-cloak>Hello {{infoList.username}}! Survey is currently active this time.</p>
 							<p class="survey-notexist" ng-cloak>Hello {{infoList.username}}! There is no survey at this time.</p>
 							<br>
-							<p><button class="btn btn-theme"><i class="fa fa-envelope"></i> Send Message to Admin</button></p>
+							<p><button class="btn btn-theme" data-toggle="modal" data-target="#message"><i class="fa fa-envelope"></i> Send Message to Admin</button></p>
 						</div><!-- --/col-md-4 ---->
 						
 						<div class="col-md-4 centered">
@@ -99,12 +99,15 @@
 									<li class="">
 										<a data-toggle="tab" href="#events">Events and News</a>
 									</li>
+									<li class="">
+										<a data-toggle="tab" href="#messages">Messages</a>
+									</li>
 								</ul>
 							</div><!-- --/panel-heading ---->
 							
 							<div class="panel-body">
 								<div class="tab-content">
-									<div id="overview" class="tab-pane">
+									<div id="overview" class="tab-pane active">
 										<div class="row">
 										<h4><i class="fa fa-angle-right"></i> Updates</h4>
 											<div class="col-md-6">
@@ -168,8 +171,8 @@
 														<p>Email Address: <strong>{{infoList.email}}</strong></p>
 														<p>Mobile #: <strong>{{infoList.mobile_no}}</strong></p>
 														<p>Telephone #: <strong>{{infoList.tele_no }}</strong></p>
-														<!--?php echo $map['js']; ?-->
-														<!--?php echo $map['html']; ?-->
+														<?php echo $map['js']; ?>
+														<?php echo $map['html']; ?>
 													</div>
 												</div>
 										</div><!-- /col-md-6-->
@@ -480,7 +483,7 @@
 											</div><!-- --/col-md-6 ---->
 										</div>
 									</div>
-									<div id="events" class="tab-pane active">
+									<div id="events" class="tab-pane">
 										<div class="row">
 											<div class="col-md-6">
 												<h4><i class="fa fa-angle-right"></i> Events</h4>
@@ -500,6 +503,40 @@
 											</div>
 										</div>
 									</div>
+									<div id="messages" class="tab-pane">
+										<div class="row">
+											<div class="col-md-6">
+												<h4><i class="fa fa-angle-right"></i> Messages List</h4>
+												<div class="alert alert-warning alert-dismissable">
+													<ul class="list-group">
+													  <li class="list-group-item list-group-item-info" ng-repeat="list in messageList" ng-click="viewMessages(list)"><img src="<?php echo base_url('assets/pictures/') ?>/{{list.picture}}" width="50" height="50"><a href> {{list.fname | capitalize}} {{list.mname | capitalize}} {{list.lname | capitalize}} {{list.extention_name | capitalize}}</a><br><a href style="color: red;" ng-click="deleteConvo(list)">Delete</a></li>
+													</ul>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<h4><i class="fa fa-angle-right"></i> Message Area</h4>
+												<div class="alert alert-warning alert-dismissable custom-message">
+													<ul class="list-group">
+													  <li class="list-group-item" ng-repeat="list in messageView">
+													  	<p><img src="<?php echo base_url('assets/pictures') ?>/{{list.picture}}" width="50" height="50">{{list.fname | capitalize}} {{list.mname | capitalize}} {{list.lname | capitalize}} {{list.extention_name | capitalize}} <br><h6>{{list.time | date}}</h6></p>
+													  	<h4>{{list.reply}}</h4>
+													  	<H6><a href ng-click="deleteMessage(list)">Delete</a></H6>
+													  </li>
+													</ul>
+												</div>
+												<form ng-submit="replyMessage()">
+												<div class="alert alert-warning alert-dismissable" id="custom-message-show">
+													<textarea ng-model="newMessage.message" class="form-control"></textarea>
+													<input type="hidden" ng-model="newMessage.conversation_id">
+													<input type="hidden" ng-model="newMessage.user_id">
+													<div class="row">
+														<button type="submit" class="btn btn-theme pull-right edit-group">Send</button>
+													</div>
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
 									</div><!-- --/tab-pane ---->
 								</div><!-- /tab-content -->
 							
@@ -507,7 +544,6 @@
 							
 						</div><!-- /col-lg-12 -->
 					</div>
-
 		</section>
 	</section>
 </section>
@@ -846,24 +882,35 @@
   </div>
 </div>
 
-<div class="modal fade" id="deleteEventOption" tabindex="-1" role="dialog" aria-labelledby="Editinfo" aria-hidden="true">
+<div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="Editinfo" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+    <form ng-submit="sendMessage()">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="Editinfo">Delete Comment</h4>
+        <h4 class="modal-title" id="Editinfo">Send a Message</h4>
       </div>
       <div class="modal-body">
-        	<label>Are you sure you want to delete this?</label>
+    	<input type="text" ng-model="message.nameUser" class="form-control" placeholder="Type the name of the alumni" ng-change="searchUser()">
+  		<ul class="list-group user-list">
+  			<li style="cursor: pointer" dir-paginate="list in userList | filter: message.nameUser | itemsPerPage: 5" ng-click="userData(list)"><img src="<?php echo base_url('assets/pictures') ?>/{{list.picture}}" width="50" height="50"> {{list.fname | capitalize}} {{list.mname | capitalize}} {{list.lname | capitalize}} {{list.extention_name | capitalize}}</li>
+  		</ul>
+  		<div class="col-md-12 mb">
+	        <div class="row">
+	          <dir-pagination-controls></dir-pagination-controls>
+	        </div>
+	      </div>
+  		<input type="hidden" ng-model="message.user_two">
+  		<textarea ng-model="message.reply" class="form-control" placeholder="Say somthing..."></textarea>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" ng-click="deleteEventComment(deleteEventPrepare)">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Send</button>
       </div>
+     </form>
     </div>
   </div>
 </div>
-
 <div class="modal fade" id="news" tabindex="-1" role="dialog" aria-labelledby="changePic" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -882,9 +929,45 @@
   </div>
 </div>
 
+<div class="modal fade" id="deleteEventOption" tabindex="-1" role="dialog" aria-labelledby="Editinfo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="Editinfo">Delete Comment</h4>
+      </div>
+      <div class="modal-body">
+        	<label>Are you sure you want to delete this?</label>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-click="deleteEventComment(deleteEventPrepare)">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="messageSucees" tabindex="-1" role="dialog" aria-labelledby="Editinfo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="Editinfo">Message Prompt</h4>
+      </div>
+      <div class="modal-body">
+        	<label>Message Successfully Sent!</label>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <script src="<?php echo base_url('assets/js/bootstrap-fileupload.js') ?>"></script>
     <script class="include" type="text/javascript" src="<?php echo base_url('assets/js/jquery.dcjqaccordion.2.7.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angular.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/dirPagination.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/loading-bar.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angularstrap/angular-sanitize.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.js') ?>"></script>

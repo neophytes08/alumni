@@ -196,5 +196,31 @@
 				$this->show_login(false);
 			}
 		}
+		public function addMessage()
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$post = json_decode(file_get_contents('php://input'));
+				$data = $this->addmodel->addMessage($post);
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
+		public function replyData()
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$post = json_decode(file_get_contents('php://input'));
+				$data = $this->addmodel->replyData($post);
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
 	}
  ?>
