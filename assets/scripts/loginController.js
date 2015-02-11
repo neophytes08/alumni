@@ -193,7 +193,11 @@ login
 			$http.get(getUrl.url + '/listCtrl/eventList')
 			.success(function onSuccess(response){
 				$scope.listEvent = response;
+				console.log($scope.listEvent);
 			});
+		}
+		$scope.showEventDetails = function showEventDetails(event){
+			$scope.eventDetails = event; 
 		}
 	$scope.getCourse();
 	$scope.eventList();
