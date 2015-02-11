@@ -136,5 +136,10 @@
 				return false;
 			}
 		}
+		public function deleteEventComment($id)
+		{
+			$this->db->where('comment_event_id' , $id);
+			$data = $this->db->delete('tblcomments_event');
+		}
 	}
  ?>

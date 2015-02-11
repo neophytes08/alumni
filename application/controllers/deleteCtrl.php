@@ -117,5 +117,16 @@
 				$this->show_login(false);
 			}	
 		}
+		public function deleteEventComment($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->deletemodel->deleteEventComment($id);
+			}
+			else
+			{
+				$this->show_login(false);
+			}	
+		}
 	}
  ?>

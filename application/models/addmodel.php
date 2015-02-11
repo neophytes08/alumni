@@ -751,6 +751,22 @@
 				return false;
 			}
 		}
+		public function addCommentEvent($post)
+		{
+			$date = date("Y-m-d");
+
+			$addComment = array(
+				'comment_event_details' => $post->comment_event_details,
+				'user_id' => $this->session->userdata('user_id'),
+				'event_id' => $post->event_id,
+				'comment_event_date' => $date
+			);
+
+			$this->db->insert('tblcomments_event', $addComment);
+
+			$query = " select a.picture,a.fname,a.mname,a.lname,a.extention_name,b.comment_event_id,b.event_id,a.user_id,b.comment_event_details,comment_event_date,c.event_id from tblgrad_profile a inner join tblcomments_event b inner join tblevent c where b.user_id = a.user_id && c.event_id = b.event_id && b.event_id = ".$post->event_id." order by b.comment_event_id asc";
+			return $this->db->query($query)->result_object();
+		}
 	}
 	
  ?>

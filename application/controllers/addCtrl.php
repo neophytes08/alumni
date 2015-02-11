@@ -183,5 +183,18 @@
 				$this->show_login(false);
 			}
 		}
+		public function addCommentEvent()
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$post = json_decode(file_get_contents('php://input'));
+				$data = $this->addmodel->addCommentEvent($post);
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
 	}
  ?>

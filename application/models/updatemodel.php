@@ -306,5 +306,17 @@
 				return false;
 			}
 		}
+		public function updateEventComment($post)
+		{
+			$update = array(
+				'comment_event_details' => $post->comment_event_details
+			);
+			
+			$this->db->where('comment_event_id', $post->comment_event_id);
+			$this->db->update('tblcomments_event', $update);
+
+			$query = " select a.picture,a.fname,a.mname,a.lname,a.extention_name,b.comment_event_id,b.event_id,a.user_id,b.comment_event_details,comment_event_date,c.event_id from tblgrad_profile a inner join tblcomments_event b inner join tblevent c where b.user_id = a.user_id && c.event_id = b.event_id && b.event_id = ".$post->event_id." order by b.comment_event_id asc";
+			return $this->db->query($query)->result_object();
+		}
 	}
  ?>

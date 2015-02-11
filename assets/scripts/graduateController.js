@@ -284,7 +284,100 @@ graduate
 					$scope.countedMy = response.countedMySurvey;
 				});
 			}
-			// 
+			// event list
+			$scope.eventList = function eventList(){
+				console.log('events');
+				$http.get(getUrl.url + '/listCtrl/eventList')
+				.success(function onSuccess(response){
+					$scope.listEvent = response;
+				});
+			}
+			// show evet
+			$scope.showEventList = {}
+			$scope.addComment = {};
+			$scope.showEvent = function showEvent(list){
+				$scope.showEventList = list
+				$scope.addComment.event_id = list.event_id;
+				$http.get(getUrl.url + '/listCtrl/listEventComment/' + list.event_id)
+				.success(function onSuccess(response){
+					console.log(response);
+					$scope.commentList = response;
+				});
+			}
+			// add comment event
+			$scope.addCommentEvent = function addCommentEvent(){
+				console.log($scope.addComment);
+
+				$http.post(getUrl.url + '/addCtrl/addCommentEvent', $scope.addComment)
+				.success(function onSuccess(response){
+					$scope.commentList = response;
+					$scope.addComment.comment_event_details = ""; 
+				})
+			}
+			// show options
+			$scope.showOptions = function showOptions(list){
+				// console.log(list);
+				var id = $('.user_id').attr('data-user');
+				console.log(id);
+
+				if(id == list.user_id)
+				{
+					console.log('options');
+					$('.editEventComment_' + list.comment_event_id).show();
+					$('.deleteEventComment_' + list.comment_event_id).show();
+				}
+				else
+				{
+					console.log('none');
+					$('.editEventComment_' + list.comment_event_id).hide();
+					$('.deleteEventComment_' + list.comment_event_id).hide();
+				}
+			}
+			// edit event comment
+			$scope.editEventOpt = function editEventOpt(list){
+				$scope.editEventComment = list;
+				console.log(list);
+				$('#editEventOption').modal('show');
+			}
+			// update event comment
+			$scope.updateEventComment = function updateEventComment(){
+
+				console.log($scope.editEventComment);
+
+				$http.post(getUrl.url + '/updateCtrl/updateEventComment', $scope.editEventComment)
+				.success(function onSuccess(response){
+					$scope.commentList = response;
+					$('#editEventOption').modal('hide');
+				})
+			}
+			// delete prompt
+			$scope.deleteEventOption = function deleteEventOption(list){
+				$scope.deleteEventPrepare = list;
+				$('#deleteEventOption').modal('show');
+			}
+			// delete comment
+			$scope.deleteEventComment = function deleteEventComment(list){
+
+				$http.get(getUrl.url + '/deleteCtrl/deleteEventComment/' + list.comment_event_id);
+				$scope.commentList.splice($scope.commentList.indexOf(list),1);
+				$('#deleteEventOption').modal('hide');
+
+			}
+
+			// get news
+			$scope.newsList = function newsList(){
+
+				$http.get(getUrl.url + '/listCtrl/newsList')
+				.success(function onSuccess(response){
+					$scope.listNews = response;
+				});
+			}
+			// show news
+			$scope.showNews = function showNews(list){
+				$scope.showNewsList = list
+			}
+			$scope.newsList();
+			$scope.eventList();
 			$scope.countSurvey();
 			$scope.getEmployment();
 			// $scope.year();

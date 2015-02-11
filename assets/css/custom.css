@@ -294,3 +294,9 @@ table.custom-table > tbody tr td
 {
     color: black!important;
 }
+
+
+#editEvent, #deleteEvent
+{
+    display: none;
+}

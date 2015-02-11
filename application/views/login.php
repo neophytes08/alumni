@@ -79,6 +79,10 @@
                     <li>
                         <a href="#news">News</a>
                     </li>
+                    <li>
+                        <a href="#associations">The Associations</a>
+                    </li>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -153,7 +157,7 @@
     </div>
     <!-- /.content-section-a -->
 
-
+    <a  name="associations"></a>
     <div class="content-section-a">
 
         <div class="container">
@@ -162,11 +166,41 @@
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Google Web Fonts and<br>Font Awesome Icons</h2>
-                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
+                    <h2 class="section-heading">The Associations</h2>
+                    <br>
+                    <h3>Alumni Officers College (SY. 2013 - 2014</h3>
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>President</td>
+                                <td>Ian S. Tampan</td>
+                            </tr>
+                            <tr>
+                                <td>Vice President</td>
+                                <td>Mena Kale Salvador</td>
+                            </tr>
+                            <tr>
+                                <td>Treasurer</td>
+                                <td>Aiza Mae Clemen</td>
+                            </tr>
+                            <tr>
+                                <td>P.I.O</td>
+                                <td>John Paul Ortiz <br> Michael Hidalgo</td>
+                            </tr>
+                            <tr>
+                                <td>Business Manager</td>
+                                <td>Niño Raphael Cocon <br> Mart Nearderian Atupan</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="<?php echo base_url('assets/img/phones.png') ?>" alt="">
+                    <img class="img-responsive" src="<?php echo base_url('assets/img/officers.jpg') ?>" alt="">
                 </div>
             </div>
 

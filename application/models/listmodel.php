@@ -365,5 +365,10 @@
 		{
 			return $this->db->get('tblnews')->result_object();
 		}
+		public function listEventComment($id)
+		{
+			$query = " select a.picture,a.fname,a.mname,a.lname,a.extention_name,b.comment_event_id,b.event_id,a.user_id,b.comment_event_details,comment_event_date,c.event_id from tblgrad_profile a inner join tblcomments_event b inner join tblevent c where b.user_id = a.user_id && c.event_id = b.event_id && b.event_id = ".$id." order by b.comment_event_id asc";
+			return $this->db->query($query)->result_object();
+		}
 	}
  ?>

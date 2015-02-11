@@ -19,7 +19,7 @@
 </head>
 <body info ng-controller="dateCtrl">
 
-<section id="container" >
+<section id="container" class="user_id" data-user="<?php echo $this->session->userdata('user_id') ?>">
 	<header class="header black-bg header-admin">
             <!--logo start-->
         <a href class="logo"><b>Alumni Tracer</b></a>
@@ -96,12 +96,15 @@
 									<li class="">
 										<a data-toggle="tab" href="#employment">Employment Records</a>
 									</li>
+									<li class="">
+										<a data-toggle="tab" href="#events">Events and News</a>
+									</li>
 								</ul>
 							</div><!-- --/panel-heading ---->
 							
 							<div class="panel-body">
 								<div class="tab-content">
-									<div id="overview" class="tab-pane active">
+									<div id="overview" class="tab-pane">
 										<div class="row">
 										<h4><i class="fa fa-angle-right"></i> Updates</h4>
 											<div class="col-md-6">
@@ -477,6 +480,26 @@
 											</div><!-- --/col-md-6 ---->
 										</div>
 									</div>
+									<div id="events" class="tab-pane active">
+										<div class="row">
+											<div class="col-md-6">
+												<h4><i class="fa fa-angle-right"></i> Events</h4>
+												<div class="alert alert-warning alert-dismissable">
+													<ul class="list-group">
+													  <li class="list-group-item" ng-repeat="list in listEvent" data-toggle="modal" data-target="#event" ng-click="showEvent(list)"><a href>{{list.event_title | capitalize}}</a></li>
+													</ul>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<h4><i class="fa fa-angle-right"></i> News</h4>
+												<div class="alert alert-warning alert-dismissable">
+													<ul class="list-group">
+													  <li class="list-group-item" ng-repeat="list in listNews" data-toggle="modal" data-target="#news" ng-click="showNews(list)"><a href>{{list.news_title | capitalize}}</a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
 									</div><!-- --/tab-pane ---->
 								</div><!-- /tab-content -->
 							
@@ -772,6 +795,92 @@
   </div>
 </div> 
 
+<div class="modal fade" id="event" tabindex="-1" role="dialog" aria-labelledby="changePic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="changePic">{{showEventList.event_title | capitalize}}</h4>
+      </div>
+      <div class="modal-body">
+      		<h3>{{showEventList.event_date | date}}</h3>
+        	<p>{{showEventList.event_description}}</p>
+      </div>
+      <div class="modal-body">
+        	<h5>Comments</h5>
+      </div>
+      <div class="modal-body" ng-repeat="list in commentList" ng-mouseover="showOptions(list)">
+        	<p style="color: blue;"><img src="<?php echo base_url('assets/pictures/') ?>/{{list.picture}}" width="50" height="50"> {{list.fname | capitalize}} {{list.mname | capitalize}} {{list.lname}} {{list.extention_name}} <br> <h6>{{list.comment_event_date | date}} <a href class="editEventComment_{{list.comment_event_id}}" id="editEvent" ng-click="editEventOpt(list)">Edit</a> <a href class="deleteEventComment_{{list.comment_event_id}}" id="deleteEvent" ng-click="deleteEventOption(list)">Delete</a></h6></p>
+        	<h5 style="margin-left: 60px;">{{list.comment_event_details}}</h5>
+      </div>
+      <div class="modal-body">
+      	<form ng-submit="addCommentEvent()">
+      		<input type="hidden" ng-model="addComment.event_id">
+      		<input type="text" ng-model="addComment.comment_event_details" placeholder="Comment Here and Press Enter..." class="form-control">
+      	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <div class="modal fade" id="editEventOption" tabindex="-1" role="dialog" aria-labelledby="Editinfo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form ng-submit="updateEventComment()">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="Editinfo">Edit Comment</h4>
+      </div>
+      <div class="modal-body">
+        	<input type="text" ng-model="editEventComment.comment_event_details" class="form-control">
+        	<input type="hidden" ng-model="editEventComment.comment_event_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Done</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteEventOption" tabindex="-1" role="dialog" aria-labelledby="Editinfo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="Editinfo">Delete Comment</h4>
+      </div>
+      <div class="modal-body">
+        	<label>Are you sure you want to delete this?</label>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-click="deleteEventComment(deleteEventPrepare)">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="news" tabindex="-1" role="dialog" aria-labelledby="changePic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="changePic">{{showNewsList.news_title | capitalize}}</h4>
+      </div>
+      <div class="modal-body">
+      		<h3>{{showNewsList.news_date | date}}</h3>
+        	<p>{{showNewsList.news_description}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="<?php echo base_url('assets/js/bootstrap-fileupload.js') ?>"></script>
     <script class="include" type="text/javascript" src="<?php echo base_url('assets/js/jquery.dcjqaccordion.2.7.js') ?>"></script>

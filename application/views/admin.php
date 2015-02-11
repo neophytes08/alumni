@@ -155,25 +155,25 @@
                   <li class="sub-menu" ng-click="getGradList()">
                       <a class="list" href>
                           <i class="fa fa-book"></i>
-                          <span>List of Graduates</span>
+                          <span>List of Alumni</span>
                       </a>
                   </li>
                   <li class="sub-menu" ng-click="AddGradList()">
                       <a class="add" href>
                           <i class="fa fa-tasks"></i>
-                          <span>Add Graduate</span>
+                          <span>Add Alumni</span>
                       </a>
                   </li>
                   <li class="sub-menu" ng-click="Events()">
-                      <a class="stat" href>
+                      <a class="events" href>
                           <i class=" fa fa-inbox"></i>
                           <span>Add Events</span>
                       </a>
                   </li>
                   <li class="sub-menu" ng-click="News()">
-                      <a class="stat" href>
+                      <a class="news" href>
                           <i class=" fa fa-inbox"></i>
-                          <span>Add Events</span>
+                          <span>Add News</span>
                       </a>
                   </li>
                   <li class="sub-menu" ng-click="getStatistics()">

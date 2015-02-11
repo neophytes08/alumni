@@ -547,5 +547,10 @@
 			$data = $this->listmodel->newsList();
 			echo json_encode($data);
 		}
+		public function listEventComment($id)
+		{
+			$data = $this->listmodel->listEventComment($id);
+			echo json_encode($data);
+		}
 	}
  ?>
