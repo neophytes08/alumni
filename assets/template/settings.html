@@ -1,4 +1,4 @@
-<div class="row">
++ <div class="row">
 <div class="col-lg-12">
     <div class="row mt">
     <!-- SERVER STATUS PANELS -->
@@ -10,7 +10,7 @@
         <div class="row">
         </div>
         <div class="centered">
-            <img src="../../assets/img/logo.jpg" width="120">
+            <img src="../../assets/img/saint-log.jpg" width="120">
           </div>
         </div><!--/grey-panel -->
       </div><!-- /col-md-4-->
@@ -468,7 +468,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="col-md-12 mb">
               <div class="weather-2 pn">
                 <div class="weather-2-header">
@@ -479,26 +479,15 @@
                   </div>
                 </div><!-- /weather-2 header -->
                 <div class="row centered">
-                  <img src="./DASHGUM - Bootstrap Admin Template_files/ny.jpg" class="img-circle" width="120">      
+                  <img src="../../assets/img/users.png" class="img-circle" width="120">      
                 </div>
                 <div class="row">
-                  <div class="col-md-6">
-                    <h5>16 Unsent Account Confirmation</h5>
-                    <h6><button class="btn btn-theme">Send</button></h6>
+                  <div class="col-md-12" style="text-align: center!important;">
+                    <h5>{{unsentEmails}} Unsent Account Confirmation</h5>
+                    <h6><button class="btn btn-theme" ng-click="sendEmails()">Send</button></h6>
+                    <img src="../../assets/img/loading.gif" class="user-send">
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="col-md-12 mb">
-              <div class="row">
-              <div class="white-panel pn">
-                  <div class="white-header">
-                    <label>Send Account Notification</label>
-                  </div>
-                  <p><img src="../../assets/img/users.png" width="120"></p>
-              </div>
               </div>
             </div>
           </div>

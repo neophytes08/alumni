@@ -28,9 +28,6 @@ angular.module('angular-capitalize-filter', [])
 graduate.controller('dateCtrl', function($scope) {
 });
 
-'use strict';
-
-
 graduate.config(function($datepickerProvider) {
   angular.extend($datepickerProvider.defaults, {
     dateFormat: 'MM/dd/yyyy',
@@ -40,11 +37,10 @@ graduate.config(function($datepickerProvider) {
 
 graduate.controller('DatepickerDemoCtrl', function($scope, $http) {
 
-  console.log('load');
   $scope.selectedDate = new Date();
   $scope.selectedDateAsNumber = Date(1986, 1, 22);
-  // $scope.fromDate = new Date();
-  // $scope.untilDate = new Date();
+  $scope.fromDate = new Date();
+  $scope.untilDate = new Date();
   $scope.getType = function(key) {
     return Object.prototype.toString.call($scope[key]);
   };

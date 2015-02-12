@@ -1,6 +1,6 @@
 .header-admin
 {
-	background: #3F369F!important;
+	background: #3DA1DE!important;
 }
 .edit-group
 {
@@ -296,7 +296,7 @@ table.custom-table > tbody tr td
 }
 
 
-#editEvent, #deleteEvent, #custom-message-show
+#editEvent, #deleteEvent, #custom-message-show, .news-load, .user-send, .updateUserBOx, .updateLoading
 {
     display: none;
 }
@@ -304,5 +304,9 @@ table.custom-table > tbody tr td
 .custom-message
 {
     height: 350px!important;
+    overflow: auto!important;
+}
+.custom-news
+{
     overflow: auto!important;
 }

@@ -1,29 +1,28 @@
 <div class="col-lg-12">
 	<div class="row">
 		 <div class="col-md-12 mb">
-		 	<div class="white-panel pn">
-                <div class="white-header">
-                  <h5>News List</h5>
-                  <div class="col-md-12 mb">
-	                <div class="row">
-	                  <dir-pagination-controls></dir-pagination-controls>
-	                </div>
-	              </div>
-                </div>
-                <div class="col-md-6 mb" dir-paginate="list in listNews | itemsPerPage: 2">
-            		<div class="white-panel pn">
-            			<div class="white-header">
-              				<h5>{{list.news_title | capitalize}}</h5>
-            			</div>
-            			<div class="white-body">
-		                	<p>{{list.news_description}}
-		                </div>
-		                <div class="col-md-12 mb">
-	            			<button class="btn btn-theme" data-toggle="modal" data-target="#editNews" ng-click="editNews(list)">Edit</button>
-	            			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteNews" ng-click="deletePrompt(list)">Delete</button>
-            			</div>
-        			</div>
-            	</div>
+		 	<div class="white-panel pn" dir-paginate="list in listNews | itemsPerPage: 1" pagination-id="cust">
+                
+                
+          <div class="white-body">
+          <img src="../../assets/news/{{list.news_pic}}" style="width: 100%; height: 300px;">
+        </div>
+        <div class="white-header">
+        <h5>{{list.news_title | capitalize}}</h5>
+      </div>
+      <div class="white-body" style="text-align: justify!important; color: black;">
+              <p>{{list.news_description}}
+            </div>
+        <div class="col-md-12 mb">
+            <button class="btn btn-theme" data-toggle="modal" data-target="#editNews" ng-click="editNews(list)">Edit</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteNews" ng-click="deletePrompt(list)">Delete</button>
+          </div>
+      </div>
+
+           <div class="col-md-12 mb">
+              <div class="row">
+                <dir-pagination-controls pagination-id="cust"></dir-pagination-controls>
+              </div>
             </div>
 		 </div>
 	<div class="col-md-6 mb">
@@ -32,11 +31,14 @@
 	    		<div class="white-header">
 	      			<h5>Create News</h5>
 	    		</div>
+          <input type="file" id="post_file" name="userfile" onchange="angular.element(this).scope().file_upload(this.files)">
+
 	    		<input type="text" ng-model="news.news_title" placeholder="Title" class="form-control" required>
 	    		<br>
 	    		<textarea class="form-control" ng-model="news.news_description" placeholder="Description" required></textarea>
 	    		<br>
-	    		<button class="btn btn-theme pull-right" type="Type">Add News</button>
+          <img src="../../assets/img/loading.gif" class="news-load pull-left">
+	    		<button class="btn btn-theme pull-right" type="submit">Add News</button>
     		</form>
 		</div>
     </div>

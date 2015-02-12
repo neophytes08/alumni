@@ -176,10 +176,10 @@
 		}
 		public function getEmails()
 		{
-			$query_1 = "select a.user_id,a.email,a.username,a.password from tbluser_acc a inner join tblstatus b where b.user_id = a.user_id && b.account_status = 'undone'";
+			$query_1 = "select a.user_id,a.email,a.username,a.password from tbluser_acc a inner join tblstatus b where b.user_id = a.user_id && b.email_status = 'undone'";
 			$unsent_mails = $this->db->query($query_1)->result_object();
 
-			$query_2 = "select user_id from tblstatus where account_status = 'done'";
+			$query_2 = "select user_id from tblstatus where email_status = 'done'";
 			$sent_mails = $this->db->query($query_2)->result_object();
 
 			$query_3 = "select COUNT(user_id) as emailCounted from tbluser_acc where position = 'user'";
@@ -375,6 +375,16 @@
 		{
 			$query = "SELECT R.conversation_id,R.time,R.reply,U.user_id,U.fname,U.mname,U.lname,U.picture,R.cr_id FROM tblgrad_profile U, tblconversation_reply R WHERE R.user_id = U.user_id AND R.conversation_id = ".$id." ORDER BY R.conversation_id DESC";
 			return $this->db->query($query)->result_object();
+		}
+		public function getYearGraduated()
+		{
+			$query = "select year_graduated_tertiary from tbltertiary group by year_graduated_tertiary";
+			return $this->db->query($query)->result_object();
+		}
+		public function getAccount()
+		{
+			$query = "select username, password, email from tbluser_acc where user_id = ".$this->session->userdata('user_id')."";
+			return $this->db->query($query)->result_object()[0];
 		}
 	}
  ?>

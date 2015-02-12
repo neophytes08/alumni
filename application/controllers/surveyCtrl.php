@@ -87,5 +87,17 @@
 				$this->show_login(false);
 			}
 		}
+		public function gettableChart()
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->surveymodel->gettableChart();
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
 	}
  ?>

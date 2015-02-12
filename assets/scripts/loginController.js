@@ -21,7 +21,8 @@ login
 			}
 			else if(response.pos == 0)
 			{
-				console.log('envalid login');
+				console.log('invalid login');
+				$('#error-login').modal('show');
 			}
 		});
 	}
@@ -34,7 +35,6 @@ login
 		$('.recover-loading').show();
 		$http.post(getUrl.url + '/recoverCtrl/getRecover', $scope.rec)
 		.success(function onSuccess(response){
-			console.log(response);
 			$scope.recovered(response);
 		});
 	}
@@ -46,13 +46,13 @@ login
               type: 'POST',
               url: 'https://mandrillapp.com/api/1.0/messages/send.json',
               data: {
-                key: 'nJvtT8OV5B57QzmMJt5RVw',
+                key: getKey.key,
                 message: {
                     "html": "<p>Hello! this is your username <strong>" + respond.username +"</strong> and your password is <strong>" + respond.password + "</strong></p>",
-                    "text": "Tracer message",
+                    "text": "Alumni message",
                     "subject": "Account Recovery",
-                    "from_email": "must.tracer@gmail.com",
-                    "from_name": "Tracer Admin",
+                    "from_email": "amlumni.tracer@gmail.com",
+                    "from_name": "Alumni Admin",
                     "to": [
                         {
                             "email": respond.email,
@@ -63,9 +63,7 @@ login
                 }
               },
               success: function ( response ) {
-                console.log( response );
-                $('.recover-loading').hide();
-                $('#succes-emailSent').modal('show');
+                $('#emailNoti').modal('show');
                 $('#forgot').modal('hide');
               },
               error: function ( response ) {
@@ -88,7 +86,6 @@ login
 	// submit
 
 		$scope.submitReg = function submitReg(){
-			console.log($scope.reg);
 			$http.post(getUrl.url + '/addCtrl/addRegister', $scope.reg)
 			.success(function onSuccess(response){
 				if(response.stat == 1)
@@ -174,17 +171,14 @@ login
 
 			$http.post(getUrl.url + '/addCtrl/addElementary', elementaryData[0])
 			.success(function onSuccess(response){
-				console.log(response);
 			});
 		}
 		$scope.submitSecondary = function submitSecondary(response){
 			var secondaryData = [];
-			console.log(response);
 			secondaryData.push({id: response.stat, school_name_secondary: $scope.secondary.school_name_secondary, school_address_secondary: $scope.secondary.school_address_secondary, year_graduated_secondary: $scope.secondary.year_graduated_secondary, awards_received_secondary: $scope.secondary.awards_received_secondary });
 		
 			$http.post(getUrl.url + '/addCtrl/addSecondary', secondaryData[0])
 			.success(function onSuccess(response){
-				console.log(response);
 			});
 		}
 		// get list events
@@ -193,7 +187,6 @@ login
 			$http.get(getUrl.url + '/listCtrl/eventList')
 			.success(function onSuccess(response){
 				$scope.listEvent = response;
-				console.log($scope.listEvent);
 			});
 		}
 		$scope.showEventDetails = function showEventDetails(event){
@@ -206,7 +199,42 @@ login
 				$scope.yearList = response;
 			});
 		}
+		// get news
+		$scope.newsList = function newsList(){
+			$http.get(getUrl.url + '/listCtrl/newsList')
+			.success(function onSuccess(response){
+				$scope.listNews = response;
+			});
+		}
 
+		// 
+		$scope.highschoolActive = function highschoolActive(){
+
+			$('.highschool').addClass('active');
+			$('.college').removeClass('active');
+			$('.gallery-hischool').fadeIn(500);
+			$('.gallery-college').fadeOut(500);
+		}
+		$scope.collegeActive = function collegeActive(){
+
+			$('.college').addClass('active');
+			$('.highschool').removeClass('active');
+			$('.gallery-hischool').fadeOut(500);
+			$('.gallery-college').fadeIn(500);
+		}
+
+		// show event
+		$scope.showEventList = {}
+		$scope.showEvent = function showEvent(list){
+			$scope.showEventList = list
+			$http.get(getUrl.url + '/listCtrl/listEventComment/' + list.event_id)
+			.success(function onSuccess(response){
+				console.log(response);
+				$scope.commentList = response;
+			});
+		}
+
+		$scope.newsList();
 		$scope.getCourse();
 		$scope.eventList();
 		$scope.year();

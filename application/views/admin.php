@@ -41,77 +41,6 @@
             <!--logo start-->
             <a href class="logo"><b>Alumni Admin Page</b></a>
             <!--logo end-->
-            <div class="nav notify-row" id="top_menu" activities>
-                <!--  notification start -->
-                <ul class="nav top-menu">
-                    <!-- inbox dropdown start-->
-                    <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="badge bg-theme">5</span>
-                        </a>
-                        <ul class="dropdown-menu extended inbox">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 5 new messages</p>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="<?php echo base_url('assets/img/ui-zac.jpg') ?>"></span>
-                                    <span class="subject">
-                                    <span class="from">Zac Snider</span>
-                                    <span class="time">Just now</span>
-                                    </span>
-                                    <span class="message">
-                                        Hi mate, how is everything?
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="<?php echo base_url('assets/img/ui-divya.jpg') ?>"></span>
-                                    <span class="subject">
-                                    <span class="from">Divya Manian</span>
-                                    <span class="time">40 mins.</span>
-                                    </span>
-                                    <span class="message">
-                                     Hi, I need your help with this.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="<?php echo base_url('assets/img/ui-danro.jpg') ?>"></span>
-                                    <span class="subject">
-                                    <span class="from">Dan Rogers</span>
-                                    <span class="time">2 hrs.</span>
-                                    </span>
-                                    <span class="message">
-                                        Love your new Dashboard.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="<?php echo base_url('assets/img/ui-sherman.jpg') ?>"></span>
-                                    <span class="subject">
-                                    <span class="from">Dj Sherman</span>
-                                    <span class="time">4 hrs.</span>
-                                    </span>
-                                    <span class="message">
-                                        Please, answer asap.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">See all messages</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- inbox dropdown end -->
-                </ul>
-                <!--  notification end -->
-            </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
                     <li><a class="logout" href="<?php echo base_url('index.php/loginctrl/logout') ?>">Logout</a></li>
@@ -179,7 +108,7 @@
                   <li class="sub-menu" ng-click="getStatistics()">
                       <a class="stat" href>
                           <i class=" fa fa-bar-chart-o"></i>
-                          <span>Statistical</span>
+                          <span>Analysis</span>
                       </a>
                   </li>
 
@@ -214,7 +143,7 @@
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2014 - Alvarez.is
+             Saint Michael College of Caraga
               <a href="index.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
@@ -233,17 +162,18 @@
     <!-- statistics -->
     <script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/chart-master/Chart.js') ?>"></script>
-    <!--script src="<?php echo base_url('assets/statistics/canvasjs.js') ?>"></script>
+    <script src="<?php echo base_url('assets/statistics/canvasjs.js') ?>"></script>
     <script src="<?php echo base_url('assets/statistics/jquery.canvasjs.js') ?>"></script>
     <script src="<?php echo base_url('assets/statistics/jscharts.js') ?>"></script>
     <script src="<?php echo base_url('assets/statistics/amcharts.js') ?>"></script>
     <script src="<?php echo base_url('assets/statistics/serial.js') ?>"></script>
-    <script src="<?php echo base_url('assets/statistics/pie.js') ?>"></script-->
+    <script src="<?php echo base_url('assets/statistics/pie.js') ?>"></script>
 
 
      <!-- angular ui -->
     <script src="<?php echo base_url('assets/js/angular.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/dirPagination.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/dirPagination.spec.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/dirPagination.tpl.html') ?>"></script>
     <script src="<?php echo base_url('assets/js/angularstrap/angular-animate.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/loading-bar.js') ?>"></script>
@@ -254,12 +184,12 @@
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="<?php echo base_url('assets/js/jquery-1.8.3.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap-fileupload.js') ?>"></script>
     <script class="include" type="text/javascript" src="<?php echo base_url('assets/js/jquery.dcjqaccordion.2.7.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.scrollTo.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.nicescroll.js') ?>" type="text/javascript"></script>
     <script src="<?php echo base_url('assets/js/jquery.sparkline.js') ?>"></script>
 
-   
     <!--common script for all pages-->
     <script src="<?php echo base_url('assets/js/common-scripts.js') ?>"></script>
     
@@ -280,134 +210,8 @@
     <script src="<?php echo base_url('assets/scripts/factory.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/directive.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/controllers.js') ?>"></script>
-	<script type="text/javascript">
-        $(document).ready(function () {
-        // var unique_id = $.gritter.add({
-        //     // (string | mandatory) the heading of the notification
-        //     title: 'Welcome to Dashgum!',
-        //     // (string | mandatory) the text inside the notification
-        //     text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
-        //     // (string | optional) the image to display on the left
-        //     image: 'assets/img/ui-sam.jpg',
-        //     // (bool | optional) if you want it to fade out on its own or just sit there
-        //     sticky: true,
-        //     // (int | optional) the time you want it to be alive for before fading out
-        //     time: '',
-        //     // (string | optional) the class name you want to apply to that specific message
-        //     class_name: 'my-sticky-class'
-        // });
-        // $(function(){
-        //     $('select.styled').customSelect();
-        // });
-          
-        // return false;
-        });
-	</script>
-	
-	<script type="application/javascript">
-        $(document).ready(function () {
 
-
-            // $("#date-popover").popover({html: true, trigger: "manual"});
-            // $("#date-popover").hide();
-            // $("#date-popover").click(function (e) {
-            //     $(this).hide();
-            // });
-        
-            // $("#my-calendar").zabuto_calendar({
-            //     action: function () {
-            //         return myDateFunction(this.id, false);
-            //     },
-            //     action_nav: function () {
-            //         return myNavFunction(this.id);
-            //     },
-            //     ajax: {
-            //         url: "show_data.php?action=1",
-            //         modal: true
-            //     },
-            //     legend: [
-            //         {type: "text", label: "Special event", badge: "00"},
-            //         {type: "block", label: "Regular event", }
-            //     ]
-            // });
-        });
-        
-        
-        // function myNavFunction(id) {
-        //     $("#date-popover").hide();
-        //     var nav = $("#" + id).data("navigation");
-        //     var to = $("#" + id).data("to");
-        //     console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        // }
-    </script>
     <script>
-    //     (function (window) {
-
-    // 'use strict';
-
-    // // class helper functions from bonzo https://github.com/ded/bonzo
-
-    // function classReg(className) {
-    //     return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
-    // }
-
-    // // classList support for class management
-    // // altho to be fair, the api sucks because it won't accept multiple classes at once
-    // var hasClass, addClass, removeClass;
-
-    // if ('classList' in document.documentElement) {
-    //     hasClass = function (elem, c) {
-    //         return elem.classList.contains(c);
-    //     };
-    //     addClass = function (elem, c) {
-    //         elem.classList.add(c);
-    //     };
-    //     removeClass = function (elem, c) {
-    //         elem.classList.remove(c);
-    //     };
-    // } else {
-    //     hasClass = function (elem, c) {
-    //         return classReg(c).test(elem.className);
-    //     };
-    //     addClass = function (elem, c) {
-    //         if (!hasClass(elem, c)) {
-    //             elem.className = elem.className + ' ' + c;
-    //         }
-    //     };
-    //     removeClass = function (elem, c) {
-    //         elem.className = elem.className.replace(classReg(c), ' ');
-    //     };
-    // }
-
-    // function toggleClass(elem, c) {
-    //     var fn = hasClass(elem, c) ? removeClass : addClass;
-    //     fn(elem, c);
-    // }
-
-    // var classie = {
-    //     // full names
-    //     hasClass: hasClass,
-    //     addClass: addClass,
-    //     removeClass: removeClass,
-    //     toggleClass: toggleClass,
-    //     // short names
-    //     has: hasClass,
-    //     add: addClass,
-    //     remove: removeClass,
-    //     toggle: toggleClass
-    // };
-
-    // // transport
-    // if (typeof define === 'function' && define.amd) {
-    //     // AMD
-    //     define(classie);
-    // } else {
-    //     // browser global
-    //     window.classie = classie;
-    // }
-
-// })(window);
-
 
 /**
  * modalEffects.js v1.0.0

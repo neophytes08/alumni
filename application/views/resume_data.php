@@ -13,13 +13,16 @@
 html {
 	/*Image only BG fallback*/
 	/*background = gradient + image pattern combo*/
-	background: url(/alumni/assets/img/bg-must.jpg) no-repeat center fixed;
-	background-size: 100%; 
+	
+
 }
 
 body {
 	font-family: montserrat, arial, verdana;
 	background-color: transparent;
+	background: url(/alumni/assets/img/resume_bg.jpg) no-repeat center center;
+    background-size: 100%;
+    background-attachment: fixed!important;
 }
 /*form styles*/
 #msform {
@@ -140,6 +143,9 @@ body {
 <body ng-controller="dateCtrl" login>
 	<!-- multistep form -->
 <div id="msform">
+	<div>
+		<a href="<?php echo base_url('index.php/loginctrl') ?>" class="btn btn-danger" style="margin-bottom: 20px;">Cancel Signup</a>
+	</div>
 	<!-- progressbar -->
 	<ul id="progressbar">
 		<li class="active">Personal Information</li>

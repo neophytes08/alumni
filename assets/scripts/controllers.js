@@ -17,7 +17,6 @@ myadmin
 
 				// get info
 				$scope.getGraduateInfo = function getGraduateInfo(list){
-					console.log(list);
 					$http.get(getUrl.url + '/listCtrl/getGraduateInfo/' + list.user_id)
 					.success(function onSuccess(response){
 						$scope.graduateInfoList = response;
@@ -28,17 +27,14 @@ myadmin
 				$scope.getGradPersonal = function getGradPersonal(list){
 					$http.get(getUrl.url + '/listCtrl/getGradPersonal/' + list.user_id)
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.personalList = response;
 					});
 				}
 				// elementary
 				$scope.getElementary = function getElementary(list){
 
-					// console.log(list);
 					$http.get(getUrl.url + '/listCtrl/getElementary/' + list.user_id)
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.elementaryList = response;
 					});
 				}
@@ -47,7 +43,6 @@ myadmin
 				$scope.getSecondary = function getSecondary(list){
 					$http.get(getUrl.url + '/listCtrl/getSecondary/' + list.user_id)
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.secondaryList = response;
 					});
 				}
@@ -55,13 +50,11 @@ myadmin
 				$scope.getTertiary = function getTertiary(list){
 					$http.get(getUrl.url + '/listCtrl/getTertiary/' + list.user_id)
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.tertiaryList = response;
 					});
 				}
 				// get employment
 				$scope.getEmployment = function getEmployment(list){
-					console.log(list);
 					$http.get(getUrl.url + '/listCtrl/getEmploymentRecord/' + list.user_id)
 					.success(function onSuccess(response){
 						console.log(response)
@@ -79,7 +72,6 @@ myadmin
 				$scope.updatePersonal = function updatePersonal(){
 					$http.post(getUrl.url + '/updateCtrl/updatePersonalInfo', $scope.infoList)
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.getUser();
 						});
 				}
@@ -87,7 +79,6 @@ myadmin
 					console.log($scope.elementaryList);
 					$http.post(getUrl.url + '/updateCtrl/updateElementary', $scope.elementaryList)
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.getElementary(response);
 					});
 				}
@@ -96,14 +87,12 @@ myadmin
 		
 					$http.post(getUrl.url + '/updateCtrl/updateSecondary', $scope.secondaryList)
 					.success(function onSuccess(response){
-						console.log(response);
 					});
 				}
 				$scope.updateTertiary = function updateTertiary(list){
 					console.log(list);
 					$http.post(getUrl.url + '/updateCtrl/updateTertiary', list)
 					.success(function onSuccess(response){
-						console.log(response);
 					});
 				}
 				// ger year list
@@ -117,7 +106,6 @@ myadmin
 				$scope.getCourse = function getCourse(){
 					$http.get(getUrl.url + '/listCtrl/getCourseList')
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.courseList = response;
 					});
 				}
@@ -128,7 +116,6 @@ myadmin
 				}
 				// delete list
 				$scope.deleteGrad = function deleteGrad(list){
-					console.log(list);
 					$('.success').fadeIn(400).delay(3000).fadeOut(400);
 					$http.get(getUrl.url + '/deleteCtrl/deleteUser/' + list.user_id)
 					.success(function onSuccess(response){
@@ -175,7 +162,6 @@ myadmin
 					
 					if($scope.new.academic_level_tertiary == 'Graduate')
 					{
-						console.log('graduate');
 						$('#academic-specific').show(500);
 					}
 				}
@@ -198,8 +184,6 @@ myadmin
 					.success(function onSuccess(response){
 						
 						$scope.graduateList = response;
-						
-						console.log($scope.graduateList);
 					});
 				}
 				// load year list
@@ -223,7 +207,7 @@ myadmin
 				$scope.$on( "show-add" , 
 					function onReceive ( ) {
 						$scope.loadCourse();
-						// $scope.year();
+						$scope.year();
 					});
 			}
 		])
@@ -234,8 +218,6 @@ myadmin
 			"getKey",
 			function controller($scope, $http, getUrl, getKey){
 				
-				console.log('activities');
-
 				$scope.getPending = function getPending(){
 
 					$http.get(getUrl.url + '/listCtrl/listPending')
@@ -252,7 +234,6 @@ myadmin
 					$('.load-accepted_' + list.user_id).show();
 					$http.post(getUrl.url + '/addCtrl/grantPending', list)
 					.success(function onSuccess(response){
-						console.log(response);
 						if(response.stat == 1)
 						{
 							alert('This person already exist in the database!');
@@ -260,7 +241,6 @@ myadmin
 						else
 						{
 							$scope.pendingList.splice($scope.pendingList.indexOf(list),1);
-							// $scope.sendConfirmation(response.stat);
 							$('.load-accepted_' + list.user_id).hide();
 							$scope.getPending();
 						}
@@ -269,8 +249,6 @@ myadmin
 
 				// send confirmation email
 				$scope.sendConfirmation = function sendConfirmation(list){
-					console.log(list);
-
 					var sendMails = function sendMails ( mail ) {
 			          return {
 			              type: 'POST',
@@ -293,7 +271,6 @@ myadmin
 			                }
 			              },
 			              success: function(response) {
-			              	console.log(response)
 			              },
 			              error: function (response) {
 			                alert( "Email Sending Failed !!!" );
@@ -301,9 +278,7 @@ myadmin
 			            }
 			        };
 
-			        
 			        	var emailData = sendMails(list);
-			        	console.log(list);
     					$.ajax(emailData);
 				}
 
@@ -330,7 +305,6 @@ myadmin
 			                }
 			              },
 			              success: function(response) {
-			              	console.log(response)
 			              },
 			              error: function (response) {
 			                alert( "Email Sending Failed !!!" );
@@ -340,7 +314,6 @@ myadmin
 
 			        
 			        	var emailData = Informnail(list);
-			        	console.log(list);
     					$.ajax(emailData);
 
     					$scope.deletPending(list);
@@ -356,12 +329,10 @@ myadmin
 				// status option
 				$scope.stat = {};
 				$scope.statusOpt = function statusOpt(list){
-					console.log(list);
 					$('.load-accepted_' + list.user_id).show();
 
 					if($scope.stat.option == 'active')
 					{
-						console.log('active');
 						$http.get(getUrl.url + '/listCtrl/statusOptActivate/' + list.user_id)
 						.success(function onSuccess(response){
 							$('.load-accepted_' + list.user_id).hide();
@@ -370,7 +341,6 @@ myadmin
 					}
 					else if($scope.stat.option == 'block')
 					{
-						console.log('block');
 						$http.get(getUrl.url + '/listCtrl/statusOptBlock/' + list.user_id)
 						.success(function onSuccess(response){
 							$('.load-accepted_' + list.user_id).hide();
@@ -380,8 +350,6 @@ myadmin
 					}
 					else if($scope.stat.option == 'deactivate')
 					{
-						console.log('deactivate');
-
 						$http.get(getUrl.url + '/listCtrl/statusOptDeactivate/' + list.user_id)
 						.success(function onSuccess(response){
 							$('.load-accepted_' + list.user_id).hide();
@@ -390,7 +358,7 @@ myadmin
 					}
 					
 				}
-				// $scope.getPending();
+				$scope.getPending();
 			}
 
 		])
@@ -400,18 +368,9 @@ myadmin
 			"getUrl",
 			function controller($scope, $http, getUrl){
 
-				console.log('settings');
-				// get course
-				$scope.getCourseWithDepartment = function getCourseWithDepartment(){
-
-					$http.get(getUrl.url + '/listCtrl/getCourseWithDepartment')
-					.success(function onSuccess(response){
-						$scope.courseList = response;
-					});
-				}
 				// get year
 				$scope.year = function year(){
-					$http.get(getUrl.url + '/listCtrl/getYear')
+					$http.get(getUrl.url + '/listCtrl/getYearGraduated')
 					.success(function onSuccess(response){
 						$scope.yearList = response;
 					});
@@ -421,260 +380,37 @@ myadmin
 				$scope.pieData = {};
 				$scope.barData = {};
 				$scope.lineData = {};
+				$scope.sendData = {};
+				$scope.generateDefault = function generateDefault(){
+
+					$scope.sendData.year = 2014;
+
+					$http.post(getUrl.url + '/surveyCtrl/getGenerate/', $scope.sendData)
+					.success(function onSuccess(response){
+						$scope.barGraph(response);
+					});
+				}
 				$scope.generate = function generate(){
-
-
-					if($scope.surveyData.year || $scope.surveyData.course)
-					{
-						$http.post(getUrl.url + '/surveyCtrl/getGenerate/', $scope.surveyData)
-						.success(function onSuccess(response){
-							
-							if(response == 0)
-							{
-								$scope.year_data = 0;
-								$scope.unemployed = 0;
-								$scope.employed = 0;
-								$('.error').fadeIn(2000);
-								$('.stat-box').fadeOut(500);
-							}
-							else
-							{
-								// $scope.year_data = response.year;
-								// $scope.unemployed = response.unemployed.unemployedCount;
-								// $scope.employed = response.employed.employedCount;
-								// $scope.pie = response.pieResult;
-								// console.log(response);
-								$scope.bar = response.barResult;
-								// console.log($scope.bar);
-								$scope.viewBarAll = response.barResult;
-								$scope.titleBar = response.barResult.course;
-								// $scope.titleBar = barTitle[0].course;
-								$('.error').fadeOut(2000);
-								$('.stat-box').fadeIn(500);
-								$('.fullViewBar').fadeIn(1000);
-								$scope.tableChart(response.barResult);
-								$scope.lineData = angular.fromJson(response.lineResult);
-								$scope.barData = angular.fromJson(response.barResult)
-								$scope.pieData = angular.fromJson(response.pieResult);
-								$scope.pieChart($scope.pieData);
-								$scope.barGraph($scope.barData);
-								$scope.lineChart($scope.lineData);
-								$('.success-stat').fadeIn(400).delay(3000).fadeOut(400);
-							}
-						});
-					}
-					else
-					{
-
-					}
-
-					
+					$http.post(getUrl.url + '/surveyCtrl/getGenerate/', $scope.surveyData)
+					.success(function onSuccess(response){
+						console.log(response);
+						$scope.barGraph(response);
+					});
 				}
-				// line chart
-				$scope.lineChart = function lineChart(list){
-					console.log(list.length);
+				$scope.tableGraph = function tableGraph(){
 
-					var line = [];
-					for(counter = 0; counter < list.length; counter++)
-					{
-						line.push({year: list[counter].year, value: parseInt(list[counter].employed)});
-					}
-
-					console.log(line);
-					
-					 	var chart;
-			            var graph;
-
-			            var chartData = line;
-		            console.log(chartData);
-		            // var chartData = [
-		            //     {
-		            //         "year": "2013",
-		            //         "value": 50
-		            //     }
-		            //     // {
-		            //     //     "year": "2014",
-		            //     //     "value": 12
-		            //     // }
-		            //     ];
-			    // AmCharts.ready(function () {
-                // SERIAL CHART
-                chart = new AmCharts.AmSerialChart();
-                chart.marginTop = 0;
-                chart.marginRight = 0;
-                chart.dataProvider = chartData;
-                chart.categoryField = "year";
-                chart.dataDateFormat = "YYYY";
-                chart.balloon.cornerRadius = 6;
-
-                // AXES
-                // category
-                var categoryAxis = chart.categoryAxis;
-                categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
-                categoryAxis.minPeriod = "YYYY"; // our data is yearly, so we set minPeriod to YYYY
-                categoryAxis.dashLength = 1;
-                categoryAxis.minorGridEnabled = true;
-                categoryAxis.axisColor = "#DADADA";
-
-                // value
-                var valueAxis = new AmCharts.ValueAxis();
-                valueAxis.axisAlpha = 0;
-                valueAxis.dashLength = 1;
-                valueAxis.inside = true;
-                chart.addValueAxis(valueAxis);
-
-                // GRAPH
-                graph = new AmCharts.AmGraph();
-                graph.lineColor = "#b6d278";
-                graph.negativeLineColor = "#487dac"; // this line makes the graph to change color when it drops below 0
-                graph.bullet = "round";
-                graph.bulletSize = 8;
-                graph.bulletBorderColor = "#FFFFFF";
-
-                graph.bulletBorderThickness = 2;
-                graph.bulletBorderAlpha = 1;
-                graph.connect = false; // this makes the graph not to connect data points if data is missing
-                graph.lineThickness = 2;
-                graph.valueField = "value";
-                graph.balloonText = "[[category]]<br><b><span style='font-size:14px;'>[[value]] Employed Graduates</span></b>";
-                chart.addGraph(graph);
-
-                // CURSOR
-                var chartCursor = new AmCharts.ChartCursor();
-                chartCursor.cursorAlpha = 0;
-                chartCursor.cursorPosition = "mouse";
-                chartCursor.categoryBalloonDateFormat = "YYYY";
-                chartCursor.graphBulletSize = 2;
-                chart.addChartCursor(chartCursor);
-
-                chart.creditsPosition = "bottom-right";
-
-                // WRITE
-                chart.write("lineGraph");
-            // });
-				}
-				// pie chart 
-				$scope.pieChart = function pieChart(list){
-
-					var pie = [];
-
-					for(var counter = 0; counter < list.length; counter++)
-					{
-						// pie.push({"country": list[counter].obe_answer, "litres": parseInt(list[counter].obe_count)});
-						pie.push({y: parseInt(list[counter].obe_count), legendText: list[counter].obe_name, indexLabel: list[counter].obe_name});
-					}
-					console.log(pie);
-
-					var chart_pie = new CanvasJS.Chart("chartContainer_pie",
-					    {
-					      title:{
-					        text: "Related Subjects for Jobs Taken"
-					      },
-					       data: [
-					      {
-					         type: "pie",
-					       showInLegend: true,
-					       dataPoints: pie
-					     }
-					     ]
-					   });
-
-					chart_pie.render();
-				}
-				// table chart
-				$scope.tableList = {year: 'no data', employed: 'no data', unemployed: 'no data'};
-				$scope.tableChart = function tableChart(list){
-					console.log(list);
-					var barList = list;
-
-					$http.post(getUrl.url + '/surveyCtrl/getAllSurveyYear', barList)
-					 .success(function onSuccess(response){
-					 	console.log(response);
-					 	$('.table_title').fadeIn(500);
-					 	$scope.tableList = response;
-					 });
-
-				}
-				// view all
-				$scope.barResultAll = {};
-				$scope.viewAllBar = function viewAllBar(list){
-
-					var barGet = list;
-
-					console.log(barGet);
-					 $http.post(getUrl.url + '/surveyCtrl/getAllSurveyYear', barGet)
-					 .success(function onSuccess(response){
-					 	console.log(response);
-
-					 	$scope.barResultAll = angular.fromJson(response)
-					 	$scope.barGraphAll($scope.barResultAll);
-					 });
+					$http.get(getUrl.url + '/surveyCtrl/gettableChart')
+					.success(function onSuccess(response){
+						$scope.tableList = response
+					});
 				}
 
-				$scope.barGraphAll = function barGraphAll(list){
-
-					console.log(list.length);
-					  var bar = [];
-
-					  for(var counter = 0; counter < list.length; counter++)
-					  {
-					  	bar.push([list[counter].year, parseInt(list[counter].employed), parseInt(list[counter].unemployed)])
-					  }
-						
-						console.log(bar);
-
-					  // var myData = new Array(['Asia', 437, 520], ['Europe', 322, 390], ['North America', 233, 286], ['Latin America', 110, 162], ['Africa', 34, 49], ['Middle East', 20, 31], ['Aus/Oceania', 19, 22]);
-					  // var myData = new Array(bar);
-					  var myChart = new JSChart('bar', 'bar');
-					  myChart.setDataArray(bar);
-					  myChart.setTitle('Employemnt and Unemployment Records for ' + list[0].course);
-					  myChart.setTitleColor('#8E8E8E');
-					  myChart.setAxisNameX('');
-					  myChart.setAxisNameY('');
-					  myChart.setAxisNameFontSize(16);
-					  myChart.setAxisNameColor('#999');
-					  myChart.setAxisValuesAngle(30);
-					  myChart.setAxisValuesColor('#777');
-					  myChart.setAxisColor('#B5B5B5');
-					  myChart.setAxisWidth(1);
-					  myChart.setBarValuesColor('#2F6D99');
-					  myChart.setAxisPaddingTop(60);
-					  myChart.setAxisPaddingBottom(60);
-					  myChart.setAxisPaddingLeft(45);
-					  myChart.setTitleFontSize(11);
-					  myChart.setBarColor('#2D6B96', 1);
-					  myChart.setBarColor('#9CCEF0', 2);
-					  myChart.setBarBorderWidth(0);
-					  myChart.setBarSpacingRatio(50);
-					  myChart.setBarOpacity(0.9);
-					  myChart.setFlagRadius(6);
-					  myChart.setTooltipPosition('nw');
-					  myChart.setTooltipOffset(3);
-					  myChart.setLegendShow(true);
-					  myChart.setLegendPosition('right top');
-					  myChart.setLegendForBar(1, 'Employed');
-					  myChart.setLegendForBar(2, 'Unemployed');
-					  myChart.setSize(940, 320);
-					  myChart.setGridColor('#C6C6C6');
-					  myChart.draw();
-				}
-			
-				// graph
 				$scope.barGraph = function graph(list){
 
-
-				  console.log(list.length);
-				  var bar = [];
-
-				 bar.push(list.year, parseInt(list.employed), parseInt(list.unemployed))
-					
-				console.log(bar);
-
-				  // var myData = new Array(['Asia', 437, 520], ['Europe', 322, 390], ['North America', 233, 286], ['Latin America', 110, 162], ['Africa', 34, 49], ['Middle East', 20, 31], ['Aus/Oceania', 19, 22]);
-				  var myData = new Array(bar);
+				  var myData = new Array([list.year, parseInt(list.male), parseInt(list.female)]);
 				  var myChart = new JSChart('bar', 'bar');
 				  myChart.setDataArray(myData);
-				  myChart.setTitle('Employemnt and Unemployment Records for ' + list.course);
+				  myChart.setTitle('No. of Batches for ' + list.year);
 				  myChart.setTitleColor('#8E8E8E');
 				  myChart.setAxisNameX('');
 				  myChart.setAxisNameY('');
@@ -699,20 +435,19 @@ myadmin
 				  myChart.setTooltipOffset(3);
 				  myChart.setLegendShow(true);
 				  myChart.setLegendPosition('right top');
-				  myChart.setLegendForBar(1, 'Employed');
-				  myChart.setLegendForBar(2, 'Unemployed');
+				  myChart.setLegendForBar(1, 'Male');
+				  myChart.setLegendForBar(2, 'Female');
 				  myChart.setSize(940, 320);
 				  myChart.setGridColor('#C6C6C6');
 				  myChart.draw();
-			}
-
-				// $scope.$on("show-statistics", 
-					// function onReceive() {
+				}
+				$scope.$on("show-statistics", 
+					function onReceive() {
 						$scope.year();
-						$scope.getCourseWithDepartment();
-				// });
+						$scope.tableGraph();
+						$scope.generateDefault();
+				});
 			}
-				
 		])
 		.controller('settingsController', [
 			"$scope",
@@ -787,10 +522,8 @@ myadmin
 				$scope.addcourse = {};
 				$scope.getCourse = function getCourse(list){
 					$scope.departmentTitle = list.department_name;
-					console.log(list);
 					$http.get(getUrl.url + '/listCtrl/getCourse/' + list.department_id)
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.courseList = response;
 						$scope.addcourse.department_id = list.department_id;
 						$('#course').modal('show');
@@ -826,13 +559,11 @@ myadmin
 								$('.exist').fadeIn(400).delay(3000).fadeOut(400);
 							}
 						});
-						console.log('update');
 					}
 					else
 					{
 						var course = {course_id: 0, course_name: $scope.addcourse.course_name, department_id: $scope.addcourse.department_id};
 
-						console.log(course);
 						$http.post(getUrl.url + '/addCtrl/addCourse', course)
 						.success(function onSuccess(response){
 							if(response.stat === 0)
@@ -973,7 +704,6 @@ myadmin
 				}
 				// add user
 				$scope.addUser = function addUser(){
-					console.log($scope.add);
 					$http.post(getUrl.url + '/addCtrl/addUser', $scope.add)
 					.success(function onSuccess(response){
 						if(response.stat === 3)
@@ -1030,7 +760,6 @@ myadmin
 				}
 				// search user
 				$scope.searchUserInfo = function searchUserInfo(){
-					console.log($scope.keyword);
 					// $http.post(getUrl.url + '/listCtrl/searchUser/', $scope.keyword)
 					// .success(function onSuccess(response){
 					// 	$scope.userList = response;
@@ -1064,7 +793,6 @@ myadmin
 								$scope.obe.obe_name = "";
 							}
 						});
-						console.log('update');
 					}
 					else
 					{
@@ -1103,7 +831,6 @@ myadmin
 				}
 				// delete prompt obe
 				$scope.deletePromptObe = function deletePromptObe(list){
-					console.log(list);
 					$scope.deleteObeList = list;
 					$('#deleteObe').modal('show');
 				}
@@ -1121,7 +848,6 @@ myadmin
 				$scope.mailUser = function mailUser(){
 					$http.get(getUrl.url + '/listCtrl/getEmails')
 					.success(function onSuccess(response){
-						console.log(response);
 						$scope.sentEmails = response.sent.length;
 						$scope.unsentEmails = response.unsent.length;
 						$scope.forSendEmails = response.unsent;
@@ -1162,10 +888,10 @@ myadmin
 					                key: getKey.key,
 					                message: {
 					                    "html": "<p>Hello! Survey for this year is active. Please have a time to answer the survey. </strong>. <br> You can also access it via <strong> <a href='http://localhost/tracer/'>Graduate Tracer Home Page</a></strong></p>",
-					                    "text": "Tracer message",
-					                    "subject": "Graduate Tracer Survey",
-					                    "from_email": "must.tracer@gmail.com",
-					                    "from_name": "Tracer Admin",
+					                    "text": "Alumni message",
+					                    "subject": "Account Recovery",
+					                    "from_email": "amlumni.tracer@gmail.com",
+					                    "from_name": "Alumni Admin",
 					                    "to": [
 					                        {
 					                            "email": mails.email,
@@ -1200,10 +926,12 @@ myadmin
 				// send emails
 				$scope.sendEmails = function sendEmails(){
 
+					$('.user-send').show();
 					console.log('Click');
 					if($scope.forSendEmails.length == 0)
 					{
-						$('#surveyPrompt').modal('show');
+						console.log('no account');
+						$('.user-send').hide();
 					}
 					else
 					{
@@ -1216,10 +944,10 @@ myadmin
 					                key: getKey.key,
 					                message: {
 					                    "html": "<p>Hello! This is you account for Graduate tracer, this will serve as your profile for the survey here in Mindanao University of Science and Technology. <br> This is your Username: <strong> " + mail.username + " </strong> and your Password: <strong> " + mail.password + " </strong>. <br> You can also test it out via <strong> <a href='http://localhost/tracer/'>Graduate Tracer Home Page</a></strong></p>",
-					                    "text": "Tracer message",
-					                    "subject": "Graduate Tracer Graduate's Account",
-					                    "from_email": "must.tracer@gmail.com",
-					                    "from_name": "Tracer Admin",
+					                    "text": "Alumni message",
+					                    "subject": "Account Recovery",
+					                    "from_email": "amlumni.tracer@gmail.com",
+					                    "from_name": "Alumni Admin",
 					                    "to": [
 					                        {
 					                            "email": mail.email,
@@ -1230,11 +958,10 @@ myadmin
 					                }
 					              },
 					              success: function(response) {
-					                $scope.countSentEmails++;
 					                $http.get(getUrl.url + '/updateCtrl/updateAccountEmail/' + mail.user_id)
 					                .success(function onSuccess(response){
-					                	console.log(response);
 					                	$scope.mailUser();
+					                	$('.user-send').hide();
 					                });
 					              },
 					              error: function (response) {
@@ -1247,9 +974,8 @@ myadmin
 					        $scope.countEmail = emailLenght;
 					        for(var x = 0; x < emailLenght; x++){
 					        	var emailData = sendAccountEmails( $scope.forSendEmails[x] );
-
-					        	// console.log($scope.countSentEmails++);
 	        					$.ajax( emailData );
+	        					$('.user-send').show();
 					        }
 					       
 						}
@@ -1273,7 +999,6 @@ myadmin
 			function controller($scope, $http, getUrl){
 
 				$scope.showLogs = function showLogs(){
-					console.log('logs');
 					$('.loader-admin').show();
 					$http.get(getUrl.url + '/listCtrl/getLogs')
 					.success(function onSuccess(response){
@@ -1282,7 +1007,6 @@ myadmin
 				}
 				// create admin
 				$scope.addAdmin = function addAdmin(){
-					console.log($scope.add);
 					$http.post(getUrl.url + '/addCtrl/addNewAdmin', $scope.add)
 					.success(function onSuccess(response){
 						if(response.stat === 1)
@@ -1307,7 +1031,6 @@ myadmin
 				}
 				// delete admin
 				$scope.deleteAdmin = function deleteAdmin(list){
-					console.log(list);
 					$http.post(getUrl.url + '/deleteCtrl/deleteAdmin/' + list.user_id)
 					.success(function onSuccess(response){
 						if(response.stat === 1)
@@ -1332,7 +1055,7 @@ myadmin
 					});
 				}
 				// $scope.showLogs();
-				// $scope.adminInfo();
+				$scope.adminInfo();
 			}
 		])
 		.controller('eventsController',[
@@ -1342,40 +1065,62 @@ myadmin
 			function controller($scope, $http, getUrl){
 
 			$scope.events = {};
+			var fd = new FormData();
 			$scope.eventList = function eventList(){
-				console.log('events');
 				$http.get(getUrl.url + '/listCtrl/eventList')
 				.success(function onSuccess(response){
 					$scope.listEvent = response;
 				});
 			}
-			// add event
-			$scope.addEvent = function addEvent(){
-				console.log($scope.events);
-				$http.post(getUrl.url + '/addCtrl/addEvent/', $scope.events)
-				.success(function onSuccess(response){
-					console.log(response);
-					$scope.events = {};
-					$scope.eventList();
-				});
-			}
+
+			// add news
+				$scope.addEvent = function addEvent(){
+
+					fd.append('eventDescription', $scope.events.event_description);
+					fd.append('eventTitle', $scope.events.event_title);
+					fd.append('eventDate', $scope.events.date)
+					var upload_url = getUrl.url + '/addCtrl/addEvent/';
+					var upload = httpReq(upload_url, fd);
+
+					upload.success(function(response){
+						$scope.eventList();
+						$('.news-load').hide();
+					});
+					upload.error(function(response){
+						console.log(response);
+					});	
+				}
+					function httpReq ( url , data ) {
+					return $.ajax({
+						type: "POST",
+						url: url,
+						data:data,
+    					dataType: 'json',
+						contentType: false,
+						cache: false,
+						processData:false
+					});
+				}
+
+			// upload 
+				$scope.file_upload = function (files) {
+					fd.append('userfile',files[0]);				
+					status = "has_file";
+				}
+	
 			// edit event
 			$scope.editEvent = function editEvent(list){
-				console.log(list);
 				$scope.edit = list;
 			}
 			// update
 			$scope.updateEvent = function updateEvent(){
-				console.log($scope.edit);
 				$http.post(getUrl.url + '/updateCtrl/updateEvent/', $scope.edit)
 				.success(function onSuccess(response){
-					console.log(response);
 					$('#editEvent').modal('hide');
 				});
 			}
 			// delete event prompt
 			$scope.deletePrompt = function deletePrompt(list){
-				console.log(list);
 				$scope.deleteEventData = list;
 			}
 			// delete event 
@@ -1387,6 +1132,31 @@ myadmin
 					$('#deleteEvent').modal('hide');
 				});
 			}
+
+			$scope.showEventList = {}
+			$scope.showEvent = function showEvent(list){
+				$scope.showEventList = list
+				$http.get(getUrl.url + '/listCtrl/listEventComment/' + list.event_id)
+				.success(function onSuccess(response){
+					console.log(response);
+					$scope.commentList = response;
+				});
+			}
+
+			// delete prompt
+			$scope.deleteEventOption = function deleteEventOption(list){
+				$scope.deleteEventPrepare = list;
+				$('#deleteEventOption').modal('show');
+			}
+			// delete comment
+			$scope.deleteEventComment = function deleteEventComment(list){
+
+				$http.get(getUrl.url + '/deleteCtrl/deleteEventComment/' + list.comment_event_id);
+				$scope.commentList.splice($scope.commentList.indexOf(list),1);
+				$('#deleteEventOption').modal('hide');
+
+			}
+			
 			$scope.eventList();
 		}
 		])
@@ -1396,8 +1166,7 @@ myadmin
 			"getUrl",
 			function controller($scope, $http, getUrl){
 
-				console.log('news');
-
+				var fd = new FormData();
 				// get news
 				$scope.newsList = function newsList(){
 
@@ -1406,35 +1175,54 @@ myadmin
 						$scope.listNews = response;
 					});
 				}
+				// upload 
+				$scope.file_upload = function (files) {
+					fd.append('userfile',files[0]);				
+					status = "has_file";
+				}
 
 				// add news
 				$scope.addNews = function addNews(){
-					console.log($scope.news);
 
-					$http.post(getUrl.url + '/addCtrl/addNews', $scope.news)
-					.success(function onSuccess(response){
-						console.log(response);
-						$scope.newsList();
+					fd.append('newsDescription', $scope.news.news_description);
+					fd.append('newsTitle', $scope.news.news_title);
+					var upload_url = getUrl.url + '/addCtrl/addNews/';
+					var upload = httpReq(upload_url, fd);
+
+					upload.success(function(response){
 						$scope.news = "";
+						$scope.newsList();
+						$('.news-load').hide();
+					});
+					upload.error(function(response){
+						console.log(response);
+					});	
+				}
+					function httpReq ( url , data ) {
+					return $.ajax({
+						type: "POST",
+						url: url,
+						data:data,
+    					dataType: 'json',
+						contentType: false,
+						cache: false,
+						processData:false
 					});
 				}
+
 				// edit news
 				$scope.editNews = function editNews(list){
-					console.log(list);
 					$scope.edit = list;
 				}
 				// update news
 				$scope.updateEvent = function updateEvent(){
-					console.log($scope.edit);
 					$http.post(getUrl.url + '/updateCtrl/updateNews/', $scope.edit)
 					.success(function onSuccess(response){
-						console.log(response);
 						$('#editNews').modal('hide');
 					});
 				}
 				// delete event prompt
 				$scope.deletePrompt = function deletePrompt(list){
-					console.log(list);
 					$scope.deleteNewsData = list;
 				}
 				// delete event 

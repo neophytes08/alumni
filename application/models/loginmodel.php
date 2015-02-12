@@ -30,7 +30,7 @@
 					);
 					return 1;
 				}
-				else if($data[0]->username == $user && $data[0]->password == $pass && $data[0]->position == 'user')
+				else if($data[0]->username == $user && $data[0]->password == $pass && $data[0]->position == 'user' && $data[0]->status = 'active' || $data[0]->status = 'pending')
 				{
 					$this->session->set_userdata( array(
 						'user_id' => $data[0]->user_id,

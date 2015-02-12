@@ -87,7 +87,7 @@
                     <tr ng-cloak dir-paginate="list in pendingList | filter: search | itemsPerPage: 5">
                        <td>{{list.fname | capitalize}} {{list.mname | capitalize}} {{list.lname | capitalize}} {{list.extention_name | capitalize}}</td>
                         <td class="hidden-phone">{{list.course_name | capitalize}}</td>
-                        <td>{{list.year_graduated_tertiary | date}}</td>
+                        <td>{{list.year_graduated_tertiary}}</td>
                         <td>
                           <select ng-model="stat.option" class="form-control">
                             <option value="active" ng-selected="list.status == 'active'">Active</option>

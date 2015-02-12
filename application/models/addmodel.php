@@ -15,11 +15,6 @@
 			$user = strtok($temp, " ");
 			$username = $user.'123';
 			$birthdate = strtok($tempBday, "T");
-			$year_graduated_elementary = strtok($post->year_graduated_elementary, "T");
-			$year_graduated_secondary = strtok($post->year_graduated_secondary, "T");
-			$year_graduated_tertiary = strtok($post->year_graduated_tertiary, "T");
-			$year_from_tertiary = strtok($post->year_from_tertiary, "T");
-			$year_to_tertiary = strtok($post->year_to_tertiary, "T");
 			
 			$query = "select * from tbluser_acc where username = '".$username."'";
 			$data = $this->db->query($query)->result_object();
@@ -79,7 +74,7 @@
 					'school_name_elementary' => $post->school_name_elementary,
 					'user_id' => $user_id,
 					'school_address_elementary' => $post->school_address_elementary,
-					'year_graduated_elementary' => $year_graduated_elementary,
+					'year_graduated_elementary' => $post->year_graduated_elementary,
 					'awards_received_elementary' => $post->awards_received_elementary,
 					'status' => 'pending'
 				);
@@ -89,7 +84,7 @@
 					'school_name_secondary' => $post->school_name_secondary,
 					'user_id' => $user_id,
 					'school_address_secondary' => $post->school_address_secondary,
-					'year_graduated_secondary' => $year_graduated_secondary,
+					'year_graduated_secondary' => $post->year_graduated_secondary,
 					'awards_received_secondary' => $post->awards_received_secondary,
 					'status' => 'pending'
 				);
@@ -98,13 +93,13 @@
 
 				$post_three = array(
 					'academic_level_tertiary' => $post->academic_level_tertiary,
-					'school_name_tertiary' => 'Mindanao University of Science and Technology',
-					'school_address_tertiary' => 'CM Recto Lapasan Cagayan De Oro City',
+					'school_name_tertiary' => 'Saint Michael College of Caraga',
+					'school_address_tertiary' => 'Masipit, Agusan del Sur',
 					'degree_tertiary' => $post->degree_tertiary,
 					'academic_specific' => $post->academic_specific,
-					'year_from_tertiary' => $year_from_tertiary,
-					'year_to_tertiary' => $year_to_tertiary,
-					'year_graduated_tertiary' => $year_graduated_tertiary,
+					'year_from_tertiary' => $post->year_from_tertiary,
+					'year_to_tertiary' => $post->year_to_tertiary,
+					'year_graduated_tertiary' => $post->year_graduated_tertiary,
 					'awards_received_tertiary' => $post->awards_received_tertiary,
 					'thesis_project_tertiary' => $post->thesis_project_tertiary,
 					'user_id' => $user_id,
@@ -636,13 +631,12 @@
 		}
 		public function addElementary($post)
 		{	
-			$year_graduated_elementary = strtok($post->year_graduated_elementary, "T");
 
 			$elementary = array(
 				'user_id' => $post->id,
 				'school_name_elementary' => $post->school_name_elementary,
 				'school_address_elementary' => $post->school_address_elementary,
-				'year_graduated_elementary' => $year_graduated_elementary,
+				'year_graduated_elementary' => $post->year_graduated_elementary,
 				'awards_received_elementary' => $post->awards_received_elementary,
 				'status' => 'pending'
 			);
@@ -659,7 +653,7 @@
 				'user_id' => $post->id,
 				'school_name_secondary' => $post->school_name_secondary,
 				'school_address_secondary' => $post->school_address_secondary,
-				'year_graduated_secondary' => $year_graduated_secondary,
+				'year_graduated_secondary' => $post->year_graduated_secondary,
 				'awards_received_secondary' => $post->awards_received_secondary,
 				'status' => 'pending'
 			);
@@ -669,18 +663,15 @@
 		}
 		public function addTertiary($post)
 		{
-			$year_from_tertiary = strtok($post->year_from_tertiary, "T");
-			$year_to_tertiary = strtok($post->year_to_tertiary, "T");
-			$year_graduated_tertiary = strtok($post->year_graduated_tertiary, "T");
 
 			$tertiary = array(
 					'academic_level_tertiary' => $post->academic_level_tertiary,
-					'school_name_tertiary' => 'Mindanao University of Science and Technology',
-					'school_address_tertiary' => 'CM Recto Lapasan Cagayan De Oro City',
+					'school_name_tertiary' => 'Saint Michael College of Caraga',
+					'school_address_tertiary' => 'Masipit, Agusan del Sur',
 					'degree_tertiary' => $post->degree_tertiary,
-					'year_from_tertiary' => $year_from_tertiary,
-					'year_to_tertiary' => $year_to_tertiary,
-					'year_graduated_tertiary' => $year_graduated_tertiary,
+					'year_from_tertiary' => $post->year_from_tertiary,
+					'year_to_tertiary' => $post->year_to_tertiary,
+					'year_graduated_tertiary' => $post->year_graduated_tertiary,
 					'awards_received_tertiary' => $post->awards_received_tertiary,
 					'thesis_project_tertiary' => $post->thesis_project_tertiary,
 					'user_id' => $post->id,
@@ -711,45 +702,13 @@
 		}
 		public function addEvent($post)
 		{
-			$date = strtok($post->date, "T");
+			
+			return $this->db->insert('tblevent', $post);
 
-			$event = array(
-				'event_title' => $post->title,
-				'event_description' => $post->description,
-				'event_date' => $date
-			);
-
-			$data = $this->db->insert('tblevent', $event);
-
-			if($data)
-			{
-				return true;
-			}
-			else
-			{
-				false;
-			}
 		}
 		public function addNews($post)
 		{
-			$date = date("Y-m-d");
-
-			$news = array(
-				'news_title' => $post->news_title,
-				'news_description' => $post->news_description,
-				'news_date' => $date
-			);
-
-			$data = $this->db->insert('tblnews', $news);
-
-			if($data)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return $this->db->insert('tblnews', $post);
 		}
 		public function addCommentEvent($post)
 		{

@@ -31,13 +31,14 @@ h6 {
 }
 
 .intro-header {
+    margin-top: 30px;
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
     text-shadow: 0px 0px 2px black!important;
-    background: url(../img/banner-saint.jpg) no-repeat center center;
-    background-size: 100%;
+    background: url(../img/final-logo-saint.jpg) no-repeat center center;
+    background-size: 100% 100%;
 }
 
 .intro-message {
@@ -94,8 +95,7 @@ h6 {
 }
 
 .content-section-a {
-    padding: 50px 0;
-    background-color: #f8f8f8;
+    background-color: #ffffff;
 }
 
 .content-section-b {
@@ -106,6 +106,7 @@ h6 {
 
 .section-heading {
     margin-bottom: 30px;
+    border-bottom: 3px solid #3DA1DE;
 }
 
 .section-heading-spacer {

@@ -14,8 +14,7 @@
     <link href="<?php echo base_url('assets/css/style-responsive.css') ?>" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/custom.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/loading-bar.css') ?>"> 
-    <script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
-    <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+    
 </head>
 <body info ng-controller="dateCtrl">
 
@@ -36,12 +35,15 @@
           		<div class="col-lg-12">
 					<div class="row content-panel graduate-page-header">
 						<div class="col-md-4 profile-text mt mb centered">
-							<div class="right-divider hidden-sm hidden-xs">
-								<h4 ng-cloak>{{countedMy.countMySurvey}} out of {{countedSurvey.countSurvey}}</h4>
-								<h6>Survey Answered</h6>
-								<div class="row">
-								
-								</div>
+							<div class="right-divider hidden-sm hidden-xs updateUserBOx">
+								<form ng-submit="updateAccount()">
+									<input type="text" placeholder="New Username" class="form-control edit-group" ng-model="listAccount.username">
+									<input type="text" placeholder="New Password" class="form-control edit-group" ng-model="listAccount.password">
+									<input type="email" placeholder="New Email" class="form-control edit-group" ng-model="listAccount.email">
+									<br>
+									<img src="<?php echo base_url('assets/img/loading.gif') ?>" class="updateLoading pull-left">
+									<button class="btn btn-info pull-right">Update</button>
+								</form>
 							</div>
 						</div><!-- --/col-md-4 ---->
 						
@@ -52,6 +54,7 @@
 							<p class="survey-notexist" ng-cloak>Hello {{infoList.username}}! There is no survey at this time.</p>
 							<br>
 							<p><button class="btn btn-theme" data-toggle="modal" data-target="#message"><i class="fa fa-envelope"></i> Send Message to Admin</button></p>
+							<p><button class="btn btn-info updateInfoBox" ng-click="getUserAccount()">Update User Account</button></p>
 						</div><!-- --/col-md-4 ---->
 						
 						<div class="col-md-4 centered">
@@ -126,10 +129,10 @@
 												  	<option value="Sr" ng-selected="infoList.extention_name == 'Sr'">Sr</option>
 												  </select>
 												  <br>
-												  <input name="gender" id="genderMale" type="radio" value="Male" ng-model="infoList.gender" ng-checked="infoList.gender = 'Male'">
+												  <input name="gender" id="genderMale" type="radio" value="Male" ng-model="infoList.gender" class="default">
 						                          <label for="genderMale">Male</label>
 						                          <br>
-						                          <input name="gender" id="genderFemale" type="radio" value="Female" ng-model="infoList.gender" ng-checked="infoList.gender = 'Female'">
+						                          <input name="gender" id="genderFemale" type="radio" value="Female" ng-model="infoList.gender"  class="default">
 						                          <label for="genderFemale">Female</label>
 						                          <br>
 						                          <input type="text" class="form-control edit-group" bs-datepicker placeholder="Birthday" ng-model="infoList.birthdate" required>
@@ -151,6 +154,10 @@
 												</div>
 												</form>
 												</div><!-- /detailed -->
+
+												<div class="alert alert-warning alert-dismissable">
+													<label>We currently need your Elementary Background</label>
+												</div>
 											</div><!-- --/col-md-6 ---->
 											
 											<div class="col-md-6 detailed">
@@ -159,7 +166,7 @@
 													<div class="activity-panel">
 														<h5>Basic Information</h5>
 														<p>Name: <strong>{{infoList.fname | capitalize}} {{infoList.mname | capitalize}} {{infoList.lname | capitalize}} {{infoList.extention_name}}</strong></p>
-														<p>Birthday: <strong>{{infoList.birthdate | date}}</strong></p>
+														<p>Birthday: <strong>{{infoList.birthdate |  date}}</strong></p>
 														<p>Gender: <strong>{{infoList.gender | capitalize}}</strong></p>
 														<p>Citizenship: <strong>{{infoList.citizenship | capitalize}}</strong></p>
 													</div>
@@ -171,8 +178,8 @@
 														<p>Email Address: <strong>{{infoList.email}}</strong></p>
 														<p>Mobile #: <strong>{{infoList.mobile_no}}</strong></p>
 														<p>Telephone #: <strong>{{infoList.tele_no }}</strong></p>
-														<?php echo $map['js']; ?>
-														<?php echo $map['html']; ?>
+														<!--?php echo $map['js']; ?-->
+														<!--?php echo $map['html']; ?-->
 													</div>
 												</div>
 										</div><!-- /col-md-6-->
@@ -193,7 +200,10 @@
 							                            <br>
 							                            <input type="text" class="form-control" placeholder="Address of the School..." ng-model="elementaryList.school_address_elementary">
 							                            <br>
-							                            <input type="text" class="form-control" placeholder="Year Graduated..." bs-datepicker ng-model="elementaryList.year_graduated_elementary">
+							                            <!-- <input type="text" class="form-control" placeholder="Year Graduated..." bs-datepicker ng-model="elementaryList.year_graduated_elementary"> -->
+							                            <select ng-model="elementaryList.year_graduated_elementary" class="form-control edit-group" required>
+								        					<option ng-repeat="list in yearList" value="{{list.year_name}}" ng-selected="list.year_name == elementaryList.year_graduated_elementary">{{list.year_name}}</option>
+								        				</select>
 							                            <br>
 							                            <textarea class="form-control" placeholder="Awards Received" ng-model="elementaryList.awards_received_elementary"></textarea>
 														<br>
@@ -203,13 +213,14 @@
 													</div>
 												</form>
 											</div><!-- --/col-md-6 ---->
-											
+
+
 											<div class="col-md-6 detailed">
 												<h4>Elementary</h4>
 												<div class="col-md-8 col-md-offset-2 mt">
 													<p>School: <strong>{{elementaryList.school_name_elementary | capitalize}}</strong></p>
 													<p>Address: <strong>{{elementaryList.school_address_elementary | capitalize}}</strong></p>
-													<p>Year Graduated: <strong>{{elementaryList.year_graduated_elementary | date}}</strong></p>
+													<p>Year Graduated: <strong>{{elementaryList.year_graduated_elementary}}</strong></p>
 													<p>Awards Received: <strong>{{elementaryList.awards_received_elementary | capitalize}}</strong></p>
 												</div>
 											</div><!-- --/col-md-6 ---->
@@ -230,7 +241,10 @@
 						                            <br>
 						                            <input type="text" class="form-control" placeholder="Address of the School..." ng-model="secondaryList.school_address_secondary">
 						                            <br>
-						                            <input type="text" class="form-control" placeholder="Year Graduated..." bs-datepicker ng-model="secondaryList.year_graduated_secondary">
+						                            <!-- <input type="text" class="form-control" placeholder="Year Graduated..." bs-datepicker ng-model="secondaryList.year_graduated_secondary"> -->
+						                            <select ng-model="secondaryList.year_graduated_secondar" class="form-control edit-group" required>
+							        					<option ng-repeat="list in yearList" value="{{list.year_name}}" ng-selected="list.year_name == secondaryList.year_graduated_secondar">{{list.year_name}}</option>
+							        				</select>
 						                            <br>
 						                            <textarea class="form-control" placeholder="Awards Received" ng-model="secondaryList.awards_received_secondary"></textarea>
 													<br>
@@ -246,7 +260,7 @@
 												<div class="col-md-8 col-md-offset-2 mt">
 													<p>School: <strong>{{secondaryList.school_name_secondary | capitalize}}</strong></p>
 													<p>Address: <strong>{{secondaryList.school_address_secondary | capitalize}}</strong></p>
-													<p>Year Graduated: <strong>{{secondaryList.year_graduated_secondary | date}}</strong></p>
+													<p>Year Graduated: <strong>{{secondaryList.year_graduated_secondary}}</strong></p>
 													<p>Awards Received: <strong>{{secondaryList.awards_received_secondary | capitalize}}</strong></p>
 												</div>
 											</div><!-- --/col-md-6 ---->
@@ -278,11 +292,21 @@
 													</select>
 													<br>
 													<label>School Attended</label>
-													<input type="text" class="form-control" placeholder="From..." bs-datepicker ng-model="list.year_from_tertiary">
+													<!-- <input type="text" class="form-control" placeholder="From..." bs-datepicker ng-model="list.year_from_tertiary"> -->
+													<select ng-model="new.year_from_tertiary" class="form-control edit-group" required>
+								        				<option ng-repeat="list in yearList" value="{{list.year_name}}" ng-selected="list.year_name == new.year_from_tertiary">{{list.year_name}}</option>
+								        			</select>
 													To
-													<input type="text" class="form-control" placeholder="To..." bs-datepicker ng-model="list.year_to_tertiary">
+													<!-- <input type="text" class="form-control" placeholder="To..." bs-datepicker ng-model="list.year_to_tertiary"> -->
+						                            <select ng-model="new.year_to_tertiary" class="form-control edit-group" required>
+								        				<option ng-repeat="list in yearList"  value="{{list.year_name}}" ng-selected="list.year_name == new.year_to_tertiary">{{list.year_name}}</option>
+								        			</select>
 						                            <br>
-						                            <input type="text" class="form-control" placeholder="Year Graduated" bs-datepicker ng-model="list.year_graduated_tertiary">
+						                            <label>Year Graduated</label>
+						                            <!-- <input type="text" class="form-control" placeholder="Year Graduated" bs-datepicker ng-model="list.year_graduated_tertiary"> -->
+						                            <select ng-model="new.year_graduated_tertiary" class="form-control edit-group" required>
+								        				<option ng-repeat="list in yearList" value="{{list.year_name}}" value="{{list.year_name}}" ng-selected="list.year_name == new.year_graduated_tertiary">{{list.year_name}}</option>
+								        			</select>
 						                            <br>
 						                            <textarea class="form-control" placeholder="Awards Received..." ng-model="list.awards_received_tertiary"></textarea>
 						                            <br>
@@ -302,8 +326,8 @@
 													<p>Address: <strong>{{list.school_address_tertiary | capitalize}}</strong></p>
 													<p>Academic Level: <strong>{{list.academic_level_tertiary | capitalize}}</strong></p>
 													<p>Degree: <strong>{{list.course_name | capitalize}}</strong></p>
-													<p>School Attended: <strong>{{list.year_from_tertiary | date}} to {{list.year_to_tertiary | date}}</strong></p>
-													<p>Year Graduated: <strong>{{list.year_graduated_tertiary | date }}</strong></p>
+													<p>School Attended: <strong>{{list.year_from_tertiary }} to {{list.year_to_tertiary}}</strong></p>
+													<p>Year Graduated: <strong>{{list.year_graduated_tertiary }}</strong></p>
 													<p>Awards Received: <strong>{{list.awards_received_tertiary | capitalize}}</strong></p>
 													<p>Thesis Project: <strong>{{list.thesis_project_tertiary | capitalize}}</strong></p>
 												</div>
@@ -452,9 +476,9 @@
 						                              <br>
 						                            <label>Employment Duration</label>
 													<br>
-													<input type="text" name="startDate" class="form-control" ng-model="employment.employment_duration_from" placeholder="From" bs-datepicker ng-required="true" />
+													<input type="text" name="startDate" class="form-control" ng-model="employment.employment_duration_from" placeholder="From" bs-datepicker required />
 											     	<br>
-											     	<input type="text" name="endDate" class="form-control" ng-model="employment.employment_duration_to" placeholder="Until" bs-datepicker/>
+											     	<input type="text" name="endDate" class="form-control" ng-model="employment.employment_duration_to" placeholder="Until" bs-datepicker required />
 											     	<br>
 											     	<input type="radio" id="present" value="Present" ng-model="employment.employment_duration_to">
 											     	<label for="present" >Present</label>
@@ -478,7 +502,7 @@
 													<p>Employment Position: <strong>{{employment.employment_position | capitalize}}</strong></p>
 													<p>Employment Salary: <strong>{{employment.employment_salary}}</strong></p>
 													<p>Employment Status: <strong>{{employment.employment_status | capitalize}}</strong></p>
-													<p>Employment Duration: <strong>{{employment.employment_duration_from | date}} <strong>to</strong> {{employment.employment_duration_to | date}}</strong></p>
+													<p>Employment Duration: <strong>{{employment.employment_duration_from }} <strong>to</strong> {{employment.employment_duration_to}}</strong></p>
 												</div>
 											</div><!-- --/col-md-6 ---->
 										</div>
@@ -548,289 +572,23 @@
 	</section>
 </section>
 
- <div class="modal fade" id="survey-noti" tabindex="-1" role="dialog" aria-labelledby="Editinfo" aria-hidden="true">
+<div class="modal fade" id="updateAccount" tabindex="-1" role="dialog" aria-labelledby="Editinfo" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="Editinfo">Hello Graduate!</h4>
+        <h4 class="modal-title" id="Editinfo">Error Login</h4>
       </div>
       <div class="modal-body">
-        <p style="text-indent: 20px!important;">Please complete this Graduate Tracer Study questionnaire as accurately and frankly as possible by filling and checking the box corressponding to your response. Your answer will be used for research purposes in order to assesss graduate employability and eventually, improve course offerings of your alma mater, the Mindanao University of Science and Technology (MUST). Your answers to this survey will be treated with strictest confidentiality.</p>
+        	<label>Error login!</label>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="takeSurvey()">Take Survey</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal">Okie</button>
       </div>
     </div>
   </div>
 </div>
- <div class="modal fade" id="changePic" tabindex="-1" role="dialog" aria-labelledby="changePic" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="changePic">Change Profile Picture</h4>
-      </div>
-      <div class="modal-body">
-        	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Upload</button>
-      </div>
-    </div>
-  </div>
-</div>
-
- <div class="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="updateProfile" aria-hidden="true">
-  <div class="modal-dialog large-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="updateProfile">Please update your profile to be able to use your Account.</h4>
-      </div>
-      <form role="form" class="form-horizontal" ng-submit="updateProfileInfo()">
-      <div class="modal-body">
-        	<div class="row">
-        	<div class="col-lg-8 col-lg-offset-2 detailed">
-			<h4 class="mb personal">Personal Information </h4>
-			<div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">First Name</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="c-name" class="form-control" type="text" ng-model="updateInfo.fname">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Middle Name</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="lives-in" class="form-control" type="text" ng-model="updateInfo.mname">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Last Name</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="country" class="form-control" type="text" ng-model="updateInfo.lname">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Extention Name</label>
-                    <div class="col-lg-6">
-                         <select class="disabled form-control" style="width: 200px!important;" ng-model="updateInfo.extention_name">
-			                <option value=" " ng-selected="updateInfo.extention_name == ' '"></option>
-			                <option value="Sr" ng-selected="updateInfo.extention_name == 'Sr'">Sr.</option>
-			                <option value="Jr" ng-selected="updateInfo.extention_name == 'Jr'">Jr.</option>
-			              </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Gender</label>
-                    <div class="col-lg-6">
-                        <div class="radio">
-						  <label>
-						    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-model="updateInfo.gender" value="Male">
-						    Male
-						  </label>
-						</div>
-						<div class="radio">
-						  <label>
-						    <input type="radio" name="optionsRadios" id="optionsRadios2" ng-model="updateInfo.gender" value="Female">
-						    Female
-						  </label>
-						</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Citizenship</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="country" class="form-control" type="text" ng-model="updateInfo.citizenship">
-                    </div>
-                </div>
-                <div class="form-group" ng-class="{'has-error': datepickerForm.date.$invalid}">
-                	<label class="col-lg-3 control-label">Birthday</label>
-               		<div class="col-lg-6">
-			        	<input type="text" class="form-control edit-group" bs-datepicker style="width: 158px!important;" placeholder="Birthday" ng-model="updateInfo.birthdate" required>
-			     	 </div>
-                </div>
-            </div>
-		</div>
-		
-		<div class="col-lg-8 col-lg-offset-2 detailed mt">
-			<h4 class="mb contact">Contact Information </h4>
-			<div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Street</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="addr1" class="form-control" type="text" ng-model="updateInfo.street">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Barangay</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="addr2" class="form-control" type="text" ng-model="updateInfo.barangay">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">City</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="phone" class="form-control" type="text" ng-model="updateInfo.city">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Province</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="cell" class="form-control" type="text" ng-model="updateInfo.province">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Email</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="email" class="form-control" type="text" ng-model="updateInfo.email">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Mobile</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="skype" class="form-control" type="text" ng-model="updateInfo.mobile_no">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Telephone</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="skype" class="form-control" type="text" ng-model="updateInfo.tele_no">
-                    </div>
-                </div>
-            </div>
-		</div><!-- --/col-lg-8 ---->
-		<div class="col-lg-8 col-lg-offset-2 detailed mt">
-			<h4 class="mb elementary">Elementary </h4>
-			<div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">School</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="addr1" class="form-control" type="text" ng-model="updateInfo.school_name_elementary">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Address</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="addr2" class="form-control" type="text" ng-model="updateInfo.school_address_elementary">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Year Graduated</label>
-                    <div class="col-lg-6">
-                    	<input type="text" class="form-control edit-group" bs-datepicker ng-model="updateInfo.year_graduated_elementary" required>
-			     	</div>
-			     	<!-- <select ng-model="updateInfo.year_graduated_elementary" class="form-control edit-group" style="width: 250px!important;">
-			     		<option ng-cloak ng-repeat="list in yearList" ng-selected="updateInfo.year_graduated_elementary == list.year_name" value="{{list.year_name}}">{{list.year_name}}</option>
-			     	</select> -->
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Awards Received</label>
-                    <div class="col-lg-6">
-                        <textarea class="form-control" ng-model="updateInfo.awards_received_elementary"></textarea>
-                    </div>
-                </div>
-            </div>
-		</div>
-		<div class="col-lg-8 col-lg-offset-2 detailed mt">
-			<h4 class="mb secondary">Secondary </h4>
-			<div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">School</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="addr1" class="form-control" type="text" ng-model="updateInfo.school_name_secondary">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Address</label>
-                    <div class="col-lg-6">
-                        <input placeholder=" " id="addr2" class="form-control" type="text" ng-model="updateInfo.school_address_secondary">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Year Graduated</label>
-			       	<div class="col-lg-6">
-			       		<input type="text" class="form-control edit-group" bs-datepicker ng-model="updateInfo.year_graduated_secondary" required>
-			     	</div>
-			     	<!-- <select ng-model="updateInfo.year_graduated_secondary" class="form-control edit-group" style="width: 250px!important;">
-			     		<option ng-cloak ng-repeat="list in yearList" ng-selected="updateInfo.year_graduated_secondary == list.year_name" value="{{list.year_name}}">{{list.year_name}}</option>
-			     	</select> -->
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Awards Received</label>
-                    <div class="col-lg-6">
-                        <textarea class="form-control" ng-model="updateInfo.awards_received_secondary"></textarea>
-                    </div>
-                </div>
-            </div>
-		</div>
-		<div class="col-lg-8 col-lg-offset-2 detailed mt">
-			<h4 class="mb tertiary">Tertiary </h4>
-			<div>
-          		<div class="form-group">
-                    <label class="col-lg-3 control-label">Academic Level</label>
-                    <select ng-model="updateInfo.academic_level_tertiary" class="form-control" style="width: 230px!important;">
-                    	<option ng-selected="updateInfo.academic_level_tertiary == 'Vocational'" value="Vocational">Vocational</option>
-                    	<option ng-selected="updateInfo.academic_level_tertiary == 'College'" value="College">College</option>
-                    	<option ng-selected="updateInfo.academic_level_tertiary == 'Graduate'" value="Graduate">Graduate</option>
-                    	<option ng-selected="updateInfo.academic_level_tertiary == 'Post Graduate'" value="Post Graduate">Post Graduate</option>
-                    </select>
-                 </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Degree</label>
-		        	<select ng-model="updateInfo.degree_tertiary" class="form-control" style="width: 250px!important;">
-		        		<option ng-repeat="list in courseList" value="{{list.course_id}}">{{list.course_name | capitalize}}</option>
-		        	</select>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">From Year</label>
-                    <div class="col-lg-6">
-                    	<input type="text" class="form-control edit-group" bs-datepicker ng-model="updateInfo.year_from_tertiary" required>
-			     	</div>
-			     	<!-- <select ng-model="updateInfo.year_from_tertiary" class="form-control edit-group" style="width: 250px!important;">
-			     		<option ng-cloak ng-repeat="list in yearList" ng-selected="updateInfo.year_from_tertiary == list.year_name" value="{{list.year_name}}">{{list.year_name}}</option>
-			     	</select> -->
-			    </div>
-			    <div class="form-group">
-			     	<label class="col-lg-3 control-label">To Year</label>
-			     	<div class="col-lg-6">
-			     		<input type="text" class="form-control edit-group" bs-datepicker ng-model="updateInfo.year_to_tertiary" required>
-			     	</div>
-			     	<!-- <select ng-model="updateInfo.year_to_tertiary" class="form-control edit-group" style="width: 250px!important;">
-			     		<option ng-cloak ng-repeat="list in yearList" ng-selected="updateInfo.year_to_tertiary == list.year_name" value="{{list.year_name}}">{{list.year_name}}</option>
-			     	</select> -->
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Year Graduated</label>
-                    <div class="col-lg-6">
-                    	<input type="text" class="form-control edit-group" bs-datepicker ng-model="updateInfo.year_graduated_tertiary" required>
-			     	</div>
-			     	<!-- <select ng-model="updateInfo.year_graduated_tertiary" class="form-control edit-group" style="width: 250px!important;">
-			     		<option ng-cloak ng-repeat="list in yearList" ng-selected="updateInfo.year_graduated_tertiary == list.year_name" value="{{list.year_name}}">{{list.year_name}}</option>
-			     	</select> -->
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Awards Received</label>
-			     	<textarea ng-model="updateInfo.awards_received_tertiary" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Thesis Project</label>
-			     		<textarea ng-model="updateInfo.thesis_project_tertiary" class="form-control"></textarea>
-                </div>
-            </div>
-		</div>
-	</div>
-  </div>
-
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Update</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div> 
-
+	
 <div class="modal fade" id="event" tabindex="-1" role="dialog" aria-labelledby="changePic" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -901,7 +659,7 @@
 	        </div>
 	      </div>
   		<input type="hidden" ng-model="message.user_two">
-  		<textarea ng-model="message.reply" class="form-control" placeholder="Say somthing..."></textarea>
+  		<textarea ng-model="message.reply" class="form-control" placeholder="Say something..."></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -964,11 +722,10 @@
   </div>
 </div>
 
+	<script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap-fileupload.js') ?>"></script>
-    <script class="include" type="text/javascript" src="<?php echo base_url('assets/js/jquery.dcjqaccordion.2.7.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angular.min.js') ?>"></script>
-    <script src="<?php echo base_url('assets/js/dirPagination.js') ?>"></script>
-    <script src="<?php echo base_url('assets/js/loading-bar.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angularstrap/angular-sanitize.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/angularstrap/angular-strap.tpl.js') ?>"></script>
@@ -976,6 +733,9 @@
     <script src="<?php echo base_url('assets/scripts/graduateFactory.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/graduateDirective.js') ?>"></script>
     <script src="<?php echo base_url('assets/scripts/graduateController.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/dirPagination.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/loading-bar.js') ?>"></script>
+
     <script type="text/javascript">
 		$(document).ready(function(){
 

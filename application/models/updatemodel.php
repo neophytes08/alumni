@@ -57,11 +57,6 @@
 		public function updateProfileInfo($post)
 		{
 			$birthdate = strtok($post->birthdate, "T");
-			$year_graduated_elementary = strtok($post->year_graduated_elementary, "T");
-			$year_graduated_secondary = strtok($post->year_graduated_secondary, "T");
-			$year_graduated_tertiary = strtok($post->year_graduated_tertiary, "T");
-			$year_from_tertiary = strtok($post->year_from_tertiary, "T");
-			$year_to_tertiary = strtok($post->year_to_tertiary, "T");
 
 
 			if($post->extention_name = ' ')
@@ -94,7 +89,7 @@
 			$elementary = array(
 				'school_name_elementary' => $post->school_name_elementary,
 				'school_address_elementary' => $post->school_address_elementary,
-				'year_graduated_elementary' => $year_graduated_elementary,
+				'year_graduated_elementary' => $pos->year_graduated_elementary,
 				'awards_received_elementary' => $post->awards_received_elementary
 			);
 			$this->db->where('user_id', $this->session->userdata('user_id'));
@@ -112,12 +107,12 @@
 		
 			$tertiary = array(
 			'academic_level_tertiary' => $post->academic_level_tertiary,
-			'school_name_tertiary' => 'Mindanao University of Science and Technology',
-			'school_address_tertiary' => 'CM Recto Lapasan, Cagayan de Oro City',
+			'school_name_tertiary' => 'Saint Michael College of Caraga',
+			'school_address_tertiary' => 'Masipit, Agusan del Sur',
 			'degree_tertiary' => $post->degree_tertiary,
-			'year_from_tertiary' => $year_from_tertiary,
-			'year_to_tertiary' => $year_to_tertiary,
-			'year_graduated_tertiary' => $year_graduated_tertiary,
+			'year_from_tertiary' => $post->year_from_tertiary,
+			'year_to_tertiary' => $post->year_to_tertiary,
+			'year_graduated_tertiary' => $post->year_graduated_tertiary,
 			'awards_received_tertiary' => $post->awards_received_tertiary,
 			'thesis_project_tertiary' => $post->thesis_project_tertiary,
 			'user_id' => $this->session->userdata('user_id')
@@ -136,12 +131,11 @@
 		}
 		public function updateElementary($post)
 		{
-			$year_graduated_elementary = strtok($post->year_graduated_elementary, "T");
 
 			$elementary = array(
 				'school_name_elementary' => $post->school_name_elementary,
 				'school_address_elementary' => $post->school_address_elementary,
-				'year_graduated_elementary' => $year_graduated_elementary,
+				'year_graduated_elementary' => $post->year_graduated_elementary,
 				'awards_received_elementary' => $post->awards_received_elementary
 			);
 			$this->db->where('elementary_id', $post->elementary_id);
@@ -151,13 +145,12 @@
 		}
 		public function updateSecondary($post)
 		{
-			$year_graduated_secondary = strtok($post->year_graduated_secondary, "T");
 
 			$secondary = array(
 				'school_name_secondary' => $post->school_name_secondary,
 				'user_id' => $post->user_id,
 				'school_address_secondary' => $post->school_address_secondary,
-				'year_graduated_secondary' => $year_graduated_secondary,
+				'year_graduated_secondary' => $post->year_graduated_secondary,
 				'awards_received_secondary' => $post->awards_received_secondary
 			);
 			$this->db->where('secondary_id', $post->secondary_id);
@@ -167,26 +160,23 @@
 		public function updateTertiary($post)
 		{
 
-			$year_from_tertiary = strtok($post->year_from_tertiary, "T");
-			$year_to_tertiary = strtok($post->year_to_tertiary, "T");
-			$year_graduated_tertiary = strtok($post->year_graduated_tertiary, "T");
-
-			$tertiary = array(
-			'academic_level_tertiary' => $post->academic_level_tertiary,
-			'school_name_tertiary' => $post->school_name_tertiary,
-			'school_address_tertiary' => $post->school_address_tertiary,
-			'degree_tertiary' => $post->degree_tertiary,
-			'year_from_tertiary' => $year_from_tertiary,
-			'year_to_tertiary' => $year_to_tertiary,
-			'year_graduated_tertiary' => $year_graduated_tertiary,
-			'awards_received_tertiary' => $post->awards_received_tertiary,
-			'thesis_project_tertiary' => $post->thesis_project_tertiary,
-			'user_id' => $this->session->userdata('user_id')
-			);
-			$this->db->where('tertiary_id', $post->tertiary_id);
-			$this->db->update('tbltertiary', $tertiary);
+			return var_dump($post);
+			// $tertiary = array(
+			// 'academic_level_tertiary' => $post->academic_level_tertiary,
+			// 'school_name_tertiary' => $post->school_name_tertiary,
+			// 'school_address_tertiary' => $post->school_address_tertiary,
+			// 'degree_tertiary' => $post->degree_tertiary,
+			// 'year_from_tertiary' => $post->year_from_tertiary,
+			// 'year_to_tertiary' => $post->year_to_tertiary,
+			// 'year_graduated_tertiary' => $post->year_graduated_tertiary,
+			// 'awards_received_tertiary' => $post->awards_received_tertiary,
+			// 'thesis_project_tertiary' => $post->thesis_project_tertiary,
+			// 'user_id' => $this->session->userdata('user_id')
+			// );
+			// $this->db->where('tertiary_id', $post->tertiary_id);
+			// $this->db->update('tbltertiary', $tertiary);
 			
-			return true;
+			// return true;
 		}
 		public function updateAccountEmail($id)
 		{
@@ -317,6 +307,17 @@
 
 			$query = " select a.picture,a.fname,a.mname,a.lname,a.extention_name,b.comment_event_id,b.event_id,a.user_id,b.comment_event_details,comment_event_date,c.event_id from tblgrad_profile a inner join tblcomments_event b inner join tblevent c where b.user_id = a.user_id && c.event_id = b.event_id && b.event_id = ".$post->event_id." order by b.comment_event_id asc";
 			return $this->db->query($query)->result_object();
+		}
+		public function updateAccount($post)
+		{
+			$update = array(
+				'username' => $post->username,
+				'password' => $post->password,
+				'email' => $post->email
+			);
+			
+			$this->db->where('user_id', $this->session->userdata('user_id'));
+			return $this->db->update('tbluser_acc', $update);
 		}
 	}
  ?>

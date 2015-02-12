@@ -5,17 +5,14 @@ graduate
 		"getUrl",
 		function controller($scope, $http, getUrl){
 			
-			$scope.editGraduateWholeInfo = {};
-			
+			$scope.updateInfo = {};
+			$scope.employment = {};
+			$scope.employment.employment_id = 0;;
+
 			$scope.hideSurvey = function hideSurvey(){
 				$('.survey-box').fadeOut(500);
 			}
 
-			$scope.takeSurvey = function takeSurvey(){
-					console.log('take');
-					$('.survey-box').fadeIn(500);
-				// });
-			}
 			// get course name
 			$scope.getCourse = function getCourse(){
 
@@ -55,27 +52,6 @@ graduate
 					}
 				});
 			}
-			// edit profile
-			$scope.infos = {};
-			$scope.editProf = function editProf(list){
-				console.log(list);
-				$scope.infos = list;
-				$scope.year();
-			}
-			// profile update trigger
-			$scope.updateProfileTrigger = function updateProfileTrigger(){
-
-				$http.get(getUrl.url + '/listCtrl/updateProfileTrigger/')
-				.success(function onSuccess(response){
-					if(response.stat === 1)
-					{
-
-						$scope.getUser
-						$scope.year();
-						$('#updateProfile').modal('show');
-					}
-				});
-			}
 			// gert whole information
 			$scope.getUser = function getUser(){
 
@@ -89,22 +65,6 @@ graduate
 				$http.get(getUrl.url + '/listCtrl/getYear')
 				.success(function onSuccess(response){
 					$scope.yearList = response;
-				});
-			}
-			// update profile info
-			$scope.updateInfo = {};
-			$scope.employment = {};
-			$scope.employment.employment_id = 0;
-			$scope.updateProfileInfo = function updateProfileInfo(){
-
-				console.log($scope.updateInfo);
-				$http.post(getUrl.url + '/updateCtrl/updateProfileInfo', $scope.updateInfo)
-				.success(function onSuccess(response){
-					if(response == true)
-					{
-						// $scope.getUser();
-						// $('#updateProfile').modal('hide');
-					}
 				});
 			}
 			// update employment
@@ -124,22 +84,17 @@ graduate
 
 				$http.post(getUrl.url + '/listCtrl/listOthers', $scope.employment)
 				.success(function onSuccess(response){
-					console.log(response)
 					$scope.result = response;
 				})
 			}
 			// get obe name
 			$scope.getObeValue = function getObeValue(list){
-				console.log(list);
-
 				$scope.employment.employment_position = list.obe_name;
 			}
 			// yes survey
 			$scope.yesSurvey = function yesSurvey(){
 				$http.get(getUrl.url + '/listCtrl/getSpecialization/')
 				.success(function onSuccess(response){
-					console.log(response.special);
-					console.log(response.survey);
 					$scope.specialization = response.special;
 					// $scope.survey.survey_id = response.survey;
 					$('.yes-survey').fadeIn(500);
@@ -152,8 +107,6 @@ graduate
 			$scope.noSurvey = function noSurvey(){
 				$http.get(getUrl.url + '/listCtrl/getSpecialization/')
 				.success(function onSuccess(response){
-					console.log(response.special);
-					console.log(response.survey);
 					$scope.specialization = response.special;
 					// $scope.survey.survey_id = response.survey;
 					$('.yes-survey').fadeOut(500);
@@ -173,6 +126,7 @@ graduate
 					if(response == 0)
 					{
 						// toast('No employment record yet!', 3000);
+						$scope.employment = "";
 					}
 					else
 					{
@@ -180,7 +134,17 @@ graduate
 					}
 				});
 			}
-			// get
+			// get user account
+			$scope.getUserAccount = function getUserAccount(){
+
+				$http.get(getUrl.url + '/listCtrl/getAccount')
+				.success(function onSuccess(response){
+					console.log(response);
+					$scope.listAccount = response;
+					$('.updateUserBOx').fadeIn(500);
+					$('.updateInfoBox').fadeOut(500);
+				});	
+			}
 			// get elementary
 			$scope.getElementary = function getElementary(list){
 
@@ -195,7 +159,6 @@ graduate
 			$scope.getSecondary = function getSecondary(list){
 				$http.get(getUrl.url + '/listCtrl/getSecondary/' + list.user_id)
 				.success(function onSuccess(response){
-					console.log(response);
 					$scope.secondaryList = response;
 				});
 			}
@@ -203,7 +166,6 @@ graduate
 			$scope.getTertiary = function getTertiary(list){
 				$http.get(getUrl.url + '/listCtrl/getTertiary/' + list.user_id)
 				.success(function onSuccess(response){
-					console.log(response);
 					$scope.tertiaryList = response;
 				});
 			}
@@ -213,10 +175,18 @@ graduate
 				$('.user-check').fadeOut(500);
 				$http.post(getUrl.url + '/updateCtrl/updateUserInfo', $scope.user)
 				.success(function onSuccess(response){
-					console.log(response);
 					$('.userInfo').slideUp(500);
 					$('.user-loading').fadeOut();
 					$('.user-check').fadeIn(500);
+				});
+			}
+			$scope.updateAccount = function updateAccount(){
+				$('.updateLoading').show();
+				$http.post(getUrl.url + '/updateCtrl/updateAccount', $scope.listAccount)
+				.success(function onSuccess(response){
+					$('.updateLoading').hide();
+					$('.updateUserBOx').hide();
+					$('.updateInfoBox').show();
 				});
 			}
 			$scope.updatePersonal = function updatePersonal(){
@@ -257,22 +227,6 @@ graduate
 					$scope.user = response;
 				});
 			}
-			$scope.showPersonal = function personal(){
-				$('.personalInfo').slideToggle(500);
-			}
-			$scope.showContact = function contactInfo(){
-				$('.contactInfo').slideToggle(500);
-			}
-			$scope.showElementary = function showElementary(){
-				$('.elementaryInfo').slideToggle(500);
-			}
-			$scope.showSecondary = function showSecondary(){
-				$('.secondaryInfo').slideToggle(500);
-			}
-			$scope.showTertiary = function showTertiary(){
-				$('.tertiaryInfo').slideToggle(500);
-			}
-
 			// survey count answer
 			$scope.countSurvey = function countSurvey(){
 
@@ -454,9 +408,8 @@ graduate
 			$scope.eventList();
 			$scope.countSurvey();
 			$scope.getEmployment();
-			// $scope.year();
+			$scope.year();
 			$scope.getUser();
-			// $scope.updateProfileTrigger();
 			// $scope.getPokeSurvey();
 			$scope.getCourse();
 		}

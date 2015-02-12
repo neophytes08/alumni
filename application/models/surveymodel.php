@@ -322,32 +322,74 @@
 		public function getGenerate($post)
 		{
 
-			$queryCourse = "select course_name from tblcourse where course_id = ".$post->course."";
-			$getCourse = $this->db->query($queryCourse)->result_object()[0];
+			// $queryCourse = "select course_name from tblcourse where course_id = ".$post->course."";
+			// $getCourse = $this->db->query($queryCourse)->result_object()[0];
 
-			$queryBar = "select * from tbltablechart where year = ".$post->year." && course = '".$getCourse->course_name."'";
-			$getBar = $this->db->query($queryBar)->result_object();
+			// $queryBar = "select * from tbltablechart where year = ".$post->year." && course = '".$getCourse->course_name."'";
+			// $getBar = $this->db->query($queryBar)->result_object();
 
-			$queryPie = " select a.obe_id,a.obe_answer,a.obe_count,b.obe_name from tblpiegraph a inner join tblspecialization_obe b where b.obe_id = a.obe_id && a.survey_year = ".$post->year." && a.course_id = ".$post->course."";
-			$getPie = $this->db->query($queryPie)->result_object();
+			// $queryPie = " select a.obe_id,a.obe_answer,a.obe_count,b.obe_name from tblpiegraph a inner join tblspecialization_obe b where b.obe_id = a.obe_id && a.survey_year = ".$post->year." && a.course_id = ".$post->course."";
+			// $getPie = $this->db->query($queryPie)->result_object();
 			
 
-			$queryLine = "select * from tbltablechart where course = '".$getCourse->course_name."'";
-			$getLine = $this->db->query($queryLine)->result_object();
+			// $queryLine = "select * from tbltablechart where course = '".$getCourse->course_name."'";
+			// $getLine = $this->db->query($queryLine)->result_object();
 
-			if($getBar)
-			{
-				$stat = array(
-				'barResult' => $getBar[0],
-				'pieResult' => $getPie,
-				'lineResult' => $getLine
+			// if($getBar)
+			// {
+			// 	$stat = array(
+			// 	'barResult' => $getBar[0],
+			// 	'pieResult' => $getPie,
+			// 	'lineResult' => $getLine
+			// 	);
+			// 	return $stat;
+			// }
+			// else
+			// {
+			// 	return 0;
+			// }
+
+			$queryBatchMale = "select b.year_graduated_tertiary, COUNT(b.user_id) as batchCount from tblgrad_profile a inner join tbltertiary b where b.user_id = a.user_id && a.gender = 'Male' && b.year_graduated_tertiary = ".$post->year."";
+			$getBatchMale = $this->db->query($queryBatchMale)->result_object()[0];
+
+			$queryBatchFemale = "select COUNT(b.user_id) as batchCount from tblgrad_profile a inner join tbltertiary b where b.user_id = a.user_id && a.gender = 'Female' && b.year_graduated_tertiary = ".$post->year."";
+			$getBatchFemale = $this->db->query($queryBatchFemale)->result_object()[0];
+
+			$batch = array(
+				'male' => $getBatchMale->batchCount[0],
+				'female' => $getBatchFemale->batchCount[0],
+				'year' => $getBatchMale->year_graduated_tertiary
+			);
+
+			return $batch;
+		}
+		public function gettableChart()
+		{
+			$result = array();
+			$queryYear = "select year_graduated_tertiary from tbltertiary group by year_graduated_tertiary";
+			$year = $this->db->query($queryYear)->result_object();
+
+ 			$size = sizeof($year);
+
+			for($x = 0; $x < $size; $x++) {
+				$queryBatchMale = "select b.year_graduated_tertiary, COUNT(*) as batchCount from tblgrad_profile a inner join tbltertiary b where b.user_id = a.user_id && a.gender = 'Male' && b.year_graduated_tertiary = '".$year[$x]->year_graduated_tertiary."'";
+				$getBatchMale = $this->db->query($queryBatchMale)->result_object()[0];
+
+				$queryBatchFemale = "select COUNT(*) as batchCount from tblgrad_profile a inner join tbltertiary b where b.user_id = a.user_id && a.gender = 'Female' && b.year_graduated_tertiary = '".$year[$x]->year_graduated_tertiary."'";
+				$getBatchFemale = $this->db->query($queryBatchFemale)->result_object()[0];
+
+				$batchData = array(
+					'year' => $getBatchMale->year_graduated_tertiary,
+					'male' => $getBatchMale->batchCount,
+					'female' => $getBatchFemale->batchCount
 				);
-				return $stat;
+
+				array_push($result, $batchData);
 			}
-			else
-			{
-				return 0;
-			}
+
+			return $result;
+			
+			
 		}
 		public function getAllSurveyYear($post)
 		{

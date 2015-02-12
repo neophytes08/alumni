@@ -14,7 +14,7 @@ login
 		.factory('getKey', [
 			function factory(){
 				return {
-					key: 'nJvtT8OV5B57QzmMJt5RVw'
+					key: '6jrVjP0mJJbZVpxVKszWAQ'
 				}
 			}
 		]);

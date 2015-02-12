@@ -190,6 +190,18 @@
 				$this->show_login(false);
 			}
 		}
+		public function getYearGraduated()
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->listmodel->getYearGraduated();
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
+		}
 		public function getUsers()
 		{
 			if($this->session->userdata('isLoggedIn'))
@@ -554,6 +566,18 @@
 		{
 			$data = $this->listmodel->messageSpecificList($id);
 			echo json_encode($data);
+		}
+		public function getAccount($id)
+		{
+			if($this->session->userdata('isLoggedIn'))
+			{
+				$data = $this->listmodel->getAccount();
+				echo json_encode($data);
+			}
+			else
+			{
+				$this->show_login(false);
+			}
 		}
 	}
  ?>
