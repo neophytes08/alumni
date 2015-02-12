@@ -2,7 +2,7 @@ login
 		.factory('getUrl',[
 			function factory(){
 				return {
-					url: '/alumni/index.php',
+					url: 'http://smcc-alumni.herokuapp.com/index.php',
 					header: {
 						headers: {
 							'Content-Type' : 'application/x-www-form-urlencoded'
