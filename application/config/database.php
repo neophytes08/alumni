@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
+$db['default']['username'] = 'a1307622_neo123';
 $db['default']['password'] = 'programmer08';
-$db['default']['database'] = 'alumni_tracer';
+$db['default']['database'] = 'a1307622_tracer';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
