@@ -597,6 +597,10 @@
         <h4 class="modal-title" id="changePic">{{showEventList.event_title | capitalize}}</h4>
       </div>
       <div class="modal-body">
+      	<!-- <img src="../../assets/events/{{showEvenList.event_picture}}" with="200" height="200"> -->
+      	<p>{{showEvenList.event_picture}}</p>
+      </div>
+      <div class="modal-body">
       		<h3>{{showEventList.event_date | date}}</h3>
         	<p>{{showEventList.event_description}}</p>
       </div>

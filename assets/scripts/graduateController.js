@@ -251,6 +251,7 @@ graduate
 			$scope.addComment = {};
 			$scope.showEvent = function showEvent(list){
 				$scope.showEventList = list
+				console.log(list);
 				$scope.addComment.event_id = list.event_id;
 				$http.get(getUrl.url + '/listCtrl/listEventComment/' + list.event_id)
 				.success(function onSuccess(response){

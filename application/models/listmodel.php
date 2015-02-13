@@ -162,7 +162,7 @@
 		}
 		public function adminInfo()
 		{
-			$query = "select a.user_id,a.username,a.password,a.position,a.level,b.picture,b.fname,b.mname,b.lname from tbluser_acc a inner join tbladmin_profile b where b.user_id = a.user_id && a.user_id = ".$this->session->userdata('user_id')."";
+			$query = "select a.user_id,a.username,a.password,a.position,a.level,b.picture,b.fname,b.mname,b.lname,b.birthdate,b.address,b.email,b.contact from tbluser_acc a inner join tbladmin_profile b where b.user_id = a.user_id && a.user_id = ".$this->session->userdata('user_id')."";
 			return $this->db->query($query)->result_object()[0];
 		}
 		public function searchUser($post)

@@ -69,7 +69,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a class="admin" href>
+                      <a class="admin" href="#admin" data-toggle="modal"
                           <i class="fa fa-desktop"></i>
                           <span>Admin</span>
                       </a>
@@ -151,6 +151,83 @@
       </footer>
       <!--footer end-->
   </section>
+
+  <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="admin" class="modal fade">
+    <div class="modal-dialog">
+        <form ng-submit="recover()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><h4>Admin Setting</h4></h4>
+            </div>
+            <div class="modal-body">
+               <div class="row content-panel">
+                  <div class="panel-heading">
+                    <ul class="nav nav-tabs nav-justified">
+                      <li class="active">
+                        <a data-toggle="tab" href="#admin">Admin Profile</a>
+                      </li>
+                      <li class="">
+                        <a data-toggle="tab" href="#settings">Settings <img src="<?php echo base_url('assets/img/check.png') ?>" width="20" height="20" class="load-admin" style="border-radius: 50%;"></a>
+                      </li>
+                    </ul>
+                  </div>
+
+                <div class="panel-body">
+                <div class="tab-content">
+                  <div id="admin" class="tab-pane active">
+                    <div class="row">
+                      <div class="col-md-12 detailed">
+                        <h4>My Information</h4>
+                        <div class="row mt mb">
+                          <div class="activity-panel">
+                            <h5>Basic Information</h5>
+                            <p>Name: <strong>{{admin.fname | capitalize}} {{admin.mname | capitalize}} {{admin.lname | capitalize}}</strong></p>
+                            <p>Birthday: <strong>{{admin.birthdate |  date}}</strong></p>
+                            <p>Address: <strong>{{admin.address | capitalize}}</strong></p>
+                            <p>Email Address: <strong>{{admin.email}}</strong></p>
+                            <p>Contact #: <strong>{{admin.contact}}</strong></p>
+                          </div>
+                        </div>
+                    </div><!-- /col-md-6-->
+                  </div><!-- --/OVERVIEW ---->
+                </div>
+
+                <div id="settings" class="tab-pane">
+                    <div class="row">
+                      <div class="col-md-12 detailed">
+                        <div class="detailed mt">
+                        <form >
+                        <div class="alert alert-warning alert-dismissable">
+                        <label>Update Your Account. </label>
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <input type="text" placeholder="Username" class="form-control edit-group" ng-model="admin.username">
+                          <input type="text" placeholder="Password" class="form-control edit-group" ng-model="admin.password">
+                          <input type="text" placeholder="First Name" class="form-control edit-group" ng-model="admin.fname">
+                          <input type="text" placeholder="Middle Name" class="form-control edit-group" ng-model="admin.mname">
+                          <input type="text" placeholder="Last Name" class="form-control edit-group" ng-model="admin.lname">
+                          <input type="text" placeholder="Birthdate" class="form-control edit-group" ng-model="admin.birthdate" bs-datepicker>
+                          <input type="text" placeholder="Email" class="form-control edit-group" ng-model="admin.email">
+                          <input type="text" placeholder="Contact" class="form-control edit-group" ng-model="admin.contact">
+                          <div class="row">
+                            <button type="submit" class="btn btn-theme pull-right" ng-click="updateAdmin()">Done</button>
+                          </div>
+                        </div>
+                        </form>
+                        </div>
+                    </div><!-- /col-md-6-->
+                  </div><!-- --/OVERVIEW ---->
+                </div>
+
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+    </form>
+    </div>
+</div>
+
   <div class='success' style='display:none'>Success!</div>
   <div class='activated' style='display:none'>Activated!</div>
   <div class='deactivated' style='display:none'>Deactivated!</div>

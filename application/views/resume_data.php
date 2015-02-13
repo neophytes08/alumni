@@ -20,7 +20,7 @@ html {
 body {
 	font-family: montserrat, arial, verdana;
 	background-color: transparent;
-	background: url(/alumni/assets/img/resume_bg.jpg) no-repeat center center;
+	background: url(../../assets/img/bg-resume.jpg) no-repeat center center;
     background-size: 100%;
     background-attachment: fixed!important;
 }

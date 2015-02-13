@@ -296,7 +296,7 @@ table.custom-table > tbody tr td
 }
 
 
-#editEvent, #deleteEvent, #custom-message-show, .news-load, .user-send, .updateUserBOx, .updateLoading
+#editEvent, #deleteEvent, #custom-message-show, .news-load, .user-send, .updateUserBOx, .updateLoading, .load-admin
 {
     display: none;
 }

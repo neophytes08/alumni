@@ -2,21 +2,6 @@
 
 <h3><i class="fa fa-angle-right"></i> Analysis Views </h3>
   <!-- page start-->
-   <div class="row mt">
-        <div class="col-lg-12">
-            <div class="content-panel">
-               <h4><i class="fa fa-angle-right"></i> Batch </h4>
-                <form class="form-inline" ng-submit="generate()">
-                  
-                      <label  for="exampleInputEmail2">Year</label>
-                      <select ng-model="surveyData.year" class="form-control" id="exampleInputEmail2" style="width: 250px!important;" required>
-                        <option ng-repeat="list in yearList" value="{{list.year_graduated_tertiary}}">{{list.year_graduated_tertiary - 1}} - {{list.year_graduated_tertiary}}</option>
-                    </select>
-                  <button type="submit" class="btn btn-theme">Generate</button>
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="row mt error">
       <div class="col-lg-12">
           <div class="content-panel">

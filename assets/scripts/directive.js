@@ -93,7 +93,7 @@ myadmin
 					"controller": "activitiesController",
 					"templateUrl": "/alumni/assets/template/dashboard.html",
 					"link": function onLink(scope, element, attributeSet){
-						element.addClass("hidden");
+						// element.addClass("hidden");
 						scope.$on('show-dashboard' , 
 							function on(){
 								element.removeClass("hidden");
@@ -189,7 +189,7 @@ myadmin
 					"controller": "eventsController",
 					"templateUrl": "/alumni/assets/template/events.html",
 					"link": function onlink(scope, element, attributeSet){
-						// element.addClass("hidden");
+						element.addClass("hidden");
 						scope.$on('show-events' , 
 							function on(){
 								element.removeClass("hidden");

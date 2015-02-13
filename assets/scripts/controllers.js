@@ -111,7 +111,6 @@ myadmin
 				}
 				// delete prompt
 				$scope.deleteUser = function deleteUser(list){
-					$('#deleteUser').modal('show');
 					$scope.forDelete = list;
 				}
 				// delete list
@@ -402,15 +401,26 @@ myadmin
 					$http.get(getUrl.url + '/surveyCtrl/gettableChart')
 					.success(function onSuccess(response){
 						$scope.tableList = response
+						$scope.barData = angular.fromJson(response);
+						$scope.barGraph($scope.barData);
 					});
 				}
 
 				$scope.barGraph = function graph(list){
 
-				  var myData = new Array([list.year, parseInt(list.male), parseInt(list.female)]);
+				  var bar = [];
+
+				  for(var counter = 0; counter < list.length; counter++)
+				  {
+				  	bar.push([list[counter].year, parseInt(list[counter].male), parseInt(list[counter].female)])
+				  }
+
+				  // var myData = new Array([list.year, parseInt(list.male), parseInt(list.female)]);
+				  // var myChart = new JSChart('bar', 'bar');
+				  // myChart.setDataArray(myData);
 				  var myChart = new JSChart('bar', 'bar');
-				  myChart.setDataArray(myData);
-				  myChart.setTitle('No. of Batches for ' + list.year);
+				  myChart.setDataArray(bar);
+				  myChart.setTitle('No. of Male and Female Every Batch');
 				  myChart.setTitleColor('#8E8E8E');
 				  myChart.setAxisNameX('');
 				  myChart.setAxisNameY('');
@@ -445,7 +455,7 @@ myadmin
 					function onReceive() {
 						$scope.year();
 						$scope.tableGraph();
-						$scope.generateDefault();
+						// $scope.generateDefault();
 				});
 			}
 		])
@@ -1054,7 +1064,15 @@ myadmin
 						$scope.admin = response;
 					});
 				}
-				// $scope.showLogs();
+				// update
+				$scope.updateAdmin = function updateAdmin(){
+					
+					$http.post(getUrl.url + '/updateCtrl/updateAdmin', $scope.admin)
+					.success(function onSuccess(response){
+						$('.load-admin').show();
+					});
+				}
+				$scope.showLogs();
 				$scope.adminInfo();
 			}
 		])
@@ -1186,6 +1204,7 @@ myadmin
 
 					fd.append('newsDescription', $scope.news.news_description);
 					fd.append('newsTitle', $scope.news.news_title);
+					console.log(fd);
 					var upload_url = getUrl.url + '/addCtrl/addNews/';
 					var upload = httpReq(upload_url, fd);
 

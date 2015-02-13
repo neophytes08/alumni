@@ -319,5 +319,30 @@
 			$this->db->where('user_id', $this->session->userdata('user_id'));
 			return $this->db->update('tbluser_acc', $update);
 		}
+		public function updateAdmin($post)
+		{
+			$birthdate = strtok($post->birthdate, "T");
+
+			$updateAccount = array(
+				'fname' => $post->fname,
+				'mname' => $post->mname,
+				'lname' => $post->lname,
+				'birthdate' => $birthdate,
+				'address' =>  $post->address,
+				'email' => $post->email,
+				'contact' => $post->contact
+			);
+
+			$updateUser = array(
+				'username' => $post->username,
+				'password' => $post->password,
+				'email' => $email
+			);
+
+			$this->db->where('user_id', $this->session->userdata('user_id'));
+			$this->db->update('tbluser_acc', $updateUser);
+			$this->db->update('tbladmin_profile', $updateAccount);
+			return true;
+		}
 	}
  ?>
